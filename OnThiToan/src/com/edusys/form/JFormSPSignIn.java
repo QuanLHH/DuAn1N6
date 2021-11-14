@@ -39,7 +39,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     public void insert(){
         try{
             NguoiDung nd = getForm();
-            int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận lưu thông tin?","Thông tin người dùng",JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(rootPane, "XÃ¡c nháº­n lÆ°u thÃ´ng tin?","ThÃ´ng tin ngÆ°á»�i dÃ¹ng",JOptionPane.YES_NO_OPTION);
             if(i==0){
                 nguoiDungDAO.insert(nd);
             }
@@ -115,23 +115,26 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(bt_next)
-                        .addGap(32, 32, 32)
-                        .addComponent(bt_Cancel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(38, 38, 38)
-                        .addComponent(tf_ngaysinh))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tf_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bt_next)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bt_Cancel))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(47, 47, 47)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
@@ -140,12 +143,8 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rd_nam)
                                 .addGap(10, 10, 10)
-                                .addComponent(rd_nu))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(61, 83, Short.MAX_VALUE))
+                                .addComponent(rd_nu)))))
+                .addGap(55, 55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +187,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_emailActionPerformed
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelActionPerformed
-        int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?", "Thoát", JOptionPane.YES_NO_OPTION);
+        int i = JOptionPane.showConfirmDialog(rootPane, "Báº¡n cÃ³ muá»‘n thoÃ¡t khÃ´ng?", "ThoÃ¡t", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             this.dispose();
         }
