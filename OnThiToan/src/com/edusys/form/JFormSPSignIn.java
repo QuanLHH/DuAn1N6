@@ -39,7 +39,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     public void insert(){
         try{
             NguoiDung nd = getForm();
-            int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận lưu thông tin?","Thông tin người dùng",JOptionPane.YES_NO_OPTION);
+            int i = JOptionPane.showConfirmDialog(rootPane, "XÃ¡c nháº­n lÆ°u thÃ´ng tin?","ThÃ´ng tin ngÆ°á»�i dÃ¹ng",JOptionPane.YES_NO_OPTION);
             if(i==0){
                 nguoiDungDAO.insert(nd);
             }
@@ -67,6 +67,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         bt_Cancel = new javax.swing.JButton();
         rd_nam = new javax.swing.JRadioButton();
         rd_nu = new javax.swing.JRadioButton();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -110,6 +111,8 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         buttonGroup1.add(rd_nu);
         rd_nu.setText("Nữ");
 
+        jLabel7.setText("jLabel7");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -133,10 +136,13 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                             .addComponent(jLabel3))
                         .addGap(47, 47, 47)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel4)
-                                .addComponent(tf_name, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                .addComponent(tf_sdt))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4)
+                                    .addComponent(tf_name, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                    .addComponent(tf_sdt))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rd_nam)
                                 .addGap(10, 10, 10)
@@ -145,13 +151,15 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(61, 83, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +196,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_emailActionPerformed
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelActionPerformed
-        int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?", "Thoát", JOptionPane.YES_NO_OPTION);
+        int i = JOptionPane.showConfirmDialog(rootPane, "Báº¡n cÃ³ muá»‘n thoÃ¡t khÃ´ng?", "ThoÃ¡t", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             this.dispose();
         }
@@ -253,6 +261,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JRadioButton rd_nam;
     private javax.swing.JRadioButton rd_nu;
     private javax.swing.JTextField tf_email;
