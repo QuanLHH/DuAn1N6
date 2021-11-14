@@ -5,6 +5,8 @@
  */
 package com.edusys.form;
 
+import PakagesClass.NguoiDung;
+import com.edusys.utils.XDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -26,26 +28,42 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
     }
-
+    public void getForm(){
+        NguoiDung nd = new NguoiDung();
+        nd.setHoTen(tf_name.getText());
+        String gt = null;
+        if(rd_nam.isSelected()){
+            gt=rd_nam.getText();
+        }else if(rd_nu.isSelected()){
+            gt=rd_nu.getText();
+        }
+        nd.setGioiTinh(gt);
+        nd.setSDT(tf_sdt.getText());
+        nd.setNgaySinh(XDate.toDate(tf_ngaysinh.getText(), "yyyy-MM-dd"));
+        nd.setEmail(tf_email.getText());
+    }
+    public void insert(){
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        tf_pass2 = new javax.swing.JTextField();
+        tf_sdt = new javax.swing.JTextField();
         tf_name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        tf_pass3 = new javax.swing.JTextField();
-        tf_pass4 = new javax.swing.JTextField();
+        tf_ngaysinh = new javax.swing.JTextField();
+        tf_email = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        bt_next = new javax.swing.JButton();
         bt_Cancel = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rd_nam = new javax.swing.JRadioButton();
+        rd_nu = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,18 +79,18 @@ public class JFormSPSignIn extends javax.swing.JDialog {
 
         jLabel5.setText("Ngày sinh:");
 
-        tf_pass4.addActionListener(new java.awt.event.ActionListener() {
+        tf_email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tf_pass4ActionPerformed(evt);
+                tf_emailActionPerformed(evt);
             }
         });
 
         jLabel6.setText("Email:");
 
-        jButton1.setText("Tiếp theo");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bt_next.setText("Tiếp theo");
+        bt_next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bt_nextActionPerformed(evt);
             }
         });
 
@@ -83,11 +101,11 @@ public class JFormSPSignIn extends javax.swing.JDialog {
             }
         });
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Nam");
+        buttonGroup1.add(rd_nam);
+        rd_nam.setText("Nam");
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Nữ");
+        buttonGroup1.add(rd_nu);
+        rd_nu.setText("Nữ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -98,13 +116,13 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jButton1)
+                        .addComponent(bt_next)
                         .addGap(32, 32, 32)
                         .addComponent(bt_Cancel))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(38, 38, 38)
-                        .addComponent(tf_pass3))
+                        .addComponent(tf_ngaysinh))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
@@ -115,15 +133,15 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4)
                                 .addComponent(tf_name, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                .addComponent(tf_pass2))
+                                .addComponent(tf_sdt))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rd_nam)
                                 .addGap(10, 10, 10)
-                                .addComponent(jRadioButton2))))
+                                .addComponent(rd_nu))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(tf_pass4, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(61, 83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -138,23 +156,23 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rd_nam)
+                    .addComponent(rd_nu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_pass2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_pass3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(tf_pass4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(bt_next)
                     .addComponent(bt_Cancel))
                 .addContainerGap(42, Short.MAX_VALUE))
         );
@@ -162,9 +180,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tf_pass4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_pass4ActionPerformed
+    private void tf_emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_emailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tf_pass4ActionPerformed
+    }//GEN-LAST:event_tf_emailActionPerformed
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelActionPerformed
         int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?", "Thoát", JOptionPane.YES_NO_OPTION);
@@ -173,9 +191,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bt_CancelActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void bt_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nextActionPerformed
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bt_nextActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,19 +240,19 @@ public class JFormSPSignIn extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_Cancel;
+    private javax.swing.JButton bt_next;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton rd_nam;
+    private javax.swing.JRadioButton rd_nu;
+    private javax.swing.JTextField tf_email;
     private javax.swing.JTextField tf_name;
-    private javax.swing.JTextField tf_pass2;
-    private javax.swing.JTextField tf_pass3;
-    private javax.swing.JTextField tf_pass4;
+    private javax.swing.JTextField tf_ngaysinh;
+    private javax.swing.JTextField tf_sdt;
     // End of variables declaration//GEN-END:variables
 }
