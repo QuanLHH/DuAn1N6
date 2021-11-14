@@ -42,7 +42,7 @@ public class TaiKhoan {
         this.MKCap2 = MKCap2;
     }
 
-    public boolean isVaiTro() {
+    public boolean getVaiTro() {
         return VaiTro;
     }
 
