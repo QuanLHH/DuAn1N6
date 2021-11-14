@@ -5,6 +5,11 @@
  */
 package com.edusys.form;
 
+import PakagesClass.NguoiDung;
+import PakagesClass.TaiKhoan;
+import com.edusys.dao.NguoiDungDAO;
+import com.edusys.dao.TaiKhoanDAO;
+import com.edusys.utils.XDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -12,10 +17,8 @@ import javax.swing.JOptionPane;
  * @author taola
  */
 public class FormSignIn extends javax.swing.JFrame {
-
-    /**
-     * Creates new form FormSignIn
-     */
+    com.edusys.dao.TaiKhoanDAO taiKhoanDAO;
+    com.edusys.dao.NguoiDungDAO nguoiDungDAO;
     public FormSignIn() {
         initComponents();
         setInit();
@@ -24,10 +27,46 @@ public class FormSignIn extends javax.swing.JFrame {
     void setInit(){
         setLocationRelativeTo(null);
         setResizable(true);
+        setTitle("Đăng ký tài khoản");
         loandForm();
+        taiKhoanDAO = new TaiKhoanDAO();
+        nguoiDungDAO = new NguoiDungDAO();
     }
     void loandForm(){
         new JFormSPSignIn(this, true).setVisible(true);
+    }
+    public NguoiDung setNguoiDung(){
+
+        NguoiDung nd = new NguoiDung();
+        nd.setHoTen(JFormSPSignIn.getHoTen);
+        nd.setGioiTinh(JFormSPSignIn.getGioiTinh);
+        nd.setSDT(JFormSPSignIn.getSDT);
+        nd.setNgaySinh(XDate.toDate(JFormSPSignIn.getNgaySinh, "yyyy-MM-dd"));
+        nd.setEmail(JFormSPSignIn.getEmail);
+        return nd;
+    }
+    public TaiKhoan getForm(){
+        TaiKhoan tk = new TaiKhoan();
+        tk.setTenTaiKhoan(tf_name.getText());
+        tk.setMatKhau(tf_pass.getText());
+        tk.setMKCap2(tf_pass2.getText());
+        tk.setID_MaND(JFormSPSignIn.ID_MaND);
+        System.out.println(JFormSPSignIn.ID_MaND);
+        return tk;
+    }
+    public void insert(){
+        TaiKhoan tk = getForm();
+        NguoiDung nd = setNguoiDung();
+        try{
+            int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận đăng ký?", "Đăng ký tài khoản", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                nguoiDungDAO.insert(nd);
+                taiKhoanDAO.insert(tk);
+                JOptionPane.showMessageDialog(rootPane, "Đăng ký thành công!");
+            }
+        }catch(Exception e){
+            
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -139,17 +178,17 @@ public class FormSignIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_dangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_dangkyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_dangkyActionPerformed
-
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelActionPerformed
         int i=JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?","Thoát",JOptionPane.YES_NO_OPTION);
-        
+
         if(i==0){
             this.dispose();
         }
     }//GEN-LAST:event_bt_CancelActionPerformed
+
+    private void bt_dangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_dangkyActionPerformed
+        insert();
+    }//GEN-LAST:event_bt_dangkyActionPerformed
 
     /**
      * @param args the command line arguments
