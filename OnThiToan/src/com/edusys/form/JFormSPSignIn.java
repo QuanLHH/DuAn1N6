@@ -1,23 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.edusys.form;
 
 import PakagesClass.NguoiDung;
+import com.edusys.dao.NguoiDungDAO;
 import com.edusys.utils.XDate;
+import java.text.SimpleDateFormat;
+
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author taola
- */
 public class JFormSPSignIn extends javax.swing.JDialog {
-
-    /**
-     * Creates new form JFormSignIn
-     */
+    com.edusys.dao.NguoiDungDAO nguoiDungDAO;
     public JFormSPSignIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -27,8 +19,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
+        nguoiDungDAO = new NguoiDungDAO();
     }
-    public void getForm(){
+    public NguoiDung getForm(){
         NguoiDung nd = new NguoiDung();
         nd.setHoTen(tf_name.getText());
         String gt = null;
@@ -41,9 +34,19 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         nd.setSDT(tf_sdt.getText());
         nd.setNgaySinh(XDate.toDate(tf_ngaysinh.getText(), "yyyy-MM-dd"));
         nd.setEmail(tf_email.getText());
+        return nd;
     }
     public void insert(){
-        
+        try{
+            NguoiDung nd = getForm();
+            int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận lưu thông tin?","Thông tin người dùng",JOptionPane.YES_NO_OPTION);
+            if(i==0){
+                nguoiDungDAO.insert(nd);
+            }
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -192,7 +195,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     }//GEN-LAST:event_bt_CancelActionPerformed
 
     private void bt_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nextActionPerformed
-        dispose();
+        insert();
+
+        
     }//GEN-LAST:event_bt_nextActionPerformed
 
     /**
