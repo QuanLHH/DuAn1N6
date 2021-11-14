@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class NguoiDungDAO extends EduSysDAO<NguoiDung, Integer>{
     String INSERT = "INSERT INTO Nguoi_Dung (HoTen,GioiTinh,SDT,NgaySinh,Email) VALUES (?,?,?,?,?)";
-    String UPDATE = "UPDATE Nguoi_Dung SET HoTen=?,GioiTinh=?,NgaySinh=?,Email=? WHERE ID_MaND=?";
+    String UPDATE = "UPDATE Nguoi_Dung SET HoTen=?,GioiTinh=?,SDT=?,NgaySinh=?,Email=? WHERE ID_MaND=?";
     @Override
     public void insert(NguoiDung nd) {
         Helper.JdbcHelper.update(INSERT, nd.getHoTen(),nd.getGioiTinh(),nd.getSDT(),nd.getNgaySinh(),nd.getEmail());
