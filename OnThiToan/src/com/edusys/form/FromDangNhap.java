@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.edusys.utils;
 
 /**
  *
@@ -11,9 +10,6 @@ package com.edusys.utils;
  */
 public class FromDangNhap extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FromDangNhap
-     */
     public FromDangNhap() {
         initComponents();
         System.out.println("a");
@@ -69,7 +65,7 @@ public class FromDangNhap extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addGap(46, 46, 46)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
