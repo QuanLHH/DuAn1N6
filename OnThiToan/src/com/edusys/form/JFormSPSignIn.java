@@ -114,7 +114,6 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
         tf_sdt = new javax.swing.JTextField();
         tf_name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -311,7 +310,6 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_next;
     private javax.swing.ButtonGroup buttonGroup1;
-    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
