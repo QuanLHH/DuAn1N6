@@ -5,7 +5,15 @@
  */
 package com.edusys.form;
 
+import PakagesClass.NguoiDung;
+import PakagesClass.TaiKhoan;
+import com.edusys.dao.NguoiDungDAO;
+import com.edusys.dao.TaiKhoanDAO;
+import com.edusys.utils.XDate;
+import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
 
 /**
  *
@@ -13,22 +21,95 @@ import javax.swing.JOptionPane;
  */
 public class FormSignIn extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormSignIn
-     */
+    com.edusys.dao.TaiKhoanDAO taiKhoanDAO;
+    com.edusys.dao.NguoiDungDAO nguoiDungDAO;
+    public static int ID_MaND = 0;
+
     public FormSignIn() {
         initComponents();
         setInit();
     }
 
-    void setInit(){
+    void setInit() {
         setLocationRelativeTo(null);
         setResizable(true);
+        setTitle("Đăng ký tài khoản");
         loandForm();
+        taiKhoanDAO = new TaiKhoanDAO();
+        nguoiDungDAO = new NguoiDungDAO();
     }
-    void loandForm(){
+
+    void loandForm() {
         new JFormSPSignIn(this, true).setVisible(true);
     }
+
+    public NguoiDung setNguoiDung() {
+
+        NguoiDung nd = new NguoiDung();
+        nd.setHoTen(JFormSPSignIn.getHoTen);
+        nd.setGioiTinh(JFormSPSignIn.getGioiTinh);
+        nd.setSDT(JFormSPSignIn.getSDT);
+        nd.setNgaySinh(XDate.toDate(JFormSPSignIn.getNgaySinh, "dd-MM-yyyy"));
+        nd.setEmail(JFormSPSignIn.getEmail);
+        return nd;
+    }
+
+    public TaiKhoan getForm() {
+        NguoiDung nd = nguoiDungDAO.getMaxID();
+        ID_MaND = nd.getID_MaND();
+        TaiKhoan tk = new TaiKhoan();
+        tk.setTenTaiKhoan(tf_name.getText());
+        tk.setMatKhau(tf_pass.getText());
+        tk.setMKCap2(tf_pass2.getText());
+        tk.setVaiTro(false);
+        tk.setID_MaND(ID_MaND);
+        System.out.println(ID_MaND);
+        return tk;
+    }
+
+    public void insert() {
+        try {
+            
+            if(tf_name.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống tài khoản!");
+                return ;
+            }else if(tf_pass.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống mật khẩu!");
+                return ;
+            }else if(tf_pass2.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống mật khẩu c2!");
+                return ;
+            }
+            String checkTK="[,'/;+-_.]{1,}";
+            if(tf_name.getText().matches(checkTK)){
+                JOptionPane.showMessageDialog(rootPane, "Tài khoản không chứa ký tự đặc biệt!");
+                return ;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        try {
+            int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận đăng ký?", "Đăng ký tài khoản", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                NguoiDung nd = setNguoiDung();
+                nguoiDungDAO.insert(nd);
+                TaiKhoan tk = getForm();
+                taiKhoanDAO.insert(tk);
+                JOptionPane.showMessageDialog(rootPane, "Đăng ký thành công!");
+                refresh();
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public void refresh() {
+        tf_name.setText("");
+        tf_pass.setText("");
+        tf_pass2.setText("");
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -75,6 +156,16 @@ public class FormSignIn extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(118, 118, 118)
+                .addComponent(bt_dangky)
+                .addGap(37, 37, 37)
+                .addComponent(bt_Cancel)
+                .addContainerGap(107, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -90,16 +181,6 @@ public class FormSignIn extends javax.swing.JFrame {
                     .addComponent(tf_pass)
                     .addComponent(tf_pass2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(118, 118, 118)
-                .addComponent(bt_dangky)
-                .addGap(37, 37, 37)
-                .addComponent(bt_Cancel)
-                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,17 +220,18 @@ public class FormSignIn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bt_dangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_dangkyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_bt_dangkyActionPerformed
-
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelActionPerformed
-        int i=JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?","Thoát",JOptionPane.YES_NO_OPTION);
-        
-        if(i==0){
+        int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?", "Thoát", JOptionPane.YES_NO_OPTION);
+
+        if (i == 0) {
             this.dispose();
         }
     }//GEN-LAST:event_bt_CancelActionPerformed
+
+    private void bt_dangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_dangkyActionPerformed
+        insert();
+        
+    }//GEN-LAST:event_bt_dangkyActionPerformed
 
     /**
      * @param args the command line arguments
