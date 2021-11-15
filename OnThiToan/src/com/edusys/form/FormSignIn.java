@@ -40,17 +40,17 @@ public class FormSignIn extends javax.swing.JFrame {
     }
 
     void loandForm() {
-        new JFormSPSignIn(this, true).setVisible(true);
+        new JFormSignIn(this, true).setVisible(true);
     }
 
     public NguoiDung setNguoiDung() {
 
         NguoiDung nd = new NguoiDung();
-        nd.setHoTen(JFormSPSignIn.getHoTen);
-        nd.setGioiTinh(JFormSPSignIn.getGioiTinh);
-        nd.setSDT(JFormSPSignIn.getSDT);
-        nd.setNgaySinh(XDate.toDate(JFormSPSignIn.getNgaySinh, "dd-MM-yyyy"));
-        nd.setEmail(JFormSPSignIn.getEmail);
+        nd.setHoTen(JFormSignIn.getHoTen);
+        nd.setGioiTinh(JFormSignIn.getGioiTinh);
+        nd.setSDT(JFormSignIn.getSDT);
+        nd.setNgaySinh(XDate.toDate(JFormSignIn.getNgaySinh, "dd-MM-yyyy"));
+        nd.setEmail(JFormSignIn.getEmail);
         return nd;
     }
 

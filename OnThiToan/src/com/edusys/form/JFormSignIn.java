@@ -4,16 +4,45 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-public class JFormSPSignIn extends javax.swing.JDialog {
+/**
+ *
+ * @author taola
+ */
+public class JFormSignIn extends javax.swing.JDialog {
 
     com.edusys.dao.NguoiDungDAO nguoiDungDAO;
+
+    /**
+     *
+     */
     public static String getHoTen = null;
+
+    /**
+     *
+     */
     public static String getGioiTinh = null;
+
+    /**
+     *
+     */
     public static String getSDT = null;
+
+    /**
+     *
+     */
     public static String getNgaySinh = null;
+
+    /**
+     *
+     */
     public static String getEmail = null;
 
-    public JFormSPSignIn(java.awt.Frame parent, boolean modal) {
+    /**
+     *
+     * @param parent
+     * @param modal
+     */
+    public JFormSignIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setInit();
@@ -27,6 +56,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         tf_ngaysinh.setText("dd-MM-yyyy");
     }
 
+    /**
+     *
+     */
     public void getForm() {
         getHoTen = tf_name.getText();
         if (rd_nam.isSelected()) {
@@ -39,6 +71,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         getEmail = tf_email.getText();
     }
 
+    /**
+     *
+     */
     public void insert() {
         try{
             
@@ -101,6 +136,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         }
     }
 
+    /**
+     *
+     */
     public void refresh() {
         tf_name.setText("");
         tf_ngaysinh.setText("");
@@ -280,21 +318,23 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFormSPSignIn dialog = new JFormSPSignIn(new javax.swing.JFrame(), true);
+                JFormSignIn dialog = new JFormSignIn(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
