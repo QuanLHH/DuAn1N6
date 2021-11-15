@@ -124,6 +124,11 @@ public class FormDMK extends javax.swing.JFrame {
         });
 
         btnHuyBo.setText("Hủy bỏ ");
+        btnHuyBo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyBoActionPerformed(evt);
+            }
+        });
 
         btnDongY.setText("Đồng ý");
         btnDongY.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +253,14 @@ public class FormDMK extends javax.swing.JFrame {
         // TODO add your handling code here:
         doiMK();
     }//GEN-LAST:event_txtPass3ActionPerformed
+
+    private void btnHuyBoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyBoActionPerformed
+        // TODO add your handling code here:
+         int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?", "", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_btnHuyBoActionPerformed
 
     /**
      * @param args the command line arguments
