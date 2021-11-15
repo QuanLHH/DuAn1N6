@@ -1,16 +1,12 @@
 package com.edusys.form;
 
-import PakagesClass.NguoiDung;
-import com.edusys.dao.NguoiDungDAO;
-import com.edusys.utils.XDate;
-import java.util.ArrayList;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class JFormSPSignIn extends javax.swing.JDialog {
 
     com.edusys.dao.NguoiDungDAO nguoiDungDAO;
-    public static int ID_MaND = 0;
     public static String getHoTen = null;
     public static String getGioiTinh = null;
     public static String getSDT = null;
@@ -26,15 +22,9 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
-        setNeed();
-    }
-
-    void setNeed() {
-        this.nguoiDungDAO = new NguoiDungDAO();
-        NguoiDung nd2 = nguoiDungDAO.getMaxID();
-        String id = Integer.toString(nd2.getID_MaND() + 1);
-        tf_id.setText(id);
-        ID_MaND = nd2.getID_MaND() + 1;
+        setTitle("Thông tin người dùng");
+        rd_nam.setSelected(true);
+        tf_ngaysinh.setText("dd-MM-yyyy");
     }
 
     public void getForm() {
@@ -50,9 +40,55 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     }
 
     public void insert() {
-
-        try {
+        try{
             
+            if(tf_name.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống họ tên!");
+                return ;
+            }else if(tf_sdt.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống số điện thoại!");
+                return ;
+            }else if(tf_ngaysinh.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống ngày sinh!");
+                return ;
+            }else if(tf_email.getText().equals("")){
+                JOptionPane.showMessageDialog(rootPane, "Không để trống email!");
+                return ;
+            }
+            String checkSo="[0-9]{1,}";
+            if(tf_name.getText().matches(checkSo)){
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng họ tên!");
+                return ;
+            }
+            String checkHT="[,'/;+-_.]{1,}";
+            if(tf_name.getText().matches(checkHT)){
+                JOptionPane.showMessageDialog(rootPane, "Họ tên không chứa ký tự đặc biệt!");
+                return ;
+            }
+            if(!tf_sdt.getText().matches(checkSo)){
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng số điện thoại!");
+                return ;
+            }else if(tf_sdt.getText().length()<10||tf_sdt.getText().length()>15){
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng độ dài số điện thoại!");
+                return ;
+            }
+            try{
+                SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy");
+                Date dates = s.parse(tf_ngaysinh.getText());
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(rootPane, "Lỗi định dạng ngày sinh!");
+                return ;
+            }
+            String checkEmail="[A-Za-z0-9+-._]{1,}+@+[A-Za-z]{2,}+\\.+[A-Za-z]{2,}";
+            if(!tf_email.getText().matches(checkEmail)){
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng email!");
+                return ;
+            }
+            
+        }catch(Exception ex){
+            ex.printStackTrace();
+        }
+        try {
             int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận thông tin?", "Thông tin người dùng", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 getForm();
@@ -65,11 +101,20 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         }
     }
 
+    public void refresh() {
+        tf_name.setText("");
+        tf_ngaysinh.setText("");
+        tf_sdt.setText("");
+        tf_email.setText("");
+        rd_nam.setSelected(true);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         tf_sdt = new javax.swing.JTextField();
         tf_name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
@@ -84,8 +129,6 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         bt_Cancel = new javax.swing.JButton();
         rd_nam = new javax.swing.JRadioButton();
         rd_nu = new javax.swing.JRadioButton();
-        jLabel7 = new javax.swing.JLabel();
-        tf_id = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,10 +172,6 @@ public class JFormSPSignIn extends javax.swing.JDialog {
         buttonGroup1.add(rd_nu);
         rd_nu.setText("Nữ");
 
-        jLabel7.setText("ID:");
-
-        tf_id.setEditable(false);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -161,8 +200,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel7))
+                                    .addComponent(jLabel2))
                                 .addGap(61, 61, 61)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -171,8 +209,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(rd_nam)
                                         .addGap(10, 10, 10)
-                                        .addComponent(rd_nu))
-                                    .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addComponent(rd_nu)))))))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -180,11 +217,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tf_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -228,7 +261,7 @@ public class JFormSPSignIn extends javax.swing.JDialog {
 
     private void bt_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nextActionPerformed
         insert();
-
+        
     }//GEN-LAST:event_bt_nextActionPerformed
 
     /**
@@ -278,17 +311,16 @@ public class JFormSPSignIn extends javax.swing.JDialog {
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_next;
     private javax.swing.ButtonGroup buttonGroup1;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JRadioButton rd_nam;
     private javax.swing.JRadioButton rd_nu;
     private javax.swing.JTextField tf_email;
-    private javax.swing.JTextField tf_id;
     private javax.swing.JTextField tf_name;
     private javax.swing.JTextField tf_ngaysinh;
     private javax.swing.JTextField tf_sdt;
