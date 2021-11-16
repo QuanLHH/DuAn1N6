@@ -1,19 +1,24 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.edusys.form;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import PakagesClass.NguoiDung;
+import com.edusys.utils.XDate;
 import javax.swing.JOptionPane;
 
-public class FormSignInNguoiDung extends javax.swing.JDialog {
+/**
+ *
+ * @author taola
+ */
+public class JFormSPSignIn extends javax.swing.JDialog {
 
-    com.edusys.dao.NguoiDungDAO nguoiDungDAO;
-    public static String getHoTen = null;
-    public static String getGioiTinh = null;
-    public static String getSDT = null;
-    public static String getNgaySinh = null;
-    public static String getEmail = null;
-
-    public FormSignInNguoiDung(java.awt.Frame parent, boolean modal) {
+    /**
+     * Creates new form JFormSignIn
+     */
+    public JFormSPSignIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setInit();
@@ -22,93 +27,24 @@ public class FormSignInNguoiDung extends javax.swing.JDialog {
     void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
-        setTitle("Thông tin người dùng");
-        rd_nam.setSelected(true);
-        tf_ngaysinh.setText("dd-MM-yyyy");
     }
-
-    public void getForm() {
-        getHoTen = tf_name.getText();
-        if (rd_nam.isSelected()) {
-            getGioiTinh = rd_nam.getText();
-        } else if (rd_nu.isSelected()) {
-            getGioiTinh = rd_nu.getText();
+    public void getForm(){
+        NguoiDung nd = new NguoiDung();
+        nd.setHoTen(tf_name.getText());
+        String gt = null;
+        if(rd_nam.isSelected()){
+            gt=rd_nam.getText();
+        }else if(rd_nu.isSelected()){
+            gt=rd_nu.getText();
         }
-        getSDT = tf_sdt.getText();
-        getNgaySinh = tf_ngaysinh.getText();
-        getEmail = tf_email.getText();
+        nd.setGioiTinh(gt);
+        nd.setSDT(tf_sdt.getText());
+        nd.setNgaySinh(XDate.toDate(tf_ngaysinh.getText(), "yyyy-MM-dd"));
+        nd.setEmail(tf_email.getText());
     }
-
-    public void insert() {
-        try{
-            
-            if(tf_name.getText().equals("")){
-                JOptionPane.showMessageDialog(rootPane, "Không để trống họ tên!");
-                return ;
-            }else if(tf_sdt.getText().equals("")){
-                JOptionPane.showMessageDialog(rootPane, "Không để trống số điện thoại!");
-                return ;
-            }else if(tf_ngaysinh.getText().equals("")){
-                JOptionPane.showMessageDialog(rootPane, "Không để trống ngày sinh!");
-                return ;
-            }else if(tf_email.getText().equals("")){
-                JOptionPane.showMessageDialog(rootPane, "Không để trống email!");
-                return ;
-            }
-            String checkSo="[0-9]{1,}";
-            if(tf_name.getText().matches(checkSo)){
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng họ tên!");
-                return ;
-            }
-            String checkHT="[,'/;+-_.]{1,}";
-            if(tf_name.getText().matches(checkHT)){
-                JOptionPane.showMessageDialog(rootPane, "Họ tên không chứa ký tự đặc biệt!");
-                return ;
-            }
-            if(!tf_sdt.getText().matches(checkSo)){
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng số điện thoại!");
-                return ;
-            }else if(tf_sdt.getText().length()<10||tf_sdt.getText().length()>15){
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng độ dài số điện thoại!");
-                return ;
-            }
-            try{
-                SimpleDateFormat s = new SimpleDateFormat("dd-MM-yyyy");
-                Date dates = s.parse(tf_ngaysinh.getText());
-            }catch(Exception e){
-                JOptionPane.showMessageDialog(rootPane, "Lỗi định dạng ngày sinh!");
-                return ;
-            }
-            String checkEmail="[A-Za-z0-9+-._]{1,}+@+[A-Za-z]{2,}+\\.+[A-Za-z]{2,}";
-            if(!tf_email.getText().matches(checkEmail)){
-                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng email!");
-                return ;
-            }
-            
-        }catch(Exception ex){
-            ex.printStackTrace();
-        }
-        try {
-            int i = JOptionPane.showConfirmDialog(rootPane, "Xác nhận thông tin?", "Thông tin người dùng", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                getForm();
-                dispose();
-                System.out.println(getHoTen);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void insert(){
+        
     }
-
-    public void refresh() {
-        tf_name.setText("");
-        tf_ngaysinh.setText("");
-        tf_sdt.setText("");
-        tf_email.setText("");
-        rd_nam.setSelected(true);
-    }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -176,47 +112,44 @@ public class FormSignInNguoiDung extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(jLabel4))
+                        .addGap(89, 89, 89)
+                        .addComponent(bt_next)
+                        .addGap(32, 32, 32)
+                        .addComponent(bt_Cancel))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addGap(38, 38, 38)
+                        .addComponent(tf_ngaysinh))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addGap(47, 47, 47)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4)
+                                .addComponent(tf_name, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                .addComponent(tf_sdt))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel5))
-                                .addGap(52, 52, 52)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tf_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(bt_next)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(bt_Cancel))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(61, 61, 61)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(tf_name)
-                                        .addComponent(tf_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rd_nam)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(rd_nu)))))))
-                .addContainerGap(50, Short.MAX_VALUE))
+                                .addComponent(rd_nam)
+                                .addGap(10, 10, 10)
+                                .addComponent(rd_nu))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(tf_email, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(61, 83, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tf_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -241,7 +174,7 @@ public class FormSignInNguoiDung extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_next)
                     .addComponent(bt_Cancel))
-                .addGap(42, 42, 42))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
@@ -252,15 +185,14 @@ public class FormSignInNguoiDung extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_emailActionPerformed
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_CancelActionPerformed
-        int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không??", "Thoát", JOptionPane.YES_NO_OPTION);
+        int i = JOptionPane.showConfirmDialog(rootPane, "Bạn có muốn thoát không?", "Thoát", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             this.dispose();
         }
     }//GEN-LAST:event_bt_CancelActionPerformed
 
     private void bt_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nextActionPerformed
-        insert();
-        
+        dispose();
     }//GEN-LAST:event_bt_nextActionPerformed
 
     /**
@@ -280,23 +212,21 @@ public class FormSignInNguoiDung extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormSignInNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormSignInNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormSignInNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormSignInNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JFormSPSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormSignInNguoiDung dialog = new FormSignInNguoiDung(new javax.swing.JFrame(), true);
+                JFormSPSignIn dialog = new JFormSPSignIn(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
