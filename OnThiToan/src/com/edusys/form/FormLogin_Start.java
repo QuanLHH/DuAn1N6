@@ -8,7 +8,7 @@ package com.edusys.form;
 import PakagesClass.TaiKhoan;
 import com.edusys.dao.TaiKhoanDAO;
 
-import entity.Auth2;
+import utils.Auth2;
 import javax.swing.JOptionPane;
 
 /**
@@ -206,7 +206,9 @@ public class FormLogin_Start extends javax.swing.JFrame {
     }//GEN-LAST:event_btncanActionPerformed
 
     private void lblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblMouseClicked
-        JOptionPane.showMessageDialog(this, "Hiện form quên mật khẩu");
+        FormQuenMK f = new FormQuenMK();
+        f.setVisible(true);
+        
     }//GEN-LAST:event_lblMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
