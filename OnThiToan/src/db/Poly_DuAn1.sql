@@ -62,6 +62,7 @@ create table Bai_Thi(
 	MaDe int not null,
 	STTCauHoi int not null,
 	ID_CauHoi int not null,
+	DoKho int ,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi)
 
 )
@@ -81,6 +82,7 @@ create table Bai_Tap(
 	ID_BaiTap int not null identity(1,1) primary key,
 	TenBai nvarchar(50) not null,
 	STTCauHoi int not null,
+	DoKho int ,
 	ID_CauHoi int not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi)
 
@@ -113,7 +115,7 @@ go
 INSERT INTO Tai_Lieu(TenTaiLieu,LinkVideo,LyThuyet)
 VALUES (N'Đạo Hàm','https://www.youtube.com/watch?v=HIGllE3N-iw',N'Cho hàm số y=f(x)xác định trên khoảng (a;b), 
 x0∈(a;b). Giới hạn hữu hạn (nếu có) của tỉ số (f(x)−f(x0)/x−x0), khi
-x→x0 được gọi là đạo hàm của hàm số đã cho tại x0')
+x→x0 được gọi là đạo hàm của hàm số đã cho tại x0'),
 	(N'Nguyên Hàm','https://www.youtube.com/watch?v=ZgxXaJMg9vQ',N'Cho hàm số f xác định trên K. Hàm số F được gọi là nguyên hàm của hàm số f trên K
  nếu F(x) khả vi trên K và F(x) = f(x) với mọi x thuộc K')
 go
