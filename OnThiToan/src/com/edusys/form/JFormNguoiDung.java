@@ -8,10 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author taola
- */
 public class JFormNguoiDung extends javax.swing.JDialog {
 
     com.edusys.dao.NguoiDungDAO nguoiDungDAO;

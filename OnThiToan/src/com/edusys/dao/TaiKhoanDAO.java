@@ -1,21 +1,23 @@
+package com.edusys.dao;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.edusys.dao;
 
+
+import Helper.JdbcHelper;
 import PakagesClass.TaiKhoan;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     String INSERT = "INSERT INTO Tai_Khoan (TenTaiKhoan,MatKhau,MKCap2,VaiTro,ID_MaND) VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,ID_MaND=? WHERE TenTaiKhoan=?";
-<<<<<<< Updated upstream
-=======
     String SELECT_BY_ID = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
->>>>>>> Stashed changes
 
     @Override
     public void insert(TaiKhoan tk) {
@@ -33,8 +35,6 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< Updated upstream
-=======
     public void doiMK(TaiKhoan nv) {
         String UPDATE = "UPDATE Tai_Khoan SET MatKhau =? WHERE TenTaiKhoan=?";
         try {
@@ -45,14 +45,11 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         }
     }
 
->>>>>>> Stashed changes
     @Override
     public ArrayList<TaiKhoan> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< Updated upstream
-=======
     public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
         ArrayList<TaiKhoan> list = new ArrayList<>();
         try {
@@ -71,19 +68,18 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         return list;
     }
 
->>>>>>> Stashed changes
     @Override
     public TaiKhoan selectById(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<TaiKhoan> list = selectBySql(SELECT_BY_ID, key);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
     protected ArrayList<TaiKhoan> selectBySql(String sql, Object... args) {
-<<<<<<< Updated upstream
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
-=======
         ArrayList<TaiKhoan> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.query(sql, args);
@@ -112,5 +108,5 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         model.setVaiTro(rs.getBoolean("VaiTro"));
         return model;
     }
->>>>>>> Stashed changes
+
 }

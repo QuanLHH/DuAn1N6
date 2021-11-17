@@ -5,78 +5,51 @@ import PakagesClass.TaiKhoan;
 import com.edusys.dao.NguoiDungDAO;
 import com.edusys.dao.TaiKhoanDAO;
 import com.edusys.utils.XDate;
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
 import javax.swing.JOptionPane;
-
-=======
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
-import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
 
-/**
- *
- * @author taola
- */
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
-public class FormSignIn extends javax.swing.JFrame {
-=======
 public class JFormSignIn extends javax.swing.JDialog {
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
 
     com.edusys.dao.TaiKhoanDAO taiKhoanDAO;
     com.edusys.dao.NguoiDungDAO nguoiDungDAO;
     public static int ID_MaND = 0;
 
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
-    public FormSignIn() {
-=======
     public JFormSignIn(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
+
         initComponents();
         setInit();
-        
+
     }
 
     void setInit() {
         setLocationRelativeTo(null);
         setResizable(true);
         setTitle("Đăng ký tài khoản");
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
-        loandForm();
         taiKhoanDAO = new TaiKhoanDAO();
         nguoiDungDAO = new NguoiDungDAO();
     }
-
-    void loandForm() {
-        new JFormNDSignIn(this, true).setVisible(true);
-    }
-=======
-        taiKhoanDAO = new TaiKhoanDAO();
-        nguoiDungDAO = new NguoiDungDAO();
-    }
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
 
     public NguoiDung setNguoiDung() {
 
         NguoiDung nd = new NguoiDung();
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
-        nd.setHoTen(JFormNDSignIn.getHoTen);
-        nd.setGioiTinh(JFormNDSignIn.getGioiTinh);
-        nd.setSDT(JFormNDSignIn.getSDT);
-        nd.setNgaySinh(XDate.toDate(JFormNDSignIn.getNgaySinh, "dd-MM-yyyy"));
-        nd.setEmail(JFormNDSignIn.getEmail);
-=======
+
         nd.setHoTen(JFormNguoiDung.getHoTen);
         nd.setGioiTinh(JFormNguoiDung.getGioiTinh);
         nd.setSDT(JFormNguoiDung.getSDT);
         nd.setNgaySinh(XDate.toDate(JFormNguoiDung.getNgaySinh, "dd-MM-yyyy"));
         nd.setEmail(JFormNguoiDung.getEmail);
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
+
+        nd.setHoTen(JFormNguoiDung.getHoTen);
+        nd.setGioiTinh(JFormNguoiDung.getGioiTinh);
+        nd.setSDT(JFormNguoiDung.getSDT);
+        nd.setNgaySinh(XDate.toDate(JFormNguoiDung.getNgaySinh, "dd-MM-yyyy"));
+        nd.setEmail(JFormNguoiDung.getEmail);
+
         return nd;
     }
 
@@ -95,26 +68,26 @@ public class JFormSignIn extends javax.swing.JDialog {
 
     public void insert() {
         try {
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
-            
-            if(tf_name.getText().equals("")){
-=======
 
             if (tf_name.getText().equals("")) {
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
-                JOptionPane.showMessageDialog(rootPane, "Không để trống tài khoản!");
-                return ;
-            }else if(tf_pass.getText().equals("")){
-                JOptionPane.showMessageDialog(rootPane, "Không để trống mật khẩu!");
-                return ;
-            }else if(tf_pass2.getText().equals("")){
-                JOptionPane.showMessageDialog(rootPane, "Không để trống mật khẩu c2!");
-                return ;
-            }
-            String checkTK="[,'/;+-_.]{1,}";
-            if(tf_name.getText().matches(checkTK)){
-                JOptionPane.showMessageDialog(rootPane, "Tài khoản không chứa ký tự đặc biệt!");
-                return ;
+
+                if (tf_name.getText().equals("")) {
+
+                    JOptionPane.showMessageDialog(rootPane, "Không để trống tài khoản!");
+                    return;
+                } else if (tf_pass.getText().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Không để trống mật khẩu!");
+                    return;
+                } else if (tf_pass2.getText().equals("")) {
+                    JOptionPane.showMessageDialog(rootPane, "Không để trống mật khẩu c2!");
+                    return;
+                }
+                String checkTK = "[,'/;+-_.]{1,}";
+                if (tf_name.getText().matches(checkTK)) {
+                    JOptionPane.showMessageDialog(rootPane, "Tài khoản không chứa ký tự đặc biệt!");
+                    return;
+                }
+
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -127,12 +100,10 @@ public class JFormSignIn extends javax.swing.JDialog {
                 TaiKhoan tk = getForm();
                 taiKhoanDAO.insert(tk);
                 JOptionPane.showMessageDialog(rootPane, "Đăng ký thành công!");
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
                 refresh();
-=======
+
                 dispose();
 
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
             }
         } catch (Exception e) {
 
@@ -258,41 +229,7 @@ public class JFormSignIn extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_bt_CancelActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-<<<<<<< Updated upstream:OnThiToan/src/com/edusys/form/FormSignIn.java
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormSignIn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-=======
-        /* Create and display the dialog */
->>>>>>> Stashed changes:OnThiToan/src/com/edusys/form/JFormSignIn.java
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 JFormSignIn dialog = new JFormSignIn(new javax.swing.JFrame(), true);
