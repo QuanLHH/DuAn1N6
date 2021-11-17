@@ -1,9 +1,10 @@
+package com.edusys.dao;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.edusys.dao;
 
 
 import Helper.JdbcHelper;
@@ -16,16 +17,17 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     String INSERT = "INSERT INTO Tai_Khoan (TenTaiKhoan,MatKhau,MKCap2,VaiTro,ID_MaND) VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,ID_MaND=? WHERE TenTaiKhoan=?";
+    String SELECT_BY_ID = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
 
     @Override
     public void insert(TaiKhoan tk) {
-        Helper.JdbcHelper.update(INSERT, tk.getTenTaiKhoan(),tk.getMatKhau(),tk.getMKCap2(),tk.getVaiTro(),tk.getID_MaND());
+        Helper.JdbcHelper.update(INSERT, tk.getTenTaiKhoan(), tk.getMatKhau(), tk.getMKCap2(), tk.getVaiTro(), tk.getID_MaND());
 
     }
 
     @Override
     public void update(TaiKhoan tk) {
-        Helper.JdbcHelper.update(UPDATE,tk.getMatKhau(),tk.getMKCap2(),tk.getVaiTro(),tk.getID_MaND(),tk.getTenTaiKhoan());
+        Helper.JdbcHelper.update(UPDATE, tk.getMatKhau(), tk.getMKCap2(), tk.getVaiTro(), tk.getID_MaND(), tk.getTenTaiKhoan());
     }
 
     @Override
@@ -33,11 +35,7 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
     public void doiMK(TaiKhoan nv) {
-
-      public void doiMK(TaiKhoan nv) {
-
         String UPDATE = "UPDATE Tai_Khoan SET MatKhau =? WHERE TenTaiKhoan=?";
         try {
             JdbcHelper.update(UPDATE, nv.getMatKhau(), nv.getTenTaiKhoan());
@@ -48,18 +46,11 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
     }
 
     @Override
-
-     @Override
-
     public ArrayList<TaiKhoan> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-
     public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
-
-     public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
-
         ArrayList<TaiKhoan> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -77,18 +68,10 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         return list;
     }
 
-
     @Override
     public TaiKhoan selectById(String key) {
         ArrayList<TaiKhoan> list = selectBySql(SELECT_BY_ID, key);
         if(list.isEmpty()){
-
-    @Override
-    public TaiKhoan selectById(String key) {
-        String SelectById = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
-        List<TaiKhoan> list = this.selectBySql(SelectById, key);
-        if (list.isEmpty()) {
-
             return null;
         }
         return list.get(0);
@@ -101,7 +84,6 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         try {
             ResultSet rs = JdbcHelper.query(sql, args);
             while (rs.next()) {
-
                 TaiKhoan tk = new TaiKhoan();
                 tk.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
                 tk.setMatKhau(rs.getString("MatKhau"));
@@ -125,16 +107,6 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         model.setMKCap2(rs.getString("MKCap2"));
         model.setVaiTro(rs.getBoolean("VaiTro"));
         return model;
-
-                list.add(readFromResultSet(rs));
-            }
-            rs.getStatement().getConnection().close();
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-
     }
 
 }
