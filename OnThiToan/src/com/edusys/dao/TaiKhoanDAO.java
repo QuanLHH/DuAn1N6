@@ -6,16 +6,12 @@ package com.edusys.dao;
  * and open the template in the editor.
  */
 
-<<<<<<< HEAD
 
-=======
->>>>>>> master
 import Helper.JdbcHelper;
 import PakagesClass.TaiKhoan;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
@@ -39,11 +35,7 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< HEAD
     public void doiMK(TaiKhoan nv) {
-=======
-      public void doiMK(TaiKhoan nv) {
->>>>>>> master
         String UPDATE = "UPDATE Tai_Khoan SET MatKhau =? WHERE TenTaiKhoan=?";
         try {
             JdbcHelper.update(UPDATE, nv.getMatKhau(), nv.getTenTaiKhoan());
@@ -52,22 +44,13 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
             throw new RuntimeException();
         }
     }
-<<<<<<< HEAD
 
     @Override
-=======
-     @Override
->>>>>>> master
     public ArrayList<TaiKhoan> selectALL() {
-        String SELECT = "SELECT * FROM Tai_Khoan";
-        return this.selectBySql(SELECT);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-<<<<<<< HEAD
     public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
-=======
-     public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
->>>>>>> master
         ArrayList<TaiKhoan> list = new ArrayList<>();
         try {
             ResultSet rs = null;
@@ -84,36 +67,23 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         }
         return list;
     }
-<<<<<<< HEAD
 
     @Override
     public TaiKhoan selectById(String key) {
         ArrayList<TaiKhoan> list = selectBySql(SELECT_BY_ID, key);
         if(list.isEmpty()){
-=======
-    
-    @Override
-    public TaiKhoan selectById(String key) {
-        String SelectById = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
-        List<TaiKhoan> list = this.selectBySql(SelectById, key);
-        if (list.isEmpty()) {
->>>>>>> master
             return null;
         }
         return list.get(0);
     }
 
-  @Override
+    @Override
     protected ArrayList<TaiKhoan> selectBySql(String sql, Object... args) {
-<<<<<<< HEAD
 
-=======
->>>>>>> master
         ArrayList<TaiKhoan> list = new ArrayList<>();
         try {
             ResultSet rs = JdbcHelper.query(sql, args);
             while (rs.next()) {
-<<<<<<< HEAD
                 TaiKhoan tk = new TaiKhoan();
                 tk.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
                 tk.setMatKhau(rs.getString("MatKhau"));
@@ -137,26 +107,6 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
         model.setMKCap2(rs.getString("MKCap2"));
         model.setVaiTro(rs.getBoolean("VaiTro"));
         return model;
-=======
-                list.add(readFromResultSet(rs));
-            }
-            rs.getStatement().getConnection().close();
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-
->>>>>>> master
     }
 
-     private TaiKhoan readFromResultSet(ResultSet rs) throws SQLException {
-        TaiKhoan model = new TaiKhoan();
-        model.setID_MaND(rs.getInt("ID_MaND"));
-        model.setTenTaiKhoan(rs.getString("TenTaiKhoan"));
-        model.setMatKhau(rs.getString("MatKhau"));
-        model.setMKCap2(rs.getString("MKCap2"));
-        model.setVaiTro(rs.getBoolean("VaiTro"));
-        return model;
-    }
 }
