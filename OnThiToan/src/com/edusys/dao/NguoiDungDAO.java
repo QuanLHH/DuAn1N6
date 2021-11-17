@@ -5,9 +5,11 @@
  */
 package com.edusys.dao;
 
+import Helper.JdbcHelper;
 import PakagesClass.NguoiDung;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -35,12 +37,19 @@ public class NguoiDungDAO extends EduSysDAO<NguoiDung, Integer>{
 
     @Override
     public ArrayList<NguoiDung> selectALL() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT*FROM Nguoi_Dung join Tai_Khoan on Nguoi_Dung.ID_MaND = Tai_Khoan.ID_MaND";
+        return selectBySql(sql);
     }
 
     @Override
     public NguoiDung selectById(Integer key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+         String sql = "SELECT*FROM Nguoi_Dung join Tai_Khoan on Nguoi_Dung.ID_MaND = Tai_Khoan.ID_MaND\n"
+                + "where Nguoi_Dung.ID_MaND like ?";
+        List<NguoiDung> list = selectBySql(sql,key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
     public NguoiDung getMaxID(){
         ArrayList<NguoiDung> list = selectBySql(SelectMaxID);
@@ -70,6 +79,4 @@ public class NguoiDungDAO extends EduSysDAO<NguoiDung, Integer>{
         }
         return list;
     }
-    
-    
 }
