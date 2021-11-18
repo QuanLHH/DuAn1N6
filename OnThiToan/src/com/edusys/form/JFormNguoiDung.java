@@ -116,6 +116,7 @@ public class JFormNguoiDung extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -165,10 +166,12 @@ public class JFormNguoiDung extends javax.swing.JDialog {
             }
         });
 
+        buttonGroup1.add(rd_nam);
         rd_nam.setText("Nam");
 
         jLabel1.setText("Họ tên:");
 
+        buttonGroup1.add(rd_nu);
         rd_nu.setText("Nữ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -307,6 +310,7 @@ public class JFormNguoiDung extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bt_Cancel;
     private javax.swing.JButton bt_next;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
