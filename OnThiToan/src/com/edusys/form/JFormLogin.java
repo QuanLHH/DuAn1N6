@@ -33,29 +33,37 @@ public class JFormLogin extends javax.swing.JDialog {
         String name = txtname.getText();
         String pass = new String(txtpas.getText());
 
-        TaiKhoan tk = daotk.selectById(name);
+        try {
+            TaiKhoan tk = daotk.selectById(name);
 
-        if (txtname.getText().equals("") || txtpas.getText().equals("")) {
-            lablecheck.setText("Vui lòng điền đầy đủ thông tin!");
-            return;
-        } else if (txtname.getText().equals("")) {
+            if (txtname.getText().equals("") || txtpas.getText().equals("")) {
+                lablecheck.setText("Vui lòng điền đầy đủ thông tin!");
+                return;
+            } else if (txtname.getText().equals("")) {
 
-            lablecheck.setText("Vui lòng điền tên tài khoản! ");
-            return;
-        } else if (txtpas.getText().equals("")) {
+                lablecheck.setText("Vui lòng điền tên tài khoản! ");
+                return;
+            } else if (txtpas.getText().equals("")) {
 
-            lablecheck.setText("Vui lòng điền mật khẩu!");
-            return;
-        } else if (tk == null) {
-            lablecheck.setText("Tài khoản không đúng!");
-            return;
-        } else {
-            Auth2.use = tk;
-            JOptionPane.showMessageDialog(this, "Login thành công");
-            fLogin();
-            this.dispose();
-
+                lablecheck.setText("Vui lòng điền mật khẩu!");
+                return;
+            } else if (tk == null) {
+                lablecheck.setText("Tài khoản không đúng!");
+                return;
+            } else if (!tk.getMatKhau().equalsIgnoreCase(pass)) {
+                lablecheck.setText("Mật khẩu không đúng!");
+                return;
+            }else {
+                Auth2.use = tk;
+                JOptionPane.showMessageDialog(this, "Login thành công");
+                fLogin();
+                this.dispose();}
+        }catch(Exception e){
+        e.printStackTrace();
         }
+
+
+       
     }
 
     public void fLogin() {
