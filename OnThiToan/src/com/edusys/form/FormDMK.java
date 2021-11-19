@@ -107,7 +107,7 @@ public class FormDMK extends javax.swing.JFrame {
 
         jLabel3.setText("Tên đăng nhập:");
 
-        jLabel4.setText("Mật khẩu:");
+        jLabel4.setText("Mật khẩu cũ:");
 
         txtPass1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
