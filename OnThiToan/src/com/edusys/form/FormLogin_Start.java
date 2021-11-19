@@ -114,9 +114,9 @@ public class FormLogin_Start extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("ĐĂNG NHẬP");
 
-        jLabel3.setText("Usename");
+        jLabel3.setText("Username");
 
-        jLabel4.setText("PassWorld");
+        jLabel4.setText("PassWord");
 
         lbl.setForeground(new java.awt.Color(51, 51, 255));
         lbl.setText(" Forgot password ?");
