@@ -17,6 +17,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     public JForm_QLCauHoi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
     }
 
     /**
