@@ -216,7 +216,7 @@ public class FormLogin_Start extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         new JFormNguoiDung(this, true).setVisible(true);
-        new JFormSignIn(this, true).setVisible(true);
+        new JFormSignUp(this, true).setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**
