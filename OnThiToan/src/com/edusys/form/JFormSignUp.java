@@ -13,13 +13,13 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-public class JFormSignIn extends javax.swing.JDialog {
+public class JFormSignUp extends javax.swing.JDialog {
 
     com.edusys.dao.TaiKhoanDAO taiKhoanDAO;
     com.edusys.dao.NguoiDungDAO nguoiDungDAO;
     public static int ID_MaND = 0;
 
-    public JFormSignIn(java.awt.Frame parent, boolean modal) {
+    public JFormSignUp(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setInit();
@@ -281,7 +281,7 @@ public class JFormSignIn extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JFormSignIn dialog = new JFormSignIn(new javax.swing.JFrame(), true);
+                JFormSignUp dialog = new JFormSignUp(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
