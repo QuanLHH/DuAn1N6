@@ -37,6 +37,7 @@ create table TaiLieu_ChiTiet(
 
 )
 go
+
 create table Cau_Hoi(
 	ID_CauHoi int not null identity(1,1) primary key,
 	ID_BT int,
@@ -121,18 +122,22 @@ x→x0 được gọi là đạo hàm của hàm số đã cho tại x0'),
 go
 INSERT INTO Cau_Hoi(CauHoi,DoKho)
 VALUES (N'Tính đạo hàm của các hàm số sau: 
-Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x-2. Tính f(-2)?',1)
+Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x-2. Tính f(-2)?',1),
+	(N'Đạo hàm của hàm số y=(2x^4-3x^2-5x)(x^2-7x) là:',3)
+
 INSERT INTO Cau_Hoi(ID_BT, CauHoi,DoKho)
 VALUES (1,N'Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x^2-10. Tính f(4)?',2)
 go
 INSERT INTO Dap_An(ID_CauHoi, DapAnDung,DapAnSai1,DapAnSai2,DapAnSai3)
 VALUES (1,'f(-2)=13','f(-2)=15','f(-2)=11','f(-2)=12'),
-	(2,'f(4)=17','f(4)=20','f(4)=5','ff(4)=10')
+	(2,'f(4)=17','f(4)=20','f(4)=5','f(4)=10'),
+	(3,'(8x^3-6x-5)(x^2-7x)-(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)(2x-7)','(8x^3-6x-5)(x^2-7x)+(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)+(2x-7)')
+	
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
 SELECT*FROM Cau_Hoi
-SELECT*FROM Dap_An
+SELECT*FROM Dap_An 
 
 SELECT * FROM Nguoi_Dung WHERE ID_MaND= (SELECT MAX(ID_MaND) FROM Nguoi_Dung )
 
