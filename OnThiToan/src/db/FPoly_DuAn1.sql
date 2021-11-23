@@ -35,7 +35,8 @@ create table Cau_Hoi(
 	Role_ID bit default(0),
 	CauHoi nvarchar(250) not null,
 	DoKho int not null,
-	DapAn varchar(250),
+	TenBai nvarchar(30),
+	DapAn varchar(2),
 	NgayTao date not null default(getdate())
 )
 go
@@ -62,7 +63,6 @@ create table ChiTiet_BaiThi(
 )
 create table Bai_Tap(
 	ID_BaiTap int not null identity(1,1) primary key,
-	TenBai nvarchar(50) not null,
 	DoKho int ,
 	ID_CauHoi int not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi)
@@ -103,12 +103,18 @@ go
 INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho)
 VALUES (1,'Hinh/dethi/anh1-121.png',1),
 	(1,'Hinh/dethi/anh2-121.png',1),
-	(1,'Hinh/dethi/anh3-121.png',1)
+	(1,'Hinh/dethi/anh3-121.png',1),
+	(1,'Hinh/dethi/anh2-121.png',2),
+	(1,'Hinh/dethi/anh3-121.png',3)
+
 go
+INSERT INTO Cau_Hoi(CauHoi,DoKho,TenBai,DapAn)
+VALUES ('hinh/baitap/bai2.png',1,N'Đạo Hàm','A'),
+	('hinh/baitap/bai1.png',2,N'Đạo Hàm','A'),
+	('hinh/baitap/bai3.png',3,N'Đạo Hàm','A')
+GO
 
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
-SELECT*FROM Cau_Hoi
-
 
