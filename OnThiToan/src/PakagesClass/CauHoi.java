@@ -4,19 +4,48 @@ package PakagesClass;
 import java.util.Date;
 
 public class CauHoi {
-    private int ID_CauHoi, ID_BT;
+    private int ID_CauHoi;
+    private boolean Role_ID;
     private String CauHoi;
     private int doKho;
+    private String tenBai;
+    private String DapAn;
     private Date ngayTao;
 
     public CauHoi() {
     }
 
-    public CauHoi(int ID_CauHoi, int ID_BT, String CauHoi, int doKho, Date ngayTao) {
+    public boolean getRole_ID() {
+        return Role_ID;
+    }
+
+    public void setRole_ID(boolean Role_ID) {
+        this.Role_ID = Role_ID;
+    }
+
+    public String getDapAn() {
+        return DapAn;
+    }
+
+    public void setDapAn(String DapAn) {
+        this.DapAn = DapAn;
+    }
+
+    public String getTenBai() {
+        return tenBai;
+    }
+
+    public void setTenBai(String tenBai) {
+        this.tenBai = tenBai;
+    }
+
+    public CauHoi(int ID_CauHoi, boolean Role_ID, String CauHoi, int doKho, String tenBai, String DapAn, Date ngayTao) {
         this.ID_CauHoi = ID_CauHoi;
-        this.ID_BT = ID_BT;
+        this.Role_ID = Role_ID;
         this.CauHoi = CauHoi;
         this.doKho = doKho;
+        this.tenBai = tenBai;
+        this.DapAn = DapAn;
         this.ngayTao = ngayTao;
     }
 
@@ -26,14 +55,6 @@ public class CauHoi {
 
     public void setID_CauHoi(int ID_CauHoi) {
         this.ID_CauHoi = ID_CauHoi;
-    }
-
-    public int getID_BT() {
-        return ID_BT;
-    }
-
-    public void setID_BT(int ID_BT) {
-        this.ID_BT = ID_BT;
     }
 
     public String getCauHoi() {

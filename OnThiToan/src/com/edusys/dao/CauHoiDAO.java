@@ -16,25 +16,26 @@ import java.util.ArrayList;
  */
 public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
 
-    String INSERT = "INSERT INTO Cau_Hoi(ID_BT,CauHoi,DoKho) VALUES (?,?,?)";
-    String UPDATE = "UPDATE Cau_Hoi SET ID_BT=?,CauHoi=?,DoKho=? WHERE ID_CauHoi=?";
-    String DELETE = "DELETE FROM Dap_An WHERE ID_DapAn = ?\n"
-            + "DELETE FROM Cau_Hoi WHERE ID_CauHoi=?";
-    String SELECTALL = "SELECT * FROM Cau_Hoi";
-
+    String INSERT = "INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho)VALUES(?,?,?)";
+    String UPDATE = "UPDATE Cau_Hoi SET Role_ID=?,CauHoi=?,DoKho=? WHERE ID_CauHoi=?";
+    String DELETE = "DELETE FROM Cau_Hoi WHERE ID_CauHoi=?";
+    String SELECTALL = "SELECT * FROM Cau_Hoi WHERE Role_ID =0";
+    
     @Override
     public void insert(CauHoi ch) {
-        Helper.JdbcHelper.update(INSERT, ch.getID_BT(), ch.getCauHoi(), ch.getDoKho());
+        Helper.JdbcHelper.update(INSERT, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho());
     }
 
     @Override
-    public void update(CauHoi entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void update(CauHoi ch) {
+        Helper.JdbcHelper.update(UPDATE, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(),ch.getID_CauHoi());
+
     }
 
     @Override
     public void delete(Integer key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Helper.JdbcHelper.update(DELETE, key);
+
     }
 
     @Override
@@ -56,10 +57,12 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
             while (rs.next()) {
                 CauHoi ch = new CauHoi();
                 ch.setID_CauHoi(rs.getInt(1));
-                ch.setID_BT(rs.getInt(2));
+                ch.setRole_ID(rs.getBoolean(2));
                 ch.setCauHoi(rs.getString(3));
                 ch.setDoKho(rs.getInt(4));
-                ch.setNgayTao(rs.getDate(5));
+                ch.setTenBai(rs.getString(5));
+                ch.setDapAn(rs.getString(6));
+                ch.setNgayTao(rs.getDate(7));
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
@@ -69,7 +72,6 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-
     // Lấy row mới nhất của table
     public CauHoi selectIDNew() {
         String SELECTIDNEW = "SELECT TOP 1 * FROM Cau_Hoi ORDER BY ID_CauHoi DESC ";
@@ -81,25 +83,16 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
     }
 
     // Lấy danh sách theo mã ID_BT
-    public ArrayList<Object[]> selectByID_MaBT(int key) {
-        ArrayList<Object[]> list = new ArrayList<>();
+    public ArrayList<CauHoi> selectDoKho() {
+        ArrayList<CauHoi> list = new ArrayList<>();
         try {
             int i = 0;
-            String sql = "SELECT Cau_Hoi.ID_CauHoi,DoKho,DapAnDung FROM Cau_Hoi \n"
-                    + "JOIN Dap_An ON Cau_Hoi.ID_CauHoi=Dap_An.ID_CauHoi WHERE ID_BT=?";
-            ResultSet rs = Helper.JdbcHelper.query(sql, key);
+            String sql = "SELECT DoKho FROM Cau_Hoi GROUP BY DoKho";
+            ResultSet rs = Helper.JdbcHelper.query(sql);
             while (rs.next()) {
-                String doKho = null;
-                if (rs.getInt(2) == 1) {
-                    doKho = "Dễ";
-                } else if (rs.getInt(2) == 2) {
-                    doKho = "Trung bình";
-                } else if (rs.getInt(2) == 3) {
-                    doKho = "Khó";
-                }
-                Object[] ch = {i, rs.getInt(1), doKho, rs.getString(3)};
+                CauHoi ch = new CauHoi();
+                ch.setDoKho(rs.getInt(1));
                 list.add(ch);
-                i++;
             }
             rs.getStatement().getConnection().close();
         } catch (Exception e) {
@@ -108,5 +101,4 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         return list;
     }
 
-    
 }
