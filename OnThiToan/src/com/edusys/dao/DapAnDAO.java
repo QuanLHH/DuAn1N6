@@ -5,22 +5,22 @@
  */
 package com.edusys.dao;
 
-import PakagesClass.CauHoi;
+import PakagesClass.DapAn;
 import java.util.ArrayList;
 
 /**
  *
  * @author taola
  */
-public class CauHoiDAO extends EduSysDAO<CauHoi, Integer>{
+public class DapAnDAO extends EduSysDAO<DapAn, Integer>{
 
     @Override
-    public void insert(CauHoi entity) {
+    public void insert(DapAn entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void update(CauHoi entity) {
+    public void update(DapAn entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -30,17 +30,17 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer>{
     }
 
     @Override
-    public ArrayList<CauHoi> selectALL() {
+    public ArrayList<DapAn> selectALL() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public CauHoi selectById(Integer key) {
+    public DapAn selectById(Integer key) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    protected ArrayList<CauHoi> selectBySql(String sql, Object... args) {
+    protected ArrayList<DapAn> selectBySql(String sql, Object... args) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

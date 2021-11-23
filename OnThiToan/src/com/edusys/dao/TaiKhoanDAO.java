@@ -47,8 +47,7 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     @Override
     public ArrayList<TaiKhoan> selectALL() {
-        String SELECT = "SELECT * FROM Tai_Khoan";
-        return this.selectBySql(SELECT);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList<TaiKhoan> selectFrom(String sql, Object... args) {
