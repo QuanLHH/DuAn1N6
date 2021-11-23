@@ -5,6 +5,7 @@
  */
 package com.edusys.dao;
 
+import Helper.JdbcHelper;
 import PakagesClass.CauHoi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         return list;
     }
 
+    // Lấy row mới nhất của table
     public CauHoi selectIDNew() {
         String SELECTIDNEW = "SELECT TOP 1 * FROM Cau_Hoi ORDER BY ID_CauHoi DESC ";
         ArrayList<CauHoi> list = selectBySql(SELECTIDNEW);
@@ -78,4 +80,33 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         return list.get(0);
     }
 
+    // Lấy danh sách theo mã ID_BT
+    public ArrayList<Object[]> selectByID_MaBT(int key) {
+        ArrayList<Object[]> list = new ArrayList<>();
+        try {
+            int i = 0;
+            String sql = "SELECT Cau_Hoi.ID_CauHoi,DoKho,DapAnDung FROM Cau_Hoi \n"
+                    + "JOIN Dap_An ON Cau_Hoi.ID_CauHoi=Dap_An.ID_CauHoi WHERE ID_BT=?";
+            ResultSet rs = Helper.JdbcHelper.query(sql, key);
+            while (rs.next()) {
+                String doKho = null;
+                if (rs.getInt(2) == 1) {
+                    doKho = "Dễ";
+                } else if (rs.getInt(2) == 2) {
+                    doKho = "Trung bình";
+                } else if (rs.getInt(2) == 3) {
+                    doKho = "Khó";
+                }
+                Object[] ch = {i, rs.getInt(1), doKho, rs.getString(3)};
+                list.add(ch);
+                i++;
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    
 }
