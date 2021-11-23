@@ -49,6 +49,9 @@ public class FormLogin_Start extends javax.swing.JFrame {
             } else if (tk == null) {
                 lablecheck.setText("Tài khoản không đúng!");
                 return;
+            } else if (!tk.getMatKhau().equalsIgnoreCase(pass)) {
+                lablecheck.setText("Mật khẩu không đúng!");
+                return;
             } else {
                 Auth2.use = tk;
                 JOptionPane.showMessageDialog(this, "Login thành công");
@@ -111,9 +114,9 @@ public class FormLogin_Start extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
         jLabel1.setText("ĐĂNG NHẬP");
 
-        jLabel3.setText("Usename ");
+        jLabel3.setText("Username");
 
-        jLabel4.setText("PassWorld");
+        jLabel4.setText("PassWord");
 
         lbl.setForeground(new java.awt.Color(51, 51, 255));
         lbl.setText(" Forgot password ?");
@@ -213,7 +216,7 @@ public class FormLogin_Start extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         new JFormNguoiDung(this, true).setVisible(true);
-        new JFormSignIn(this, true).setVisible(true);
+        new JFormSignUp(this, true).setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
 
     /**

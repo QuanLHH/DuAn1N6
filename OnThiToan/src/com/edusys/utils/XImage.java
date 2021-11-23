@@ -12,14 +12,14 @@ import javax.swing.ImageIcon;
 
 public class XImage {
     public static void save(File src){
-        File dst = new File("Hinh/chuyende",src.getName());
-        if(!dst.getParentFile().exists()){
-            dst.getParentFile().mkdirs();// tạo thư mục nếu chưa tồn tại
+        File f = new File("Hinh/dethi",src.getName());
+        if(!f.getParentFile().exists()){
+            f.getParentFile().mkdirs();// tạo thư mục nếu chưa tồn tại
         }
         try{
-            // copy ảnh vào thư mục chuyende
+            // copy ảnh vào thư mục dethi
             Path from = Paths.get(src.getAbsolutePath());
-            Path to = Paths.get(dst.getAbsolutePath());
+            Path to = Paths.get(f.getAbsolutePath());
             Files.copy(from, to,StandardCopyOption.REPLACE_EXISTING);
         }catch(Exception e){
             e.printStackTrace();
