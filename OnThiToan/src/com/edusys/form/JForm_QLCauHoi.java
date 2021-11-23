@@ -12,6 +12,7 @@ import java.io.File;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -65,39 +66,88 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     public CauHoi getForm() {
+        int dem = tb_cauHoi.getSelectedRow();
         CauHoi ch = new CauHoi();
-        int doKho = cbb_mucDo.getSelectedIndex()+1;
+        int doKho = cbb_mucDo.getSelectedIndex() + 1;
+        int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
+        ch.setID_CauHoi(id);
         ch.setDoKho(doKho);
         ch.setTenBai(tf_TenBai.getText());
         ch.setCauHoi(path);
         ch.setDapAn(tf_dapAn.getText());
         return ch;
     }
-    
+
     public void fillTable() {
+        this.listCH = CauHoiDao.selectALL();
         model.setRowCount(0);
-        for(CauHoi x:listCH){
-            model.addRow(new Object[]{x.getID_CauHoi(),x.getCauHoi(),x.getDoKho(),x.getTenBai(),x.getDapAn()});
+        for (CauHoi x : listCH) {
+            model.addRow(new Object[]{x.getID_CauHoi(), x.getCauHoi(), x.getDoKho(), x.getTenBai(), x.getDapAn()});
         }
     }
-    
-    public void shows(){
-        int dem =tb_cauHoi.getSelectedRow();
+
+    public void shows() {
+        int dem = tb_cauHoi.getSelectedRow();
         path = model.getValueAt(dem, 1).toString();
         ImageIcon img = new ImageIcon(path);
+
         lb_image.setIcon(img);
+        int item = Integer.valueOf(model.getValueAt(dem, 2).toString());
+        if (item==1) {
+            cbb_mucDo.setSelectedIndex(0);
+        } else if (item==2) {
+            cbb_mucDo.setSelectedIndex(1);
+        } else if (item==3) {
+            cbb_mucDo.setSelectedIndex(2);
+        }
+        tf_TenBai.setText(model.getValueAt(dem, 3).toString());
+        tf_dapAn.setText(model.getValueAt(dem, 4).toString());
     }
-    public void insert(){
-        try{
+
+    public void insert() {
+        try {
             CauHoi ch = getForm();
             CauHoiDao.insert(ch);
-            
             JOptionPane.showMessageDialog(rootPane, "Thêm thành công!");
             fillTable();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    public void update() {
+        int dem = tb_cauHoi.getSelectedRow();
+        try {
+            CauHoi ch = getForm();
+            int i = JOptionPane.showConfirmDialog(rootPane, "Update câu hỏi mã: " + model.getValueAt(dem, 0).toString() + "?", "", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                CauHoiDao.update(ch);
+                JOptionPane.showMessageDialog(rootPane, "Update thành công!");
+                fillTable();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete() {
+        int dem = tb_cauHoi.getSelectedRow();
+        try {
+            CauHoi ch = getForm();
+            int i = JOptionPane.showConfirmDialog(rootPane, "Xóa câu hỏi mã: " + model.getValueAt(dem, 0).toString() + "?", "", JOptionPane.YES_NO_OPTION);
+            if (i == 0) {
+                int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
+                CauHoiDao.delete(id);
+                JOptionPane.showMessageDialog(rootPane, "Xóa thành công!");
+                fillTable();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void runs() {
         new Thread() {
             @Override
@@ -129,13 +179,13 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             ImageIcon img = new ImageIcon(path);
             lb_image.setIcon(img);
         }
-        
+
     }
 
     public void refresh() {
-        path=null;
+        path = null;
         ImageIcon img = new ImageIcon("");
-            lb_image.setIcon(img);
+        lb_image.setIcon(img);
     }
 
     @SuppressWarnings("unchecked")
@@ -156,6 +206,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         tf_TenBai = new javax.swing.JTextField();
         tf_dapAn = new javax.swing.JTextField();
+        jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_cauHoi = new javax.swing.JTable();
@@ -208,6 +259,13 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
         jLabel4.setText("Tên bài:");
 
+        jButton7.setText("Sửa");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -237,7 +295,9 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(52, 52, 52)
+                .addGap(18, 18, 18)
+                .addComponent(jButton7)
+                .addGap(18, 18, 18)
                 .addComponent(jButton4)
                 .addGap(141, 141, 141))
         );
@@ -263,7 +323,8 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton7))
                 .addContainerGap())
         );
 
@@ -328,6 +389,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         });
 
         jButton6.setText("Xóa");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -442,15 +508,23 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }//GEN-LAST:event_lb_imageMouseClicked
 
     private void tb_cauHoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_cauHoiMouseClicked
-        if(evt.getClickCount()==2&&!evt.isConsumed()){
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             shows();
             jTP_show.setSelectedIndex(0);
         }
     }//GEN-LAST:event_tb_cauHoiMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        update();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        delete();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -504,6 +578,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

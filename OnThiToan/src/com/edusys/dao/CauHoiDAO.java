@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
 
     String INSERT = "INSERT INTO Cau_Hoi(CauHoi,DoKho,TenBai,DapAn)VALUES(?,?,?,?)";
-    String UPDATE = "UPDATE Cau_Hoi SET DoKho=?,TenBai=?,DapAn=? WHERE ID_CauHoi=?";
+    String UPDATE = "UPDATE Cau_Hoi SET CauHoi=?,DoKho=?,TenBai=?,DapAn=? WHERE ID_CauHoi=?";
     String DELETE = "DELETE FROM Cau_Hoi WHERE ID_CauHoi=?";
     String SELECTALL = "SELECT * FROM Cau_Hoi WHERE Role_ID =0";
     
