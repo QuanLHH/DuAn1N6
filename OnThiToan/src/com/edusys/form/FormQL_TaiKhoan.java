@@ -35,14 +35,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         filltable();
         setExit();
     }
-    public void setExit() {
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e){
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            }
-        });
-    }
+  
 
     public void setform(TaiKhoan tk) {
         txtma.setText(tk.getID_MaND() + "");
