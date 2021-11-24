@@ -137,14 +137,14 @@
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Usename "/>
+        <Property name="text" type="java.lang.String" value="Username"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtname">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
-        <Property name="text" type="java.lang.String" value="PassWorld"/>
+        <Property name="text" type="java.lang.String" value="PassWord"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtpas">
