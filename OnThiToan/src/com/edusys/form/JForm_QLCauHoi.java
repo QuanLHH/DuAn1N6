@@ -136,11 +136,16 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         int dem = tb_cauHoi.getSelectedRow();
         try {
             CauHoi ch = getFormUpdate();
-            int i = JOptionPane.showConfirmDialog(rootPane, "Update câu hỏi ID: " + model.getValueAt(dem, 0).toString() + "?", "", JOptionPane.YES_NO_OPTION);
-            if (i == 0) {
-                CauHoiDao.update(ch);
-                JOptionPane.showMessageDialog(rootPane, "Update thành công!");
-                fillTable();
+            checkImg();
+            checkTenBai();
+            checkDapAn();
+            if (check == true) {
+                int i = JOptionPane.showConfirmDialog(rootPane, "Update câu hỏi ID: " + model.getValueAt(dem, 0).toString() + "?", "", JOptionPane.YES_NO_OPTION);
+                if (i == 0) {
+                    CauHoiDao.update(ch);
+                    JOptionPane.showMessageDialog(rootPane, "Update thành công!");
+                    fillTable();
+                }
             }
 
         } catch (Exception e) {
@@ -225,7 +230,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             lb_loaibai.setText("");
             check = true;
         }
-        
+
     }
 
     void checkDapAn() {
@@ -238,8 +243,8 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             lb_DapAN.setText("");
             check = true;
         }
-        String checkDapAn="[ABCDabcd]{1}";
-        if(!tf_dapAn.getText().matches(checkDapAn)){
+        String checkDapAn = "[ABCDabcd]{1}";
+        if (!tf_dapAn.getText().matches(checkDapAn)) {
             lb_DapAN.setText("Đáp án là A,B,C,D");
             lb_DapAN.setForeground(Color.red);
             check = false;
@@ -409,10 +414,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                     .addComponent(lb_loaibai, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lb_DapAN, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bt_Them)
-                    .addComponent(bt_Refresh)
-                    .addComponent(bt_Update))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(bt_Refresh)
+                        .addComponent(bt_Update)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
