@@ -162,10 +162,10 @@
                           <Component id="btnsua" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="42" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="3" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnthem" alignment="0" max="32767" attributes="0"/>
                           <Component id="btnxoa" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnupdate" alignment="3" max="32767" attributes="0"/>
+                          <Component id="btnupdate" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
