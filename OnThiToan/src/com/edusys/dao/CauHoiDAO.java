@@ -7,8 +7,13 @@ package com.edusys.dao;
 
 import Helper.JdbcHelper;
 import PakagesClass.CauHoi;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -150,5 +155,37 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-
+      public String dapan(int id){
+         String dap = null;
+          try {
+              String sql = "select DapAn from Cau_Hoi where ID_CauHoi = ?";
+               ResultSet rs = Helper.JdbcHelper.query(sql,id);
+           while(rs.next()){
+               dap=rs.getString("DapAn");
+           }
+           rs.getStatement().getConnection().close();
+             
+              return dap;
+          } catch (Exception e) {
+              e.printStackTrace();
+              throw new RuntimeException(e);
+          }
+          
+      }
+      public int idcauhoi(String tenbai,int mucdo){
+        try {
+            int a = 0 ;
+            String sql = "select ID_CauHoi from Cau_Hoi where DoKho = ? and TenBai = ?";
+            ResultSet rs = Helper.JdbcHelper.query(sql,mucdo,tenbai);
+           while(rs.next()){
+               a=rs.getInt("ID_CauHoi");
+           }
+           rs.getStatement().getConnection().close();
+           return a;
+        } catch (SQLException ex) {
+            Logger.getLogger(CauHoiDAO.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            throw new RuntimeException();
+        }
+      }
 }
