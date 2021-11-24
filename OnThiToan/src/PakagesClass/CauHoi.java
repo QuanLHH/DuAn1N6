@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class CauHoi {
     private int ID_CauHoi;
-    private boolean Role_ID;
+    private boolean Role_ID=true;
     private String CauHoi;
     private int doKho;
     private String tenBai;

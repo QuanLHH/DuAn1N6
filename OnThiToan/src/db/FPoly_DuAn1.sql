@@ -100,18 +100,15 @@ VALUES (N'Đạo Hàm','https://www.youtube.com/watch?v=HIGllE3N-iw',
 	'https://vungoi.vn/lop-12/chi-tiet-ly-thuyet-nguyen-ham-5af3eae81261631175a05d3e.html')
 go
 
-INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho)
-VALUES (1,'Hinh/dethi/anh1-121.png',1),
-	(1,'Hinh/dethi/anh2-121.png',1),
-	(1,'Hinh/dethi/anh3-121.png',1),
-	(1,'Hinh/dethi/anh2-121.png',2),
-	(1,'Hinh/dethi/anh3-121.png',3)
-
-go
-INSERT INTO Cau_Hoi(CauHoi,DoKho,TenBai,DapAn)
-VALUES ('hinh/baitap/bai2.png',1,N'Đạo Hàm','A'),
-	('hinh/baitap/bai1.png',2,N'Đạo Hàm','A'),
-	('hinh/baitap/bai3.png',3,N'Đạo Hàm','A')
+INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn)
+VALUES (1,'Hinh/CauHoi/anh1-121.png',1,'DT0001','A'),
+	(1,'Hinh/CauHoi/anh2-121.png',1,'DT0002','B'),
+	(1,'Hinh/CauHoi/anh3-121.png',1,'DT0003','C'),
+	(1,'Hinh/CauHoi/anh2-121.png',2,'DT0004','B'),
+	(1,'Hinh/CauHoi/anh3-121.png',3,'DT0005','D').
+	(0,'hinh/CauHoi/bai2.png',1,N'Đạo Hàm','A'),
+	(0,'hinh/CauHoi/bai1.png',2,N'Đạo Hàm','A'),
+	(0,'hinh/CauHoi/bai3.png',3,N'Đạo Hàm','A')
 GO
 
 SELECT*FROM Nguoi_Dung
