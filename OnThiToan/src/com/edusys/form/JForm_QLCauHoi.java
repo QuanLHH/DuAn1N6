@@ -432,7 +432,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                     .addComponent(Prev)
                     .addComponent(Next)
                     .addComponent(Last1))
-=======
+
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
