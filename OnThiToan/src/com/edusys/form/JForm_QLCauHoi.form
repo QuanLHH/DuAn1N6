@@ -167,10 +167,12 @@
                               <Component id="lb_DapAN" min="-2" pref="13" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="bt_Them" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="bt_Refresh" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="bt_Update" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="bt_Refresh" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="bt_Update" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace pref="27" max="32767" attributes="0"/>
                       </Group>
