@@ -328,13 +328,13 @@ public class FormQuenMK extends javax.swing.JFrame {
                 return;
             } else {
                 Random rand = new Random();
-                int randomCode = rand.nextInt(999999);
+                randomcode = rand.nextInt(999999);
                 String host = "smtp.gmail.com";
                 String user = "dangdinhvu221";
                 String pass = "vu123456";
                 String to = email.getText();
                 String subject = "Reseting Code";
-                String message = "Your reset code is " + randomCode;
+                String message = "Your reset code is " + randomcode;
                 boolean sessionDebug = false;
                 Properties props = System.getProperties();
 
@@ -389,12 +389,11 @@ public class FormQuenMK extends javax.swing.JFrame {
         t.start();
     }
      public void VerifyCode() {
-        Integer randomCode = null;
+        
         if (Validate.checkEmety(this,txtVerify,"Nhập very code","Error")==false) {
             return;
-        } else if (Integer.valueOf(txtVerify.getText()) == randomCode) {
-            mesageDiaLogHelper.showErrorDialog(this, "Mã không đúng. Vui lòng nhập lại", "Error!!");
-            
+        } else if (Integer.valueOf(txtVerify.getText()) != randomcode) {
+            mesageDiaLogHelper.showErrorDialog(this, "Mã không đúng. Vui lòng nhập lại", "Error!!");    
         } else {
             mesageDiaLogHelper.showMessageDialog(this, "Mã hợp lệ!", "Error!!");
             this.t.stop();
