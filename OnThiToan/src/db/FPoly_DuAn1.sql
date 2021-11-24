@@ -105,7 +105,7 @@ VALUES (1,'Hinh/CauHoi/anh1-121.png',1,'DT0001','A'),
 	(1,'Hinh/CauHoi/anh2-121.png',1,'DT0002','B'),
 	(1,'Hinh/CauHoi/anh3-121.png',1,'DT0003','C'),
 	(1,'Hinh/CauHoi/anh2-121.png',2,'DT0004','B'),
-	(1,'Hinh/CauHoi/anh3-121.png',3,'DT0005','D').
+	(1,'Hinh/CauHoi/anh3-121.png',3,'DT0005','D'),
 	(0,'hinh/CauHoi/bai2.png',1,N'Đạo Hàm','A'),
 	(0,'hinh/CauHoi/bai1.png',2,N'Đạo Hàm','A'),
 	(0,'hinh/CauHoi/bai3.png',3,N'Đạo Hàm','A')
