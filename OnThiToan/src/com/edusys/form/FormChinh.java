@@ -48,7 +48,7 @@ public class FormChinh extends javax.swing.JFrame {
     void openLogin(){
         FormLogin_Start login = new FormLogin_Start();
         login.setVisible(true);
-        this.dispose();
+        
     }
     void openDMK(){ 
         new JFormDMK(this,true).setVisible(true);
@@ -64,12 +64,14 @@ public class FormChinh extends javax.swing.JFrame {
         new JForm_QLCauHoi(this, true).setVisible(true);
     }
     void QLTK(){
-        new JFormNguoiDung(this, true).setVisible(true);
+        FormQL_TaiKhoan tk = new FormQL_TaiKhoan();
+        tk.setVisible(true);
+      
     }
     void LamBaiTap(){
         formlambaitap lbt = new formlambaitap();
         lbt.setVisible(true);
-        this.dispose();
+        
     }
     
     @SuppressWarnings("unchecked")
