@@ -16,19 +16,19 @@ import java.util.ArrayList;
  */
 public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
 
-    String INSERT = "INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho)VALUES(?,?,?)";
-    String UPDATE = "UPDATE Cau_Hoi SET Role_ID=?,CauHoi=?,DoKho=? WHERE ID_CauHoi=?";
+    String INSERT = "INSERT INTO Cau_Hoi(CauHoi,DoKho,TenBai,DapAn)VALUES(?,?,?,?)";
+    String UPDATE = "UPDATE Cau_Hoi SET CauHoi=?,DoKho=?,TenBai=?,DapAn=? WHERE ID_CauHoi=?";
     String DELETE = "DELETE FROM Cau_Hoi WHERE ID_CauHoi=?";
     String SELECTALL = "SELECT * FROM Cau_Hoi WHERE Role_ID =0";
     
     @Override
     public void insert(CauHoi ch) {
-        Helper.JdbcHelper.update(INSERT, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho());
+        Helper.JdbcHelper.update(INSERT, ch.getCauHoi(),ch.getDoKho(),ch.getTenBai(),ch.getDapAn());
     }
 
     @Override
     public void update(CauHoi ch) {
-        Helper.JdbcHelper.update(UPDATE, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(),ch.getID_CauHoi());
+        Helper.JdbcHelper.update(UPDATE, ch.getCauHoi(),ch.getDoKho(),ch.getTenBai(),ch.getDapAn(),ch.getID_CauHoi());
 
     }
 
@@ -92,6 +92,40 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
             while (rs.next()) {
                 CauHoi ch = new CauHoi();
                 ch.setDoKho(rs.getInt(1));
+                list.add(ch);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+     public ArrayList<CauHoi> selecttenbai() {
+        ArrayList<CauHoi> list = new ArrayList<>();
+        try {
+            String sql = "SELECT TenBai FROM Cau_Hoi GROUP BY TenBai";
+            ResultSet rs = Helper.JdbcHelper.query(sql);
+            while (rs.next()) {
+                CauHoi ch = new CauHoi();
+               ch.setTenBai(rs.getString(1));
+                list.add(ch);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+      public ArrayList<CauHoi> selectfill(String tenbai,int dokho) {
+        ArrayList<CauHoi> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Cau_Hoi WHERE TenBai =? AND DoKho = ?";
+            ResultSet rs = Helper.JdbcHelper.query(sql,tenbai,dokho);
+            while (rs.next()) {
+                CauHoi ch = new CauHoi();
+               ch.setCauHoi(rs.getString(1));
+               ch.setDoKho(rs.getInt(2));
+               ch.setTenBai(rs.getString(3)); 
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
