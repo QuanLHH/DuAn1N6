@@ -5,20 +5,77 @@
  */
 package com.edusys.form;
 
+import PakagesClass.BaiThi;
+import com.edusys.dao.BaiThiDAO;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOVO
  */
 public class JForm_QLBaiThi extends javax.swing.JDialog {
 
+     com.edusys.dao.BaiThiDAO BaiThiDao = new BaiThiDAO();
+    ArrayList<BaiThi> listBT = new ArrayList<>();
+    DefaultTableModel model = new DefaultTableModel();
     /**
      * Creates new form JForm_QLDeThi
      */
     public JForm_QLBaiThi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setInit();
     }
 
+      public void setInit(){
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Quản lý bài thi");
+        this.listBT = BaiThiDao.selectALL();
+        model = (DefaultTableModel) tb_BaiThi.getModel();
+        setCbbMucDo();
+        fillTable();
+    }
+    
+    public void fillTable(){
+        this.listBT = BaiThiDao.selectALL();
+        model.setRowCount(0);
+        for(BaiThi x : listBT){
+            model.addRow(new Object[]{
+                x.getID_BaiThi(), x.getDoKho(),x.getMaDe() , x.getID_CauHoi()
+            });
+        }
+    }
+    
+    public void setCbbMucDo(){
+        ArrayList<BaiThi> list = BaiThiDao.selectDoKho();
+        cbb_Mucdo.removeAllItems();
+        for(BaiThi x : list){
+            String mucdo = null;
+            if(x.getDoKho() == 1){
+                mucdo = "Dễ";
+            } else if (x.getDoKho() == 2){
+                mucdo = "Trung Bình";
+            } else if (x.getDoKho() == 3){
+                mucdo = "Khó";
+            }
+            cbb_Mucdo.addItem(mucdo);
+        }
+    }
+    public void shows(){
+        int dem =  tb_BaiThi.getSelectedRow();
+        txt_Made.setText(model.getValueAt(dem, 1).toString());
+        int item = Integer.valueOf(model.getValueAt(dem, 2).toString());
+        if(item == 1){
+            cbb_Mucdo.setSelectedIndex(0);
+        }else if (item == 2){
+            cbb_Mucdo.setSelectedIndex(1);
+        }else if(item == 3){
+            cbb_Mucdo.setSelectedIndex(2);
+        }
+        cbb_IDCauHoi.setSelectedItem(model.getValueAt(dem, 3).toString());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,7 +119,7 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
 
         jLabel6.setText("Mức độ:");
 
-        cbb_Mucdo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbb_Mucdo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dễ ", "Trung Bình", "Khó" }));
 
         jLabel7.setText("ID_Câu hỏi:");
 
@@ -82,6 +139,11 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tb_BaiThi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_BaiThiMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tb_BaiThi);
@@ -184,6 +246,13 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tb_BaiThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_BaiThiMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2 && !evt.isConsumed()){
+            shows();
+        }
+    }//GEN-LAST:event_tb_BaiThiMouseClicked
 
     /**
      * @param args the command line arguments

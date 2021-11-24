@@ -113,9 +113,15 @@ VALUES ('hinh/baitap/bai2.png',1,N'Đạo Hàm','A'),
 	('hinh/baitap/bai1.png',2,N'Đạo Hàm','A'),
 	('hinh/baitap/bai3.png',3,N'Đạo Hàm','A')
 GO
-
+INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
+VALUES('123',1,1),
+	  ('231',2,4),
+	  ('123',1,3),
+	  ('321',3,8)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
 SELECT*FROM Cau_Hoi
+SELECT*FROM Bai_Thi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
+
