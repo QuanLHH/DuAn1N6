@@ -28,14 +28,14 @@ public class FormChinh extends javax.swing.JFrame {
         this.btnLBT.setIcon(icon2);
         ImageIcon icon3 = new ImageIcon("Hinh/Properties.png");
         this.btnLBTap.setIcon(icon3);
-        ImageIcon icon7 = new ImageIcon("Hinh/Best.png");
-        this.btnXemTop.setIcon(icon7);
         ImageIcon icon4 = new ImageIcon("Hinh/List.png");
         this.btnTaiLieu.setIcon(icon4);
         ImageIcon icon5 = new ImageIcon("Hinh/Comments.png");
         this.btnPhanHoi.setIcon(icon5);
-        ImageIcon icon6 = new ImageIcon("Hinh/logoweb (1).png");
+        ImageIcon icon6 = new ImageIcon("Hinh/logoweb.png");
         this.lblAnh.setIcon(icon6);
+        ImageIcon icon7 = new ImageIcon("Hinh/Best.png");
+        this.btnXemTop.setIcon(icon7);
         
     }
 
@@ -63,7 +63,7 @@ public class FormChinh extends javax.swing.JFrame {
     void QLCH(){
         new JForm_QLCauHoi(this, true).setVisible(true);
     }
-    void QLND(){
+    void QLTK(){
         new JFormNguoiDung(this, true).setVisible(true);
     }
     void LamBaiTap(){
@@ -285,7 +285,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniQLTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLTKActionPerformed
         // TODO add your handling code here:
-        QLND();
+        QLTK();
     }//GEN-LAST:event_mniQLTKActionPerformed
 
     private void mniQLCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLCHActionPerformed
