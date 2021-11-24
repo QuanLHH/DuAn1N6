@@ -63,7 +63,7 @@ public class FormChinh extends javax.swing.JFrame {
     void QLCH(){
         new JForm_QLCauHoi(this, true).setVisible(true);
     }
-    void QLND(){
+    void QLTK(){
         new JFormNguoiDung(this, true).setVisible(true);
     }
     void LamBaiTap(){
@@ -285,7 +285,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniQLTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLTKActionPerformed
         // TODO add your handling code here:
-        QLND();
+        QLTK();
     }//GEN-LAST:event_mniQLTKActionPerformed
 
     private void mniQLCHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLCHActionPerformed
