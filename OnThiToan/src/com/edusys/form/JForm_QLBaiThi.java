@@ -6,8 +6,14 @@
 package com.edusys.form;
 
 import PakagesClass.BaiThi;
+import PakagesClass.CauHoi;
 import com.edusys.dao.BaiThiDAO;
+import com.edusys.dao.CauHoiDAO;
+import static com.edusys.form.JForm_QLCauHoi.path;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -16,9 +22,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JForm_QLBaiThi extends javax.swing.JDialog {
 
-     com.edusys.dao.BaiThiDAO BaiThiDao = new BaiThiDAO();
+    com.edusys.dao.BaiThiDAO BaiThiDao = new BaiThiDAO();
     ArrayList<BaiThi> listBT = new ArrayList<>();
     DefaultTableModel model = new DefaultTableModel();
+    public static boolean check = true;
+
     /**
      * Creates new form JForm_QLDeThi
      */
@@ -28,54 +36,167 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
         setInit();
     }
 
-      public void setInit(){
+    public void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Quản lý bài thi");
         this.listBT = BaiThiDao.selectALL();
         model = (DefaultTableModel) tb_BaiThi.getModel();
         setCbbMucDo();
+        setCbbID();
         fillTable();
     }
-    
-    public void fillTable(){
+
+    public void fillTable() {
         this.listBT = BaiThiDao.selectALL();
         model.setRowCount(0);
-        for(BaiThi x : listBT){
+        for (BaiThi x : listBT) {
             model.addRow(new Object[]{
-                x.getID_BaiThi(), x.getDoKho(),x.getMaDe() , x.getID_CauHoi()
+                x.getID_BaiThi(), x.getDoKho(), x.getMaDe(), x.getID_CauHoi()
             });
         }
     }
-    
-    public void setCbbMucDo(){
+
+    public void setCbbMucDo() {
         ArrayList<BaiThi> list = BaiThiDao.selectDoKho();
         cbb_Mucdo.removeAllItems();
-        for(BaiThi x : list){
+        for (BaiThi x : list) {
             String mucdo = null;
-            if(x.getDoKho() == 1){
+            if (x.getDoKho() == 1) {
                 mucdo = "Dễ";
-            } else if (x.getDoKho() == 2){
+            } else if (x.getDoKho() == 2) {
                 mucdo = "Trung Bình";
-            } else if (x.getDoKho() == 3){
+            } else if (x.getDoKho() == 3) {
                 mucdo = "Khó";
             }
             cbb_Mucdo.addItem(mucdo);
         }
     }
-    public void shows(){
-        int dem =  tb_BaiThi.getSelectedRow();
+
+    public void setCbbID() {
+        CauHoi ch = new CauHoi();
+        CauHoiDAO cauHoiDao = new CauHoiDAO();
+        cbb_IDCauHoi.removeAllItems();
+        ArrayList<CauHoi> list = cauHoiDao.selectID();
+        for (CauHoi x : list) {
+            cbb_IDCauHoi.addItem(Integer.toString(x.getID_CauHoi()));
+        }
+    }
+
+    public void shows() {
+        int dem = tb_BaiThi.getSelectedRow();
         txt_Made.setText(model.getValueAt(dem, 1).toString());
         int item = Integer.valueOf(model.getValueAt(dem, 2).toString());
-        if(item == 1){
+        if (item == 1) {
             cbb_Mucdo.setSelectedIndex(0);
-        }else if (item == 2){
+        } else if (item == 2) {
             cbb_Mucdo.setSelectedIndex(1);
-        }else if(item == 3){
+        } else if (item == 3) {
             cbb_Mucdo.setSelectedIndex(2);
         }
         cbb_IDCauHoi.setSelectedItem(model.getValueAt(dem, 3).toString());
     }
+
+    public void lamNew() {
+        txt_Made.setText("");
+        cbb_Mucdo.setSelectedIndex(0);
+        cbb_IDCauHoi.setSelectedIndex(0);
+    }
+
+    void checkMaBaiThi() {
+        if (txt_Made.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Nhập mã của bài thi");
+            check = false;
+            return;
+        }
+        String checkMaBai = "\\d*";
+        if (!txt_Made.getText().matches(checkMaBai)) {
+            JOptionPane.showMessageDialog(this, "Mã bài phải là số");
+            check = false;
+            return;
+        }
+    }
+
+    public BaiThi getInsert() {
+        BaiThi bt = new BaiThi();
+        int dem = tb_BaiThi.getSelectedRow();
+        int mucdo = cbb_Mucdo.getSelectedIndex() + 1;
+        int idCauHoi = cbb_IDCauHoi.getSelectedIndex() + 1;
+        bt.setMaDe(Integer.parseInt(txt_Made.getText()));
+        bt.setDoKho(mucdo);
+        bt.setID_CauHoi(idCauHoi);
+        return bt;
+    }
+
+    public void them() {
+        try {
+            checkMaBaiThi();
+            if (check == true) {
+                BaiThi bt = getInsert();
+                BaiThiDao.insert(bt);
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                fillTable();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public BaiThi getFormUpdate() {
+        int dem = tb_BaiThi.getSelectedRow();
+        BaiThi bt = new BaiThi();
+        int idBaiThi = Integer.valueOf(model.getValueAt(dem, 0).toString());
+        bt.setID_BaiThi(idBaiThi);
+        bt.setMaDe(Integer.parseInt(txt_Made.getText()));
+        int doKhoBai = cbb_Mucdo.getSelectedIndex() + 1;
+        bt.setDoKho(doKhoBai);
+        int idCauHoi = cbb_IDCauHoi.getSelectedIndex() + 1;
+        bt.setID_CauHoi(idCauHoi);
+        return bt;
+    }
+
+    public void sua() {
+        int dem = tb_BaiThi.getSelectedRow();
+        try {
+            if (dem == -1) {
+                JOptionPane.showMessageDialog(this, "Chọn để sửa");
+                return;
+            }
+            BaiThi bt = getFormUpdate();
+            checkMaBaiThi();
+            if (check == true) {
+
+                BaiThiDao.update(bt);
+                JOptionPane.showMessageDialog(this, "Sửa thành công");
+                fillTable();
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void delete() {
+        int dem = tb_BaiThi.getSelectedRow();
+        try {
+
+            if (dem == -1) {
+                JOptionPane.showMessageDialog(this, "Chọn để xóa");
+                return;
+            }
+            BaiThi bt = getFormUpdate();
+            int idBaiThi = Integer.valueOf(model.getValueAt(dem, 0).toString());
+            BaiThiDao.delete(idBaiThi);
+            JOptionPane.showMessageDialog(this, "Xóa thành công");
+            fillTable();
+            return;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,12 +278,32 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
         btn_Last.setText(">|");
 
         btn_Them.setText("Thêm");
+        btn_Them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThemActionPerformed(evt);
+            }
+        });
 
         btn_Sua.setText("Sửa");
+        btn_Sua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SuaActionPerformed(evt);
+            }
+        });
 
         btn_Xoa.setText("Xóa");
+        btn_Xoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaActionPerformed(evt);
+            }
+        });
 
         btn_New.setText("New");
+        btn_New.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NewActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -249,10 +390,30 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
 
     private void tb_BaiThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_BaiThiMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount() == 2 && !evt.isConsumed()){
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             shows();
         }
     }//GEN-LAST:event_tb_BaiThiMouseClicked
+
+    private void btn_ThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThemActionPerformed
+        // TODO add your handling code here:
+        them();
+    }//GEN-LAST:event_btn_ThemActionPerformed
+
+    private void btn_NewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NewActionPerformed
+        // TODO add your handling code here:
+        lamNew();
+    }//GEN-LAST:event_btn_NewActionPerformed
+
+    private void btn_SuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SuaActionPerformed
+        // TODO add your handling code here:
+        sua();
+    }//GEN-LAST:event_btn_SuaActionPerformed
+
+    private void btn_XoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaActionPerformed
+        // TODO add your handling code here:
+        delete();
+    }//GEN-LAST:event_btn_XoaActionPerformed
 
     /**
      * @param args the command line arguments

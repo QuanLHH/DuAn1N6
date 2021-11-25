@@ -16,17 +16,17 @@ import java.util.ArrayList;
 public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
 
      String INSERT = "INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)VALUES(?,?,?)";
-    String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE ID_BaiThi=?";
+    String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE MaDe=?";
     String DELETE = "DELETE FROM Bai_Thi WHERE ID_BaiThi=?";
     String SELECTALL = "SELECT * FROM Bai_Thi";
     @Override
     public void insert(BaiThi bt) {
-       Helper.JdbcHelper.update(INSERT, bt.getMaDe(),bt.getDoKho());
+       Helper.JdbcHelper.update(INSERT, bt.getMaDe(),bt.getDoKho(),bt.getID_CauHoi());
     }
 
     @Override
    public void update(BaiThi bt) {
-       Helper.JdbcHelper.update(UPDATE, bt.getMaDe(),bt.getDoKho(), bt.getID_BaiThi());
+       Helper.JdbcHelper.update(UPDATE, bt.getMaDe(),bt.getDoKho(), bt.getID_CauHoi(),bt.getID_BaiThi());
     }
 
     @Override

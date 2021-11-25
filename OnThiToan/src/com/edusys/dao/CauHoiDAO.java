@@ -172,4 +172,23 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
             throw new RuntimeException();
         }
       }
+      
+      //Lấy ID_CauHoi
+       public ArrayList<CauHoi> selectID() {
+        ArrayList<CauHoi> list = new ArrayList<>();
+        try {
+            int i = 0;
+            String sql = "SELECT ID_CauHoi FROM Cau_Hoi";
+            ResultSet rs = Helper.JdbcHelper.query(sql);
+            while (rs.next()) {
+                CauHoi ch = new CauHoi();
+                ch.setID_CauHoi(rs.getInt(1));
+                list.add(ch);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
