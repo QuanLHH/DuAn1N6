@@ -21,19 +21,23 @@ import java.util.logging.Logger;
  */
 public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
 
-    String INSERT = "INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn)VALUES(?,?,?,?,?)";
-    String UPDATE = "UPDATE Cau_Hoi SET CauHoi=?,DoKho=?,TenBai=?,DapAn=? WHERE ID_CauHoi=?";
+    String INSERT = "INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn,DapAnSai1,DapAnSai2,DapAnSai3)"
+            + "VALUES (?,?,?,?,?,?,?,?)";
+    String UPDATE = "UPDATE Cau_Hoi SET Role_ID=?,CauHoi=?,DoKho=?,TenBai=?,DapAn=?,DapAnSai1=?,DapAnSai2=?,DapAnSai3=?"
+            + " WHERE ID_CauHoi=?";
     String DELETE = "DELETE FROM Cau_Hoi WHERE ID_CauHoi=?";
     String SELECTALL = "SELECT * FROM Cau_Hoi";
-    
+    String SELECTBYID = "SELECT * FROM Cau_Hoi WHERE ID_CauHoi=?";
     @Override
     public void insert(CauHoi ch) {
-        Helper.JdbcHelper.update(INSERT,ch.getRole_ID(), ch.getCauHoi(),ch.getDoKho(),ch.getTenBai(),ch.getDapAn());
+        Helper.JdbcHelper.update(INSERT, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(), ch.getTenBai(), ch.getDapAn(),
+        ch.getDapAnSai1(),ch.getDapAnSai2(),ch.getDapAnSai3());
     }
 
     @Override
     public void update(CauHoi ch) {
-        Helper.JdbcHelper.update(UPDATE, ch.getCauHoi(),ch.getDoKho(),ch.getTenBai(),ch.getDapAn(),ch.getID_CauHoi());
+        Helper.JdbcHelper.update(UPDATE, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(), ch.getTenBai(), ch.getDapAn(),
+        ch.getDapAnSai1(),ch.getDapAnSai2(),ch.getDapAnSai3(),ch.getID_CauHoi());
 
     }
 
@@ -51,7 +55,11 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
 
     @Override
     public CauHoi selectById(Integer key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<CauHoi> list = selectBySql(SELECTBYID,key);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
     @Override
@@ -67,7 +75,10 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
                 ch.setDoKho(rs.getInt(4));
                 ch.setTenBai(rs.getString(5));
                 ch.setDapAn(rs.getString(6));
-                ch.setNgayTao(rs.getDate(7));
+                ch.setDapAnSai1(rs.getString(7));
+                ch.setDapAnSai2(rs.getString(8));
+                ch.setDapAnSai3(rs.getString(9));
+                ch.setNgayTao(rs.getDate(10));
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
@@ -77,6 +88,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
+
     // Lấy row mới nhất của table
     public CauHoi selectIDNew() {
         String SELECTIDNEW = "SELECT TOP 1 * FROM Cau_Hoi ORDER BY ID_CauHoi DESC ";
@@ -104,7 +116,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-    
+
     public ArrayList<CauHoi> selectRole_ID() {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
@@ -121,14 +133,15 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-     public ArrayList<CauHoi> selecttenbai() {
+
+    public ArrayList<CauHoi> selecttenbai() {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
             String sql = "SELECT TenBai FROM Cau_Hoi GROUP BY TenBai";
             ResultSet rs = Helper.JdbcHelper.query(sql);
             while (rs.next()) {
                 CauHoi ch = new CauHoi();
-               ch.setTenBai(rs.getString(1));
+                ch.setTenBai(rs.getString(1));
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
@@ -137,16 +150,17 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-      public ArrayList<CauHoi> selectfill(String tenbai,int dokho) {
+
+    public ArrayList<CauHoi> selectfill(String tenbai, int dokho) {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM Cau_Hoi WHERE TenBai =? AND DoKho = ?";
-            ResultSet rs = Helper.JdbcHelper.query(sql,tenbai,dokho);
+            ResultSet rs = Helper.JdbcHelper.query(sql, tenbai, dokho);
             while (rs.next()) {
                 CauHoi ch = new CauHoi();
-               ch.setCauHoi(rs.getString(1));
-               ch.setDoKho(rs.getInt(2));
-               ch.setTenBai(rs.getString(3)); 
+                ch.setCauHoi(rs.getString(1));
+                ch.setDoKho(rs.getInt(2));
+                ch.setTenBai(rs.getString(3));
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
@@ -155,37 +169,39 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-      public String dapan(int id){
-         String dap = null;
-          try {
-              String sql = "select DapAn from Cau_Hoi where ID_CauHoi = ?";
-               ResultSet rs = Helper.JdbcHelper.query(sql,id);
-           while(rs.next()){
-               dap=rs.getString("DapAn");
-           }
-           rs.getStatement().getConnection().close();
-             
-              return dap;
-          } catch (Exception e) {
-              e.printStackTrace();
-              throw new RuntimeException(e);
-          }
-          
-      }
-      public int idcauhoi(String tenbai,int mucdo){
+
+    public String dapan(int id) {
+        String dap = null;
         try {
-            int a = 0 ;
+            String sql = "select DapAn from Cau_Hoi where ID_CauHoi = ?";
+            ResultSet rs = Helper.JdbcHelper.query(sql, id);
+            while (rs.next()) {
+                dap = rs.getString("DapAn");
+            }
+            rs.getStatement().getConnection().close();
+
+            return dap;
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public int idcauhoi(String tenbai, int mucdo) {
+        try {
+            int a = 0;
             String sql = "select ID_CauHoi from Cau_Hoi where DoKho = ? and TenBai = ?";
-            ResultSet rs = Helper.JdbcHelper.query(sql,mucdo,tenbai);
-           while(rs.next()){
-               a=rs.getInt("ID_CauHoi");
-           }
-           rs.getStatement().getConnection().close();
-           return a;
+            ResultSet rs = Helper.JdbcHelper.query(sql, mucdo, tenbai);
+            while (rs.next()) {
+                a = rs.getInt("ID_CauHoi");
+            }
+            rs.getStatement().getConnection().close();
+            return a;
         } catch (SQLException ex) {
             Logger.getLogger(CauHoiDAO.class.getName()).log(Level.SEVERE, null, ex);
             ex.printStackTrace();
             throw new RuntimeException();
         }
-      }
+    }
 }
