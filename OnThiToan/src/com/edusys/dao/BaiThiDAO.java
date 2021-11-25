@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     String INSERT = "INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)VALUES(?,?,?)";
     String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE ID_BaiThi=?";
     String DELETE = "DELETE FROM Bai_Thi WHERE ID_BaiThi=?";
@@ -39,12 +40,26 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
     public void update(BaiThi entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 >>>>>>> parent of 72aee40 (quanlibaithi)
+=======
+    @Override
+    public void insert(BaiThi entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(BaiThi entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
     }
 
     @Override
     public void delete(Integer key) {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Helper.JdbcHelper.update(DELETE, key);
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
 =======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 >>>>>>> parent of 72aee40 (quanlibaithi)
@@ -53,8 +68,12 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
     @Override
     public ArrayList<BaiThi> selectALL() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         ArrayList<BaiThi> list = selectBySql(SELECTALL);
         return list;
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
 =======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 >>>>>>> parent of 72aee40 (quanlibaithi)
@@ -67,6 +86,7 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
 
     @Override
     protected ArrayList<BaiThi> selectBySql(String sql, Object... args) {
+<<<<<<< HEAD
 <<<<<<< HEAD
         ArrayList<BaiThi> list = new ArrayList<>();
         try {
@@ -115,6 +135,9 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
             e.printStackTrace();
         }
         return list;
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
 =======
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 >>>>>>> parent of 72aee40 (quanlibaithi)
