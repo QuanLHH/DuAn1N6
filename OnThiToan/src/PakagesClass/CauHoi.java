@@ -9,10 +9,22 @@ public class CauHoi {
     private String CauHoi;
     private int doKho;
     private String tenBai;
-    private String DapAn;
+    private String DapAn,DapAnSai1,DapAnSai2,DapAnSai3;
     private Date ngayTao;
 
     public CauHoi() {
+    }
+
+    public CauHoi(int ID_CauHoi, String CauHoi, int doKho, String tenBai, String DapAn, String DapAnSai1, String DapAnSai2, String DapAnSai3, Date ngayTao) {
+        this.ID_CauHoi = ID_CauHoi;
+        this.CauHoi = CauHoi;
+        this.doKho = doKho;
+        this.tenBai = tenBai;
+        this.DapAn = DapAn;
+        this.DapAnSai1 = DapAnSai1;
+        this.DapAnSai2 = DapAnSai2;
+        this.DapAnSai3 = DapAnSai3;
+        this.ngayTao = ngayTao;
     }
 
     public boolean getRole_ID() {
@@ -31,22 +43,36 @@ public class CauHoi {
         this.DapAn = DapAn;
     }
 
+    public String getDapAnSai1() {
+        return DapAnSai1;
+    }
+
+    public void setDapAnSai1(String DapAnSai1) {
+        this.DapAnSai1 = DapAnSai1;
+    }
+
+    public String getDapAnSai2() {
+        return DapAnSai2;
+    }
+
+    public void setDapAnSai2(String DapAnSai2) {
+        this.DapAnSai2 = DapAnSai2;
+    }
+
+    public String getDapAnSai3() {
+        return DapAnSai3;
+    }
+
+    public void setDapAnSai3(String DapAnSai3) {
+        this.DapAnSai3 = DapAnSai3;
+    }
+
     public String getTenBai() {
         return tenBai;
     }
 
     public void setTenBai(String tenBai) {
         this.tenBai = tenBai;
-    }
-
-    public CauHoi(int ID_CauHoi, boolean Role_ID, String CauHoi, int doKho, String tenBai, String DapAn, Date ngayTao) {
-        this.ID_CauHoi = ID_CauHoi;
-        this.Role_ID = Role_ID;
-        this.CauHoi = CauHoi;
-        this.doKho = doKho;
-        this.tenBai = tenBai;
-        this.DapAn = DapAn;
-        this.ngayTao = ngayTao;
     }
 
     public int getID_CauHoi() {
