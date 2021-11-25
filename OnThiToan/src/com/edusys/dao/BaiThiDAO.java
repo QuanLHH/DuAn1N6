@@ -6,7 +6,6 @@
 package com.edusys.dao;
 
 import PakagesClass.BaiThi;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 
 /**
@@ -15,6 +14,7 @@ import java.util.ArrayList;
  */
 public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
 
+<<<<<<< HEAD
     String INSERT = "INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)VALUES(?,?,?)";
     String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE ID_BaiThi=?";
     String DELETE = "DELETE FROM Bai_Thi WHERE ID_BaiThi=?";
@@ -29,17 +29,35 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
     @Override
     public void update(BaiThi bt) {
         Helper.JdbcHelper.update(UPDATE, bt.getMaDe(), bt.getDoKho(), bt.getID_CauHoi(), bt.getID_BaiThi());
+=======
+    @Override
+    public void insert(BaiThi entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void update(BaiThi entity) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
     }
 
     @Override
     public void delete(Integer key) {
+<<<<<<< HEAD
         Helper.JdbcHelper.update(DELETE, key);
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
     }
 
     @Override
     public ArrayList<BaiThi> selectALL() {
+<<<<<<< HEAD
         ArrayList<BaiThi> list = selectBySql(SELECTALL);
         return list;
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
     }
 
     @Override
@@ -49,6 +67,7 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
 
     @Override
     protected ArrayList<BaiThi> selectBySql(String sql, Object... args) {
+<<<<<<< HEAD
         ArrayList<BaiThi> list = new ArrayList<>();
         try {
             ResultSet rs = Helper.JdbcHelper.query(sql, args);
@@ -96,6 +115,9 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
             e.printStackTrace();
         }
         return list;
+=======
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+>>>>>>> parent of 72aee40 (quanlibaithi)
     }
 
 }
