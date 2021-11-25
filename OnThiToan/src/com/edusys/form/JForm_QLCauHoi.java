@@ -29,6 +29,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     ArrayList<CauHoi> listCH = new ArrayList<>();
     DefaultTableModel model = new DefaultTableModel();
     public int id_cauhoi = 0;
+    public boolean check = false;
 
     public JForm_QLCauHoi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -46,6 +47,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         model = (DefaultTableModel) tb_cauHoi.getModel();
         setCbbMucDo();
         setCbbTheLoai();
+        setCbbTenBai();
         fillTable();
     }
 
@@ -76,6 +78,14 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                 theLoai = "Đề thi";
             }
             cbb_TheLoai.addItem(theLoai);
+        }
+    }
+
+    public void setCbbTenBai() {
+        ArrayList<CauHoi> list = CauHoiDao.selecttenbai();
+        cbb_viewTenBai.removeAllItems();
+        for (CauHoi x : list) {
+            cbb_viewTenBai.addItem(x.getTenBai());
         }
     }
 
@@ -150,12 +160,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     public boolean check() {
-        boolean check = false;
         try {
             if (checkCauHoi() == true && checkTenBai() == true && checkDapAnDung() == true
                     && checkDapAn1() == true && checkDapAn2() == true && checkDapAn3() == true
                     && checkDapAn4() == true) {
-                check=true;
+                check = true;
             }
 
         } catch (Exception e) {
@@ -165,11 +174,6 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     public void insert() {
-        try {
-
-        } catch (Exception e) {
-
-        }
         try {
             if (check() == true) {
                 CauHoi ch = getForm();
@@ -333,111 +337,116 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         try {
             if (tp_CauHoi.getText().equals("")) {
                 setLabelCauHoi("Không để trống câu hỏi");
-                return false;
+                check = false;
             } else {
                 setLabelCauHoi("");
-                return true;
+                check = true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     public boolean checkTenBai() {
         try {
             if (tf_TenBai.getText().equals("")) {
                 setLabelTenBai("Không để trống tên bài");
-                return false;
+                check = false;
             } else {
                 setLabelTenBai("");
+                check = true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     public boolean checkDapAnDung() {
         try {
             if (tf_DapAnDung.getText().equals("")) {
                 setLabelDapAnDung("Điền đáp án");
-                return false;
+                check = false;
             } else {
                 setLabelDapAnDung("");
-                return true;
+                check = true;
             }
-
+            String regexDapAn = "[ABCDabcd]{1}";
+            if (!tf_DapAnDung.getText().matches(regexDapAn)) {
+                setLabelDapAnDung("Đáp án A, B, C, D");
+                check = false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     public boolean checkDapAn1() {
         try {
             if (tf_DapAn1.getText().equals("")) {
                 setLabelDapAn1("Điền đáp án A");
-                return false;
+                check = false;
             } else {
                 setLabelDapAn1("");
-                return true;
+                check = true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     public boolean checkDapAn2() {
         try {
             if (tf_DapAn2.getText().equals("")) {
                 setLabelDapAn2("Điền đáp án B");
-                return false;
+                check = false;
             } else {
                 setLabelDapAn2("");
-                return true;
+                check = true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     public boolean checkDapAn3() {
         try {
             if (tf_DapAn3.getText().equals("")) {
                 setLabelDapAn3("Điền đáp án C");
-                return false;
+                check = false;
             } else {
                 setLabelDapAn3("");
-                return true;
+                check = true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     public boolean checkDapAn4() {
         try {
             if (tf_DapAn4.getText().equals("")) {
                 setLabelDapAn4("Điền đáp án C");
-                return false;
+                check = false;
             } else {
                 setLabelDapAn4("");
-                return true;
+                check = true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return true;
+        return check;
     }
 
     @SuppressWarnings("unchecked")
@@ -951,6 +960,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private void tb_cauHoiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_cauHoiMouseClicked
         if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             shows();
+            check();
             jtp_Show.setSelectedIndex(0);
         }
     }//GEN-LAST:event_tb_cauHoiMouseClicked
