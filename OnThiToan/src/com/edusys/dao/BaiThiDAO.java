@@ -13,29 +13,31 @@ import java.util.ArrayList;
  *
  * @author taola
  */
-public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
+public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
 
-     String INSERT = "INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)VALUES(?,?,?)";
+    String INSERT = "INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)VALUES(?,?,?)";
     String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE ID_BaiThi=?";
     String DELETE = "DELETE FROM Bai_Thi WHERE ID_BaiThi=?";
     String SELECTALL = "SELECT * FROM Bai_Thi";
+    String SELECTMUCDOCAU = "SELECT Cau_Hoi.ID_CauHoi,Cau_Hoi.DoKho FROM Cau_Hoi inner join Bai_Thi  on Cau_Hoi.ID_CauHoi = Bai_Thi.ID_CauHoi";
+
     @Override
     public void insert(BaiThi bt) {
-       Helper.JdbcHelper.update(INSERT, bt.getMaDe(),bt.getDoKho(),bt.getID_CauHoi());
+        Helper.JdbcHelper.update(INSERT, bt.getMaDe(), bt.getDoKho(), bt.getID_CauHoi());
     }
 
     @Override
-   public void update(BaiThi bt) {
-       Helper.JdbcHelper.update(UPDATE, bt.getMaDe(),bt.getDoKho(), bt.getID_CauHoi(),bt.getID_BaiThi());
+    public void update(BaiThi bt) {
+        Helper.JdbcHelper.update(UPDATE, bt.getMaDe(), bt.getDoKho(), bt.getID_CauHoi(), bt.getID_BaiThi());
     }
 
     @Override
     public void delete(Integer key) {
-       Helper.JdbcHelper.update(DELETE, key);
+        Helper.JdbcHelper.update(DELETE, key);
     }
 
     @Override
-   public ArrayList<BaiThi> selectALL() {
+    public ArrayList<BaiThi> selectALL() {
         ArrayList<BaiThi> list = selectBySql(SELECTALL);
         return list;
     }
@@ -46,11 +48,11 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
     }
 
     @Override
-   protected ArrayList<BaiThi> selectBySql(String sql, Object... args) {
-       ArrayList<BaiThi> list = new ArrayList<>();
+    protected ArrayList<BaiThi> selectBySql(String sql, Object... args) {
+        ArrayList<BaiThi> list = new ArrayList<>();
         try {
             ResultSet rs = Helper.JdbcHelper.query(sql, args);
-            while (rs.next()){
+            while (rs.next()) {
                 BaiThi bt = new BaiThi();
                 bt.setID_BaiThi(rs.getInt(1));
                 bt.setDoKho(rs.getInt(2));
@@ -65,18 +67,19 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
         }
         return list;
     }
-   
+
     //lấy row ms nhất
-    public BaiThi selectNew(){
+    public BaiThi selectNew() {
         String SELECTNEW = "SELECT TOP 1 * FROM Bai_Thi ORDER BY ID_BaiThi DESC";
         ArrayList<BaiThi> list = selectBySql(SELECTNEW);
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
     }
     
-        // Lấy danh sách theo mã ID_BT
+
+    // Lấy danh sách theo mã ID_BT
     public ArrayList<BaiThi> selectDoKho() {
         ArrayList<BaiThi> list = new ArrayList<>();
         try {
@@ -84,7 +87,7 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
             String sql = "SELECT DoKho FROM Bai_Thi GROUP BY DoKho";
             ResultSet rs = Helper.JdbcHelper.query(sql);
             while (rs.next()) {
-               BaiThi bt = new BaiThi();
+                BaiThi bt = new BaiThi();
                 bt.setDoKho(rs.getInt(1));
                 list.add(bt);
             }
@@ -94,5 +97,5 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
         }
         return list;
     }
-    
+
 }

@@ -81,7 +81,10 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
         for (CauHoi x : list) {
             cbb_IDCauHoi.addItem(Integer.toString(x.getID_CauHoi()));
         }
+
     }
+
+
 
     public void shows() {
         int dem = tb_BaiThi.getSelectedRow();
@@ -238,7 +241,7 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
 
         jLabel4.setText("Mã đề:");
 
-        jLabel6.setText("Mức độ:");
+        jLabel6.setText("Mức độ đề:");
 
         cbb_Mucdo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dễ ", "Trung Bình", "Khó" }));
 
@@ -270,12 +273,32 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
         jScrollPane2.setViewportView(tb_BaiThi);
 
         btn_First.setText("|<");
+        btn_First.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_FirstActionPerformed(evt);
+            }
+        });
 
         btn_Prev.setText("<<");
+        btn_Prev.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_PrevActionPerformed(evt);
+            }
+        });
 
         btn_Next.setText(">>");
+        btn_Next.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_NextActionPerformed(evt);
+            }
+        });
 
         btn_Last.setText(">|");
+        btn_Last.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_LastActionPerformed(evt);
+            }
+        });
 
         btn_Them.setText("Thêm");
         btn_Them.addActionListener(new java.awt.event.ActionListener() {
@@ -314,22 +337,19 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(224, 224, 224)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel4))
-                                .addGap(38, 38, 38)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel7))
+                                .addGap(36, 36, 36)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbb_IDCauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_Made, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(cbb_Mucdo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel7)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbb_IDCauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(224, 224, 224)
-                                .addComponent(jLabel1)))
+                                    .addComponent(cbb_Mucdo, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -414,6 +434,46 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
         // TODO add your handling code here:
         delete();
     }//GEN-LAST:event_btn_XoaActionPerformed
+
+    private void btn_FirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FirstActionPerformed
+        // TODO add your handling code here:
+         tb_BaiThi.setRowSelectionInterval(0, 0);
+        shows();
+    }//GEN-LAST:event_btn_FirstActionPerformed
+
+    private void btn_LastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_LastActionPerformed
+        // TODO add your handling code here:
+        tb_BaiThi.setRowSelectionInterval(listBT.size() - 1, listBT.size() - 1);
+        shows();
+    }//GEN-LAST:event_btn_LastActionPerformed
+
+    private void btn_PrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PrevActionPerformed
+        // TODO add your handling code here:
+        try {
+            int dem = tb_BaiThi.getSelectedRow() - 1;
+            if (dem < 0) {
+                dem = listBT.size() - 1;
+            }
+            tb_BaiThi.setRowSelectionInterval(dem, dem);
+            shows();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_PrevActionPerformed
+
+    private void btn_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NextActionPerformed
+        // TODO add your handling code here:
+         try {
+            int dem = tb_BaiThi.getSelectedRow() + 1;
+            if (dem >= listBT.size()) {
+                dem = 0;
+            }
+            tb_BaiThi.setRowSelectionInterval(dem, dem);
+            shows();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_btn_NextActionPerformed
 
     /**
      * @param args the command line arguments
