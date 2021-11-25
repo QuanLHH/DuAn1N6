@@ -32,11 +32,13 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     public FormQL_TaiKhoan() {
         initComponents();
         setLocationRelativeTo(null);
+        JPasswordField pass = new JPasswordField();
+         pass.setEchoChar('*');
+        
         setExit();
         filltable();
         setExit();
     }
-  
 
     public void setform(TaiKhoan tk) {
         txtma.setText(tk.getID_MaND() + "");
@@ -67,11 +69,10 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         model.setRowCount(0);
         try {
             List<TaiKhoan> list = daotk.selectALL();
-            JPasswordField pass=new JPasswordField();
-            pass.setEchoChar('*');
+
             for (TaiKhoan tk : list) {
                 Object[] row = {
-                    tk.getID_MaND(), tk.getTenTaiKhoan(),  tk.getVaiTro()
+                    tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getVaiTro()
                 };
                 model.addRow(row);
             }
@@ -96,7 +97,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     }
 
     public void sua() {
-        
+
         int index = table.getSelectedRow();
         String mk = new String(txtmk2.getText());
         if (index == -1) {
@@ -105,10 +106,10 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         }
         TaiKhoan tk = getfrom();
         try {
-           if(txthoten.getText().equals("")||txtmk.getText().equals("")||txtmk2.getText().equals("")){
-           JOptionPane.showMessageDialog(this,"Bạn cần nhập đầy đủ thông tin!");
-           return;
-           }
+            if (txthoten.getText().equals("") || txtmk.getText().equals("") || txtmk2.getText().equals("")) {
+                JOptionPane.showMessageDialog(this, "Bạn cần nhập đầy đủ thông tin!");
+                return;
+            }
             if (!mk.equalsIgnoreCase(tk.getMatKhau())) {
                 JOptionPane.showMessageDialog(this, "Mật khẩu xác nhận không đúng! ");
                 return;
@@ -123,8 +124,8 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     }
 
     public void delete() {
-         int index = table.getSelectedRow();
-         if (index == -1) {
+        int index = table.getSelectedRow();
+        if (index == -1) {
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng để Delete");
             return;
         }
@@ -136,7 +137,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
 
             this.filltable();
             this.clear();
-            JOptionPane.showMessageDialog(this, "Xoa thành công");
+            JOptionPane.showMessageDialog(this, "Xoa thành công ");
         }
     }
 
@@ -164,10 +165,11 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         new JFormSignUp(this, true).setVisible(true);
         filltable();
     }
-    public void fist(){
-        int row=table.getSelectedRow();
-    row=0;
-    moustClick();
+
+    public void fist() {
+        int row = table.getSelectedRow();
+        row = 0;
+        moustClick();
     }
 
     @SuppressWarnings("unchecked")
@@ -212,7 +214,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
 
         txtma.setEditable(false);
 
-        jLabel3.setText("Họ tên");
+        jLabel3.setText("Tên tài khoản");
 
         jLabel5.setText("Vai trò");
 
@@ -472,6 +474,10 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         sua();
     }//GEN-LAST:event_btnupdateActionPerformed
 
+    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nextActionPerformed
+
     private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lastActionPerformed
@@ -480,15 +486,10 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_prevActionPerformed
 
-    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nextActionPerformed
-
     private void firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstActionPerformed
         // TODO add your handling code here:
         fist();
-     
-        
+
     }//GEN-LAST:event_firstActionPerformed
 
     /**
