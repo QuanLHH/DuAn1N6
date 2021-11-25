@@ -86,11 +86,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         int dem = tb_cauHoi.getSelectedRow();
         int doKho = cbb_mucDo.getSelectedIndex() + 1;
         int tl = cbb_TheLoai.getSelectedIndex();
-        boolean role=true;
-        if(tl==0){
-            role=false;
-        }else if(tl==1){
-            role=true;
+        boolean role = true;
+        if (tl == 0) {
+            role = false;
+        } else if (tl == 1) {
+            role = true;
         }
         ch.setDoKho(doKho);
         ch.setRole_ID(role);
@@ -106,11 +106,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         int doKho = cbb_mucDo.getSelectedIndex() + 1;
         int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
         int tl = cbb_TheLoai.getSelectedIndex();
-        boolean role=true;
-        if(tl==0){
-            role=false;
-        }else if(tl==1){
-            role=true;
+        boolean role = true;
+        if (tl == 0) {
+            role = false;
+        } else if (tl == 1) {
+            role = true;
         }
         ch.setID_CauHoi(id);
         ch.setDoKho(doKho);
@@ -148,8 +148,14 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         } else if (item == 3) {
             cbb_mucDo.setSelectedIndex(2);
         }
-        tf_TenBai.setText(model.getValueAt(dem, 3).toString());
-        tf_dapAn.setText(model.getValueAt(dem, 4).toString());
+        String tenBai = model.getValueAt(dem, 3).toString();
+        if (!tenBai.equals("")) {
+            tf_TenBai.setText(tenBai);
+        }
+        String dapAn = model.getValueAt(dem, 4).toString();
+        if (!dapAn.equals("")) {
+            tf_dapAn.setText(dapAn);
+        }
         int theLoai = 0;
         if (model.getValueAt(dem, 5).toString().equalsIgnoreCase("bài tập")) {
             theLoai = 0;
@@ -265,7 +271,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     void checkTenBai() {
-        if (tf_TenBai.getText().equals("")) {
+        if (tf_TenBai.getText().equals("")&& cbb_TheLoai.getSelectedIndex() == 0) {
             lb_loaibai.setText("Nhập loại bài câu hỏi");
             lb_loaibai.setForeground(Color.red);
             check = false;
@@ -278,7 +284,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     void checkDapAn() {
-        if (tf_dapAn.getText().equals("")&&cbb_TheLoai.getSelectedIndex()==0) {
+        if (tf_dapAn.getText().equals("") && cbb_TheLoai.getSelectedIndex() == 0) {
             lb_DapAN.setText("Nhập đáp án");
             lb_DapAN.setForeground(Color.red);
             check = false;
@@ -288,7 +294,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             check = true;
         }
         String checkDapAn = "[ABCDabcd]{1}";
-        if (!tf_dapAn.getText().matches(checkDapAn)&&cbb_TheLoai.getSelectedIndex()==0) {
+        if (!tf_dapAn.getText().matches(checkDapAn) && cbb_TheLoai.getSelectedIndex() == 0) {
             lb_DapAN.setText("Đáp án là A,B,C,D");
             lb_DapAN.setForeground(Color.red);
             check = false;
@@ -718,7 +724,10 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_TenBaiActionPerformed
 
     private void tf_TenBaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TenBaiKeyReleased
-        checkTenBai();
+        if (cbb_TheLoai.getSelectedIndex() == 0) {
+            checkTenBai();
+
+        }
     }//GEN-LAST:event_tf_TenBaiKeyReleased
 
     private void tf_dapAnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_dapAnKeyReleased
@@ -729,11 +738,15 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_dapAnKeyReleased
 
     private void cbb_TheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_TheLoaiActionPerformed
-        if(cbb_TheLoai.getSelectedIndex()==1){
+        if (cbb_TheLoai.getSelectedIndex() == 1) {
             tf_dapAn.setText("");
+            tf_TenBai.setText("");
             tf_dapAn.setEnabled(false);
-        }else if(cbb_TheLoai.getSelectedIndex()==0){
+            tf_TenBai.setEnabled(false);
+        } else if (cbb_TheLoai.getSelectedIndex() == 0) {
             tf_dapAn.setEnabled(true);
+            tf_TenBai.setEnabled(true);
+            
         }
     }//GEN-LAST:event_cbb_TheLoaiActionPerformed
 
