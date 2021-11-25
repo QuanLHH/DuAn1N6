@@ -105,8 +105,16 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         CauHoi ch = new CauHoi();
         int doKho = cbb_mucDo.getSelectedIndex() + 1;
         int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
+        int tl = cbb_TheLoai.getSelectedIndex();
+        boolean role=true;
+        if(tl==0){
+            role=false;
+        }else if(tl==1){
+            role=true;
+        }
         ch.setID_CauHoi(id);
         ch.setDoKho(doKho);
+        ch.setRole_ID(role);
         ch.setTenBai(tf_TenBai.getText());
         ch.setCauHoi(path);
         ch.setDapAn(tf_dapAn.getText());
