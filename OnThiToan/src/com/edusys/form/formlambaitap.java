@@ -113,38 +113,33 @@ public class formlambaitap extends javax.swing.JFrame {
         }
     }
       void edit() {
-
-        int dem =table.getSelectedRow();
+        int  index =0;
 //        int idcauhoi = (int) table.getValueAt(index,0);       
 //        CauHoi ch = CauHoiDao.selectById(idcauhoi);
-          ImageIcon img = new ImageIcon(model.getValueAt(dem, 0).toString());
+          ImageIcon img = new ImageIcon(model.getValueAt(index, 0).toString());
        lbldebai.setIcon(img);
     }
       void first() {
-        table.setRowSelectionInterval(0,0);
+        index = 0;
         edit();
     }
 
     void prev() {
-       int dem =table.getSelectedRow()-1;
-        if(dem<0){
-            dem=listCH.size()-1;
+        if (index > 0) {
+            index--;
+            edit();
         }
-        table.setRowSelectionInterval(dem, dem);
-        edit();
     }
 
     void next() {
-        int dem =table.getSelectedRow()+1;
-        if(dem>=listCH.size()){
-            dem=0;
+        if (index < table.getRowCount() - 1) {
+            index++;
+            edit();
         }
-        table.setRowSelectionInterval(dem, dem);
-        edit();
     }
 
     void last() {
-        table.setRowSelectionInterval(listCH.size()-1, listCH.size()-1);
+        index = table.getRowCount() - 1;
         edit();
     }
     @SuppressWarnings("unchecked")
@@ -417,13 +412,8 @@ public class formlambaitap extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-//         int index =table.getSelectedRow();
-//         edit();
-         int dem =table.getSelectedRow();
+         int index =table.getSelectedRow();
          edit();
-         // đổi ảnh
-         ImageIcon img = new ImageIcon(model.getValueAt(dem, 0).toString());
-         lbldebai.setIcon(img);
     
     }//GEN-LAST:event_tableMouseClicked
 
