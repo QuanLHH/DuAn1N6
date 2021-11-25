@@ -234,7 +234,7 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 51, 255));
-        jLabel1.setText("Quản lí bài thi");
+        jLabel1.setText("Quản lí đề thi");
 
         jLabel4.setText("Mã đề:");
 
