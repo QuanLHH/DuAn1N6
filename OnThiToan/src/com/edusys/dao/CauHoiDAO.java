@@ -21,23 +21,23 @@ import java.util.logging.Logger;
  */
 public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
 
-    String INSERT = "INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn,DapAnSai1,DapAnSai2,DapAnSai3)"
-            + "VALUES (?,?,?,?,?,?,?,?)";
-    String UPDATE = "UPDATE Cau_Hoi SET Role_ID=?,CauHoi=?,DoKho=?,TenBai=?,DapAn=?,DapAnSai1=?,DapAnSai2=?,DapAnSai3=?"
+    String INSERT = "INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung)"
+            + "VALUES (?,?,?,?,?,?,?,?,?)";
+    String UPDATE = "UPDATE Cau_Hoi SET Role_ID=?,CauHoi=?,DoKho=?,TenBai=?,DapAn1=?,DapAn2=?,DapAn3=?,DapAn4=?,DapAnDung=?"
             + " WHERE ID_CauHoi=?";
     String DELETE = "DELETE FROM Cau_Hoi WHERE ID_CauHoi=?";
     String SELECTALL = "SELECT * FROM Cau_Hoi";
     String SELECTBYID = "SELECT * FROM Cau_Hoi WHERE ID_CauHoi=?";
     @Override
     public void insert(CauHoi ch) {
-        Helper.JdbcHelper.update(INSERT, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(), ch.getTenBai(), ch.getDapAn(),
-        ch.getDapAnSai1(),ch.getDapAnSai2(),ch.getDapAnSai3());
+        Helper.JdbcHelper.update(INSERT, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(), ch.getTenBai(),
+        ch.getDapAn1(),ch.getDapAn2(),ch.getDapAn3(),ch.getDapAn4(),ch.getDapAnDung());
     }
 
     @Override
     public void update(CauHoi ch) {
-        Helper.JdbcHelper.update(UPDATE, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(), ch.getTenBai(), ch.getDapAn(),
-        ch.getDapAnSai1(),ch.getDapAnSai2(),ch.getDapAnSai3(),ch.getID_CauHoi());
+        Helper.JdbcHelper.update(UPDATE, ch.getRole_ID(), ch.getCauHoi(), ch.getDoKho(), ch.getTenBai(), 
+        ch.getDapAn1(),ch.getDapAn2(),ch.getDapAn3(),ch.getDapAn4(),ch.getDapAnDung(),ch.getID_CauHoi());
 
     }
 
@@ -74,11 +74,12 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
                 ch.setCauHoi(rs.getString(3));
                 ch.setDoKho(rs.getInt(4));
                 ch.setTenBai(rs.getString(5));
-                ch.setDapAn(rs.getString(6));
-                ch.setDapAnSai1(rs.getString(7));
-                ch.setDapAnSai2(rs.getString(8));
-                ch.setDapAnSai3(rs.getString(9));
-                ch.setNgayTao(rs.getDate(10));
+                ch.setDapAn1(rs.getString(6));
+                ch.setDapAn2(rs.getString(7));
+                ch.setDapAn3(rs.getString(8));
+                ch.setDapAn4(rs.getString(9));
+                ch.setDapAnDung(rs.getString(10));
+                ch.setNgayTao(rs.getDate(11));
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
