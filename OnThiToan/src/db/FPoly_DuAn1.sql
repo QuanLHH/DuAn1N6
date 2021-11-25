@@ -100,22 +100,23 @@ VALUES (N'Đạo Hàm','https://www.youtube.com/watch?v=HIGllE3N-iw',
 	'https://vungoi.vn/lop-12/chi-tiet-ly-thuyet-nguyen-ham-5af3eae81261631175a05d3e.html')
 go
 
-INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai)
-VALUES (1,'Hinh/CauHoi/anh1-121.png',1,'DT0001'),
-	(1,'Hinh/CauHoi/anh2-121.png',1,'DT0001'),
-	(1,'Hinh/CauHoi/anh3-121.png',1,'DT0001'),
-	(1,'Hinh/CauHoi/anh4-121.png',2,'DT0001'),
-	(1,'Hinh/CauHoi/anh5-121.png',3,'DT0001'),
-	(1,'Hinh/CauHoi/anh6-121.png',3,'DT0001'),
-	(1,'Hinh/CauHoi/anh7-121.png',1,'DT0001'),
-	(1,'Hinh/CauHoi/anh4-121.png',2,'DT0001'),
-	(1,'Hinh/CauHoi/anh5-121.png',3,'DT0001'),
-	(1,'Hinh/CauHoi/anh6-121.png',3,'DT0001')
+INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho)
+VALUES (1,'Hinh/CauHoi/anh1-121.png',1),
+	(1,'Hinh/CauHoi/anh2-121.png',1),
+	(1,'Hinh/CauHoi/anh3-121.png',1),
+	(1,'Hinh/CauHoi/anh4-121.png',2),
+	(1,'Hinh/CauHoi/anh5-121.png',3),
+	(1,'Hinh/CauHoi/anh6-121.png',3),
+	(1,'Hinh/CauHoi/anh7-121.png',1),
+	(1,'Hinh/CauHoi/anh4-121.png',2),
+	(1,'Hinh/CauHoi/anh5-121.png',3),
+	(1,'Hinh/CauHoi/anh6-121.png',3)
 go
+
 INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn)
 VALUES 
-	(0,'Hinh/CauHoi/bai2.png',1,N'Đạo Hàm','A'),
-	(0,'Hinh/CauHoi/bai1.png',2,N'Đạo Hàm','B'),
+	(0,'Hinh/CauHoi/bai1.png',1,N'Đạo Hàm','A'),
+	(0,'Hinh/CauHoi/bai2.png',2,N'Đạo Hàm','B'),
 	(0,'Hinh/CauHoi/bai3.png',3,N'Đạo Hàm','C'),
 	(0,'Hinh/CauHoi/bai4.png',1,N'Đạo Hàm','A'),
 	(0,'Hinh/CauHoi/bai5.png',2,N'Đạo Hàm','D'),

@@ -718,7 +718,10 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }//GEN-LAST:event_tf_TenBaiActionPerformed
 
     private void tf_TenBaiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_TenBaiKeyReleased
-        checkTenBai();
+        if (cbb_TheLoai.getSelectedIndex() == 0) {
+            checkTenBai();
+
+        }
     }//GEN-LAST:event_tf_TenBaiKeyReleased
 
     private void tf_dapAnKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tf_dapAnKeyReleased
