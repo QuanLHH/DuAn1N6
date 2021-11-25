@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class BaiThiDAO extends EduSysDAO<BaiThi, Integer>{
 
      String INSERT = "INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)VALUES(?,?,?)";
-    String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE MaDe=?";
+    String UPDATE = "UPDATE Bai_Thi SET MaDe=?,DoKho=?,ID_CauHoi=? WHERE ID_BaiThi=?";
     String DELETE = "DELETE FROM Bai_Thi WHERE ID_BaiThi=?";
     String SELECTALL = "SELECT * FROM Bai_Thi";
     @Override
