@@ -121,9 +121,15 @@ VALUES
 	'(8x^3-6x-5)(x^2-7x)-(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)(2x-7)','(8x^3-6x-5)(x^2-7x)+(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)+(2x-7)','C'),
 	(0,N'Câu 3.Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x^2-10. Tính f(4)?',3,N'Đạo Hàm',
 	'f(4)=17','f(4)=20','f(4)=5','f(4)=10','D')
-
+go
+INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
+VALUES
+	(100,1,1),
+	(200,2,2),
+	(300,3,3)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
 SELECT*FROM Cau_Hoi
+SElECT*FROM Bai_Thi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
