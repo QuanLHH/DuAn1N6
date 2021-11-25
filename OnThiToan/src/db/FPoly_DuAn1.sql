@@ -36,7 +36,10 @@ create table Cau_Hoi(
 	CauHoi nvarchar(250) not null,
 	DoKho int not null,
 	TenBai nvarchar(30),
-	DapAn varchar(2),
+	DapAn varchar(250) not null,
+	DapAnSai1 varchar(250) not null,
+	DapAnSai2 varchar(250) not null,
+	DapAnSai3 varchar(250) not null,
 	NgayTao date not null default(getdate())
 )
 go
@@ -99,28 +102,26 @@ VALUES (N'Đạo Hàm','https://www.youtube.com/watch?v=HIGllE3N-iw',
 	(N'Nguyên Hàm','https://www.youtube.com/watch?v=ZgxXaJMg9vQ',
 	'https://vungoi.vn/lop-12/chi-tiet-ly-thuyet-nguyen-ham-5af3eae81261631175a05d3e.html')
 go
-
-INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn)
-VALUES (1,'Hinh/CauHoi/anh1-121.png',1,'',''),
-	(1,'Hinh/CauHoi/anh2-121.png',1,'',''),
-	(1,'Hinh/CauHoi/anh3-121.png',1,'',''),
-	(1,'Hinh/CauHoi/anh4-121.png',2,'',''),
-	(1,'Hinh/CauHoi/anh5-121.png',3,'',''),
-	(1,'Hinh/CauHoi/anh6-121.png',3,'',''),
-	(1,'Hinh/CauHoi/anh7-121.png',1,'',''),
-	(1,'Hinh/CauHoi/anh4-121.png',2,'',''),
-	(1,'Hinh/CauHoi/anh5-121.png',3,'',''),
-	(1,'Hinh/CauHoi/anh6-121.png',3,'','')
+-- de thi
+INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn,DapAnSai1,DapAnSai2,DapAnSai3)
+VALUES (1,N'Câu 1. Tìm giao điểm của đồ thị hàm số (C): y=x^3+x^2-5x+3 và (D):y=x^2+2x-3',1,'',
+    'pi/12','pi/12','5pi/12','5pi/6'),
+	(1,N'Câu 2. Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,'',
+	'R','R\{1;−2}','(−2;1).','[2;1].'),
+	(1,N'Câu 3. Tập xác định của hàm số y = 3*(x+2)/(x-1) là:',3,'',
+	'R\{1}','(1;+∞).','R','(−∞;1).')
 go
-
-INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn)
+-- bai tap	
+INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn,DapAnSai1,DapAnSai2,DapAnSai3)
 VALUES 
-	(0,'Hinh/CauHoi/bai1.png',1,N'Đạo Hàm','A'),
-	(0,'Hinh/CauHoi/bai2.png',2,N'Đạo Hàm','B'),
-	(0,'Hinh/CauHoi/bai3.png',3,N'Đạo Hàm','C'),
-	(0,'Hinh/CauHoi/bai4.png',1,N'Đạo Hàm','A'),
-	(0,'Hinh/CauHoi/bai5.png',2,N'Đạo Hàm','D'),
-	(0,'Hinh/CauHoi/bai6.png',3,N'Đạo Hàm','C')
+	(0,N'Câu 1.Tính đạo hàm của các hàm số sau: Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x-2. Tính f(-2)?',1,N'Đạo Hàm',
+	'f(-2)=13','f(-2)=15','f(-2)=11','f(-2)=12'),
+	(0,N'Câu 2.Đạo hàm của hàm số y=(2x^4-3x^2-5x)(x^2-7x) là:',2,N'Đạo Hàm',
+	'(8x^3-6x-5)(x^2-7x)-(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)(2x-7)','(8x^3-6x-5)(x^2-7x)+(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)+(2x-7)'),
+	(0,N'Câu 3.Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x^2-10. Tính f(4)?',3,N'Đạo Hàm',
+	'f(4)=17','f(4)=20','f(4)=5','f(4)=10')
+
+
 GO
 
 SELECT*FROM Nguoi_Dung
