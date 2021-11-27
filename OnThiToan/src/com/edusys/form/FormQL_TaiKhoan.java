@@ -135,7 +135,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa " + txthoten.getText(), "", JOptionPane.YES_NO_OPTION);
         if (chon == 0) {
             daotk.delete(ten);
-
+            System.out.println("aa");
             this.filltable();
             this.clear();
             JOptionPane.showMessageDialog(this, "Xoa thành công ");
