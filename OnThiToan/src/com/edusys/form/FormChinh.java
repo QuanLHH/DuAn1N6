@@ -74,7 +74,7 @@ public class FormChinh extends javax.swing.JFrame {
         
     }
     void QLBT(){
-        new JForm_QLBaiTap(this, true).setVisible(true);
+        new JForm_QLBaiThi(this, true).setVisible(true);
     }
     
     @SuppressWarnings("unchecked")
