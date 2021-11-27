@@ -100,7 +100,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         return list.get(0);
     }
 
-    // Lấy danh sách theo mã ID_BT
+    // Lấy danh sách theo mã ID_BT// viet anh
     public ArrayList<CauHoi> selectDoKho() {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
@@ -117,7 +117,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-
+    // viet anh
     public ArrayList<CauHoi> selectRole_ID() {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
@@ -134,7 +134,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
-
+    // dinh truong
     public ArrayList<CauHoi> selecttenbai() {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
@@ -206,5 +206,23 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
             ex.printStackTrace();
             throw new RuntimeException();
         }
+    }
+    // huy hoang
+    public ArrayList<CauHoi> selectID() {
+        ArrayList<CauHoi> list = new ArrayList<>();
+        try {
+            int i = 0;
+            String sql = "SELECT ID_CauHoi FROM Cau_Hoi";
+            ResultSet rs = Helper.JdbcHelper.query(sql);
+            while (rs.next()) {
+                CauHoi ch = new CauHoi();
+                ch.setID_CauHoi(rs.getInt(1));
+                list.add(ch);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 }
