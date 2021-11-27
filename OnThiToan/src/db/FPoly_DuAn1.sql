@@ -110,17 +110,27 @@ VALUES (1,N'Câu 1. Tìm giao điểm của đồ thị hàm số (C): y=x^3+x^2
 	(1,N'Câu 2. Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,'',
 	'R','R\{1;−2}','(−2;1).','[2;1].','B'),
 	(1,N'Câu 3. Tập xác định của hàm số y = 3*(x+2)/(x-1) là:',3,'',
-	'R\{1}','(1;+∞).','R','(−∞;1).','D')
+	'R\{1}','(1;+∞).','R','(−∞;1).','D'),
+	(1,N'Câu 4. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^2+3x^2-4 là:',3,'',
+	N'3 căn 5 ',N'4 căn 5',N'5 căn 5 ',N'6 căn 5','D')
+
 go
 -- bai tap	
 INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung)
-VALUES 
-	(0,N'Câu 1.Tính đạo hàm của các hàm số sau: Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x-2. Tính f(-2)?',1,N'Đạo Hàm',
+VALUES (0,N'Câu 1.Tính đạo hàm của các hàm số sau: Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x-2. Tính f(-2)?',1,N'Đạo Hàm',
 	'f(-2)=13','f(-2)=15','f(-2)=11','f(-2)=12','A'),
 	(0,N'Câu 2.Đạo hàm của hàm số y=(2x^4-3x^2-5x)(x^2-7x) là:',2,N'Đạo Hàm',
 	'(8x^3-6x-5)(x^2-7x)-(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)(2x-7)','(8x^3-6x-5)(x^2-7x)+(2x^4-3x^2-5x)(2x-7)','(8x^3-6x-5)+(2x-7)','C'),
 	(0,N'Câu 3.Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x^2-10. Tính f(4)?',3,N'Đạo Hàm',
-	'f(4)=17','f(4)=20','f(4)=5','f(4)=10','D')
+	'f(4)=17','f(4)=20','f(4)=5','f(4)=10','D'),
+	(0,N'Câu 4. Tập xác định của hàm số y = 3*(x+2)/(x-1) là:',3,N'Tập xác định',
+	'R\{1}','(1;+∞).','R','(−∞;1).','D'),
+	(0,N'Câu 5. Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,N'Tập xác định',
+	'R','R\{1;−2}','(−2;1).','[2;1].','B'),
+	(0,N'Câu 6. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^2+3x^2-4 là:',3,N'Hàm số',
+	N'3 căn 5 ',N'4 căn 5',N'5 căn 5 ',N'6 căn 5','D'),
+	(0,N'Câu 7. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^3+4x^2-2 là:',3,N'Hàm số',
+	'2 ','4','5','6','A')
 go
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
 VALUES
