@@ -12,7 +12,7 @@ import javax.swing.ImageIcon;
 
 public class XImage {
     public static void save(File src){
-        File f = new File("Hinh/dethi",src.getName());
+        File f = new File("Hinh/CauHoi",src.getName());
         if(!f.getParentFile().exists()){
             f.getParentFile().mkdirs();// tạo thư mục nếu chưa tồn tại
         }

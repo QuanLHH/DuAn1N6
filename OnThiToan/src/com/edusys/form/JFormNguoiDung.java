@@ -29,6 +29,7 @@ public class JFormNguoiDung extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Thông tin người dùng");
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         rd_nam.setSelected(true);
         jc_date.setDateFormatString("dd-MM-yyyy");
     }
