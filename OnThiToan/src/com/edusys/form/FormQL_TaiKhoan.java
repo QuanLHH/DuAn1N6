@@ -55,7 +55,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
 
     public void moustClick() {
         int row = table.getSelectedRow();
-        String idnd = (String) table.getValueAt(row, 1);
+        String idnd = (String) table.getValueAt(row,1);
         TaiKhoan tk = daotk.selectById(idnd);
         int index = table.getSelectedRow();
         if (index >= 0) {
@@ -166,11 +166,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         filltable();
     }
 
-    public void fist() {
-        int row = table.getSelectedRow();
-        row = 0;
-        moustClick();
-    }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -196,10 +192,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         btnthem = new javax.swing.JButton();
         btnxoa = new javax.swing.JButton();
         btnupdate = new javax.swing.JButton();
-        first = new javax.swing.JButton();
-        last = new javax.swing.JButton();
-        prev = new javax.swing.JButton();
-        next = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table = new javax.swing.JTable();
@@ -259,40 +251,19 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
             }
         });
 
-        first.setText("<|");
-        first.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstActionPerformed(evt);
-            }
-        });
-
-        last.setText(">>");
-        last.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lastActionPerformed(evt);
-            }
-        });
-
-        prev.setText("<<");
-        prev.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prevActionPerformed(evt);
-            }
-        });
-
-        next.setText("|>");
-        next.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(85, 85, 85)
+                        .addComponent(btnthem)
+                        .addGap(41, 41, 41)
+                        .addComponent(btnupdate)
+                        .addGap(48, 48, 48)
+                        .addComponent(btnxoa))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(58, 58, 58)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -303,35 +274,16 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                             .addComponent(txtma)
                             .addComponent(jLabel6)
                             .addComponent(txtmk)
-                            .addComponent(txtmk2))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(txtmk2)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnthem)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnupdate)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(rdadd)
-                                .addGap(18, 18, 18)
-                                .addComponent(rdngd)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btnxoa)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                                .addComponent(first)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(prev)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(last)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(next)))))
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(jLabel5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(154, 154, 154)
+                        .addComponent(rdadd)
+                        .addGap(18, 18, 18)
+                        .addComponent(rdngd))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(jLabel5)))
+                .addContainerGap(120, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -358,21 +310,12 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdadd)
                     .addComponent(rdngd))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnthem)
-                            .addComponent(btnupdate)
-                            .addComponent(btnxoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(23, 23, 23))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(first)
-                            .addComponent(prev)
-                            .addComponent(last)
-                            .addComponent(next))
-                        .addGap(25, 25, 25))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnthem)
+                    .addComponent(btnupdate)
+                    .addComponent(btnxoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(50, 50, 50))
         );
 
         tas.addTab("Cập Nhật", jPanel1);
@@ -474,24 +417,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         sua();
     }//GEN-LAST:event_btnupdateActionPerformed
 
-    private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nextActionPerformed
-
-    private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lastActionPerformed
-
-    private void prevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prevActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_prevActionPerformed
-
-    private void firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstActionPerformed
-        // TODO add your handling code here:
-        fist();
-
-    }//GEN-LAST:event_firstActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -537,7 +462,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton first;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -547,9 +471,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton last;
-    private javax.swing.JButton next;
-    private javax.swing.JButton prev;
     private javax.swing.JRadioButton rdadd;
     private javax.swing.JRadioButton rdngd;
     private javax.swing.JTable table;
