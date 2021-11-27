@@ -99,7 +99,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             } else if (x.getRole_ID() == true) {
                 theLoai = "Đề thi";
             }
-            model.addRow(new Object[]{x.getID_CauHoi(), x.getCauHoi(), x.getDoKho(), x.getTenBai(), theLoai});
+            model.addRow(new Object[]{x.getID_CauHoi(), x.getDoKho(), x.getTenBai(), theLoai});
         }
     }
 
@@ -107,13 +107,13 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         int dem = tb_cauHoi.getSelectedRow();
         int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
         CauHoi ch = CauHoiDao.selectById(id);
+        tp_CauHoi.setText(ch.getCauHoi());
         tf_DapAn1.setText(ch.getDapAn1());
         tf_DapAn2.setText(ch.getDapAn2());
         tf_DapAn3.setText(ch.getDapAn3());
         tf_DapAn4.setText(ch.getDapAn4());
         tf_DapAnDung.setText(ch.getDapAnDung());
-        tp_CauHoi.setText(model.getValueAt(dem, 1).toString());
-        int item = Integer.valueOf(model.getValueAt(dem, 2).toString());
+        int item = Integer.valueOf(model.getValueAt(dem, 1).toString());
         if (item == 1) {
             cbb_mucDo.setSelectedIndex(0);
         } else if (item == 2) {
@@ -121,16 +121,16 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         } else if (item == 3) {
             cbb_mucDo.setSelectedIndex(2);
         }
-        String tenBai = model.getValueAt(dem, 3).toString();
+        String tenBai = model.getValueAt(dem, 2).toString();
         if (!tenBai.equals("")) {
             tf_TenBai.setText(tenBai);
         }
         tf_DapAn1.setText(ch.getDapAn1());
 
         int theLoai = 0;
-        if (model.getValueAt(dem, 4).toString().equalsIgnoreCase("bài tập")) {
+        if (model.getValueAt(dem, 3).toString().equalsIgnoreCase("bài tập")) {
             theLoai = 0;
-        } else if (model.getValueAt(dem, 4).toString().equalsIgnoreCase("đề thi")) {
+        } else if (model.getValueAt(dem, 3).toString().equalsIgnoreCase("đề thi")) {
             theLoai = 1;
         }
         cbb_TheLoai.setSelectedIndex(theLoai);
@@ -352,7 +352,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
     public boolean checkTenBai() {
         try {
-            if (tf_TenBai.getText().equals("")) {
+            if (tf_TenBai.getText().equals("") && cbb_TheLoai.getSelectedIndex()==0) {
                 setLabelTenBai("Không để trống tên bài");
                 check = false;
             } else {
@@ -368,17 +368,16 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
     public boolean checkDapAnDung() {
         try {
+            String regexDapAn = "[ABCDabcd]{1}";
             if (tf_DapAnDung.getText().equals("")) {
                 setLabelDapAnDung("Điền đáp án");
                 check = false;
-            } else {
-                setLabelDapAnDung("");
-                check = true;
-            }
-            String regexDapAn = "[ABCDabcd]{1}";
-            if (!tf_DapAnDung.getText().matches(regexDapAn)) {
+            }else if (!tf_DapAnDung.getText().matches(regexDapAn)) {
                 setLabelDapAnDung("Đáp án A, B, C, D");
                 check = false;
+            }else{
+                setLabelDapAnDung("");
+                check = true;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -437,7 +436,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     public boolean checkDapAn4() {
         try {
             if (tf_DapAn4.getText().equals("")) {
-                setLabelDapAn4("Điền đáp án C");
+                setLabelDapAn4("Điền đáp án D");
                 check = false;
             } else {
                 setLabelDapAn4("");
@@ -793,11 +792,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID_ Câu hỏi", "Câu hỏi", "Độ khó", "Tên bài", "Thể loại"
+                "ID_ Câu hỏi", "Độ khó", "Tên bài", "Thể loại"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -913,7 +912,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                     .addGroup(pn_totalLayout.createSequentialGroup()
                         .addComponent(lb_ql)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtp_Show, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
+                    .addComponent(jtp_Show))
                 .addContainerGap())
         );
         pn_totalLayout.setVerticalGroup(
