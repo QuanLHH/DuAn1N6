@@ -82,6 +82,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         tk.setTenTaiKhoan(txthoten.getText());
         tk.setMatKhau((String) txtmk.getText());
         tk.setMKCap2((String) txtmk2.getText());
+        
         boolean vaitro;
         if (rdadd.isSelected() == true) {
             vaitro = true;
@@ -93,7 +94,8 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     }
 
     public void sua() {
-        
+
+
         int index = table.getSelectedRow();
         String mk = new String(txtmk2.getText());
         if (index == -1) {
@@ -130,7 +132,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa " + txthoten.getText(), "", JOptionPane.YES_NO_OPTION);
         if (chon == 0) {
             daotk.delete(ten);
-
+            System.out.println("aa");
             this.filltable();
             this.clear();
             JOptionPane.showMessageDialog(this, "Xoa thành công");
