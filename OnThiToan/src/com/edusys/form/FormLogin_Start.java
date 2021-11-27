@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 public class FormLogin_Start extends javax.swing.JFrame {
 
     com.edusys.dao.TaiKhoanDAO daotk = new TaiKhoanDAO();
-
+    public static boolean vaiTro=false;
     public FormLogin_Start() {
         initComponents();
         setLocationRelativeTo(null);
@@ -56,6 +56,8 @@ public class FormLogin_Start extends javax.swing.JFrame {
                 Auth2.use = tk;
                 JOptionPane.showMessageDialog(this, "Login thành công");
                 fLogin();
+                vaiTro=tk.getVaiTro();
+                System.out.println(vaiTro);
                 this.dispose();
 
             }
