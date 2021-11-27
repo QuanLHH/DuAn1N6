@@ -97,24 +97,24 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         int index = table.getSelectedRow();
         String mk = new String(txtmk2.getText());
         if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng để update");
+            JOptionPane.showMessageDialog(this, "Báº¡n chÆ°a chá»n dÃ²ng Ä‘á»ƒ update");
             return;
         }
         TaiKhoan tk = getfrom();
         try {
            if(txthoten.getText().equals("")||txtmk.getText().equals("")||txtmk2.getText().equals("")){
-           JOptionPane.showMessageDialog(this,"Bạn cần nhập đầy đủ thông tin!");
+           JOptionPane.showMessageDialog(this,"Báº¡n cáº§n nháº­p Ä‘áº§y Ä‘á»§ thÃ´ng tin!");
            return;
            }
             if (!mk.equalsIgnoreCase(tk.getMatKhau())) {
-                JOptionPane.showMessageDialog(this, "Mật khẩu xác nhận không đúng! ");
+                JOptionPane.showMessageDialog(this, "Máº­t kháº©u xÃ¡c nháº­n khÃ´ng Ä‘Ãºng! ");
                 return;
             }
             daotk.update(tk);
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+            JOptionPane.showMessageDialog(this, "Cáº­p nháº­t thÃ nh cÃ´ng!");
             this.filltable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Bạn cần phải chọn dòng để update");
+            JOptionPane.showMessageDialog(this, "Báº¡n cáº§n pháº£i chá»n dÃ²ng Ä‘á»ƒ update");
         }
 
     }
@@ -122,18 +122,18 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     public void delete() {
          int index = table.getSelectedRow();
          if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng để Delete");
+            JOptionPane.showMessageDialog(this, "Báº¡n chÆ°a chá»n dÃ²ng Ä‘á»ƒ Delete");
             return;
         }
         TaiKhoan tk = getfrom();
         String ten = txthoten.getText();
-        int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa " + txthoten.getText(), "", JOptionPane.YES_NO_OPTION);
+        int chon = JOptionPane.showConfirmDialog(this, "Báº¡n cÃ³ thá»±c sá»± muá»‘n xÃ³a " + txthoten.getText(), "", JOptionPane.YES_NO_OPTION);
         if (chon == 0) {
             daotk.delete(ten);
 
             this.filltable();
             this.clear();
-            JOptionPane.showMessageDialog(this, "Xoa thành công");
+            JOptionPane.showMessageDialog(this, "Xoa thÃ nh cÃ´ng");
         }
     }
 
@@ -194,15 +194,15 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("QUẢN LÍ TÀI KHOẢN");
+        jLabel1.setText("QUáº¢N LÃ TÃ€I KHOáº¢N");
 
-        jLabel2.setText("MãND");
+        jLabel2.setText("MÃ£ND");
 
         txtma.setEditable(false);
 
-        jLabel3.setText("Tên tài khoản");
+        jLabel3.setText("TÃªn tÃ i khoáº£n");
 
-        jLabel5.setText("Vai trò");
+        jLabel5.setText("Vai trÃ²");
 
         buttonGroup1.add(rdadd);
         rdadd.setText("Admin");
@@ -213,16 +213,16 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rdngd);
-        rdngd.setText("Người dùng");
+        rdngd.setText("NgÆ°á»i dÃ¹ng");
         rdngd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdngdActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Mật khẩu");
+        jLabel6.setText("Máº­t kháº©u");
 
-        jLabel7.setText("Xác nhận mật khẩu");
+        jLabel7.setText("XÃ¡c nháº­n máº­t kháº©u");
 
         btnthem.setText("Add");
         btnthem.addActionListener(new java.awt.event.ActionListener() {
@@ -315,14 +315,14 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        tas.addTab("Cập Nhật", jPanel1);
+        tas.addTab("Cáº­p Nháº­t", jPanel1);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MaND", "Tên tài khoản", "Vai trò"
+                "MaND", "TÃªn tÃ i khoáº£n", "Vai trÃ²"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -357,7 +357,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        tas.addTab("Danh Sách", jPanel2);
+        tas.addTab("Danh SÃ¡ch", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
