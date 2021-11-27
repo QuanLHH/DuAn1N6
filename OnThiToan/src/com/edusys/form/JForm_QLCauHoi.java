@@ -201,6 +201,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
         //update
         try {
+            if(check()==true){
             int i = JOptionPane.showConfirmDialog(rootPane, "Update câu hỏi ID: " + model.getValueAt(dem, 0).toString() + "?", "", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 ch.setID_CauHoi(id);
@@ -208,7 +209,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Update thành công!");
                 fillTable();
             }
-
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -686,21 +687,21 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                                 .addComponent(jLabel9)
                                                 .addGap(18, 18, 18)
-                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                                                         .addComponent(bt_Them)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(bt_Update)
                                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                         .addComponent(bt_Refresh))
-                                                    .addComponent(lb_CheckDapAn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
-                                                    .addComponent(jScrollPane6))
+                                                    .addComponent(lb_CheckDapAn4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addGap(0, 0, Short.MAX_VALUE)))
                                         .addGap(1, 1, 1))
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(16, 16, 16)
                                         .addComponent(jLabel7)
-                                        .addGap(18, 18, 18)
+                                        .addGap(16, 16, 16)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lb_CheckDapAn2, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -708,18 +709,16 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(15, 15, 15)
                                         .addComponent(jLabel6)
-                                        .addGap(18, 18, 18)
+                                        .addGap(19, 19, 19)
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lb_CheckDapAn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE)))))
-                                .addGap(43, 43, 43))
+                                            .addComponent(jScrollPane7))))
+                                .addGap(47, 47, 47))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbb_mucDo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(25, Short.MAX_VALUE))))
+                        .addContainerGap(22, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -745,7 +744,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(0, 0, 0)
@@ -914,7 +913,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                     .addGroup(pn_totalLayout.createSequentialGroup()
                         .addComponent(lb_ql)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtp_Show))
+                    .addComponent(jtp_Show, javax.swing.GroupLayout.DEFAULT_SIZE, 504, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pn_totalLayout.setVerticalGroup(
