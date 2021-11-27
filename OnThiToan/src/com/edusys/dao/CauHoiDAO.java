@@ -138,7 +138,7 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
     public ArrayList<CauHoi> selecttenbai() {
         ArrayList<CauHoi> list = new ArrayList<>();
         try {
-            String sql = "SELECT TenBai FROM Cau_Hoi GROUP BY TenBai";
+            String sql = "SELECT TenBai FROM Cau_Hoi WHERE TenBai!='' GROUP BY TenBai";
             ResultSet rs = Helper.JdbcHelper.query(sql);
             while (rs.next()) {
                 CauHoi ch = new CauHoi();
@@ -159,9 +159,11 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
             ResultSet rs = Helper.JdbcHelper.query(sql, tenbai, dokho);
             while (rs.next()) {
                 CauHoi ch = new CauHoi();
-                ch.setCauHoi(rs.getString(1));
-                ch.setDoKho(rs.getInt(2));
-                ch.setTenBai(rs.getString(3));
+                ch.setID_CauHoi(rs.getInt(1));
+                ch.setRole_ID(rs.getBoolean(2));
+                ch.setCauHoi(rs.getString(3));
+                ch.setDoKho(rs.getInt(4));
+                ch.setTenBai(rs.getString(5));
                 list.add(ch);
             }
             rs.getStatement().getConnection().close();
@@ -174,10 +176,10 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
     public String dapan(int id) {
         String dap = null;
         try {
-            String sql = "select DapAn from Cau_Hoi where ID_CauHoi = ?";
+            String sql = "select DapAnDung from Cau_Hoi where ID_CauHoi = ?";
             ResultSet rs = Helper.JdbcHelper.query(sql, id);
             while (rs.next()) {
-                dap = rs.getString("DapAn");
+                dap = rs.getString("DapAnDung");
             }
             rs.getStatement().getConnection().close();
 
@@ -204,23 +206,5 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
             ex.printStackTrace();
             throw new RuntimeException();
         }
-    }
-    //lấy id câu hỏi
-     public ArrayList<CauHoi> selectID() {
-        ArrayList<CauHoi> list = new ArrayList<>();
-        try {
-            int i = 0;
-            String sql = "SELECT ID_CauHoi FROM Cau_Hoi";
-            ResultSet rs = Helper.JdbcHelper.query(sql);
-            while (rs.next()) {
-                CauHoi ch = new CauHoi();
-                ch.setID_CauHoi(rs.getInt(1));
-                list.add(ch);
-            }
-            rs.getStatement().getConnection().close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return list;
     }
 }

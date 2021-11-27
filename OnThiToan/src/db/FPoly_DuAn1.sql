@@ -124,9 +124,9 @@ VALUES
 go
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
 VALUES
-	(100,1,1),
-	(200,2,2),
-	(300,3,3)
+	(100,1,7),
+	(200,2,8),
+	(300,3,9)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
