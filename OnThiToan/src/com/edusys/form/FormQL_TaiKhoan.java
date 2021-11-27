@@ -98,7 +98,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     }
 
     public void sua() {
-
+        System.out.println("a");
         int index = table.getSelectedRow();
         String mk = new String(txtmk2.getText());
         if (index == -1) {
