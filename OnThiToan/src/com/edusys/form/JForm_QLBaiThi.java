@@ -127,7 +127,7 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
     }
 
     public void them() {
-        
+
         try {
             checkMaBaiThi();
             if (check == true) {
@@ -430,12 +430,12 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_NewActionPerformed
 
     private void btn_FirstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_FirstActionPerformed
-       tb_BaiThi.setRowSelectionInterval(0, 0);
+        tb_BaiThi.setRowSelectionInterval(0, 0);
         shows();
     }//GEN-LAST:event_btn_FirstActionPerformed
 
     private void btn_PrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_PrevActionPerformed
-         try {
+        try {
             int dem = tb_BaiThi.getSelectedRow() - 1;
             if (dem < 0) {
                 dem = listBT.size() - 1;
@@ -448,7 +448,7 @@ public class JForm_QLBaiThi extends javax.swing.JDialog {
     }//GEN-LAST:event_btn_PrevActionPerformed
 
     private void btn_NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_NextActionPerformed
-         try {
+        try {
             int dem = tb_BaiThi.getSelectedRow() + 1;
             if (dem >= listBT.size()) {
                 dem = 0;
