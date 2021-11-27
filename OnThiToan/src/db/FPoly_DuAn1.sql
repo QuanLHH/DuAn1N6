@@ -105,15 +105,34 @@ VALUES (N'Đạo Hàm','https://www.youtube.com/watch?v=HIGllE3N-iw',
 go
 -- de thi
 INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung)
-VALUES (1,N'Câu 1. Tìm giao điểm của đồ thị hàm số (C): y=x^3+x^2-5x+3 và (D):y=x^2+2x-3',1,'',
+VALUES(1,N'Tìm giao điểm của đồ thị hàm số (C): y=x^3+x^2-5x+3 và (D):y=x^2+2x-3',1,'',
     'pi/12','pi/12','5pi/12','5pi/6','C'),
-	(1,N'Câu 2. Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,'',
+	(1,N'Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,'',
 	'R','R\{1;−2}','(−2;1).','[2;1].','B'),
-	(1,N'Câu 3. Tập xác định của hàm số y = 3*(x+2)/(x-1) là:',3,'',
+	(1,N'Tập xác định của hàm số y = 3*(x+2)/(x-1) là:',3,'',
 	'R\{1}','(1;+∞).','R','(−∞;1).','D'),
-	(1,N'Câu 4. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^2+3x^2-4 là:',3,'',
-	N'3 căn 5 ',N'4 căn 5',N'5 căn 5 ',N'6 căn 5','D')
-
+	(1,N'Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^2+3x^2-4 là:',3,'',
+	N'3 căn 5 ',N'4 căn 5',N'5 căn 5 ',N'6 căn 5','D'),
+	(1,N'Giá trị cực tiểu của hàm sốy=x^4−4x^2−2 là:',1,'',
+	N'3 căn 5 ',N'4 căn 5',N'5 căn 5 ',N'6 căn 5','D'),
+	(1,N'Điểm cực trị của hàm số y = x^4+2x^2−3 là:',1,'',
+    '-1','2','1','3','D'),
+	(1,N'Hàm sốy=x^3−3x^2+mx đạt cực tiểu tại x= 2 khi:',3,'',
+    'm>4','0<m<4','4>m','m=0','C'),
+	(1,N'Điểm cực đại của đồ thị hàm sốy=x^3−3x+ 2 là:',3,'',
+    '(−1; 0)','(−1; 4)','(1; 0)','(1; 4)','C'),
+	(1,N'Cho hàm sốy=f(x)có tập xác địnhD(D⊂R) đạt cực tiểu tại x0. Chọn khẳng định đúng:',1,'',
+    N'Tiếp tuyến với đồ thị tại điểmM(x0;f(x0))song song vớitrục tung',N'Tiếp tuyến với đồ thị tại điểmM(x0;f(x0))song song vớitrục hoành',
+	N'Hàm số đã cho có giá trị bé nhất bằngf(x0)',N'Hàm số có đạo hàm cấp một tạix0vàf′(x0) = 0','A'),
+	(1,N'Biết rằng hàm sốy=f(x)đạt cực đại tại điểmx0. Hãy chọn khẳng định đúng?',2,'',
+    N'Đạo hàmf′(x)đổi dấu từ âm sang dương khixđi quax0',N'Đạo hàmf′(x)đổi dấu từ dương sang âm khixđi quax0','f(x0) = 0','f(x0) = 1','B'),
+	(1,N'Cho hàm sốy=f(x)xác định và liên tục trên D (0;1) Hãy chọn khẳng định đúng?',2,'',
+    N'Hàm số có giá trị cực tiểu bằng1',N'Hàm số có giá trị lớn nhất bằng 0 và giá trị bé nhất bằng −1',
+	N'Hàm số có đúng một cực trị',N'Hàm số đạt cực đại tạix= 0 và đạt cực tiểu tạix= 1','B'),
+	(1,N'Biết rằng hàm sốy=f(x)đạt cực đại tại điểmx0. Hãy chọn khẳng định đúng?',2,'',
+    N'Đạo hàmf′(x)đổi dấu từ âm sang dương khixđi quax0',N'Đạo hàmf′(x)đổi dấu từ dương sang âm khixđi quax0','f(x0) = 0','f(x0) = 1','B'),
+	(1,N'Điểm cực đại của hàm sốy=x^4−8x^2+ 1 là:',1,'',
+	'2','-2','+-2','0','B')
 go
 -- bai tap	
 INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung)
@@ -132,11 +151,22 @@ VALUES (0,N'Câu 1.Tính đạo hàm của các hàm số sau: Tại các điể
 	(0,N'Câu 7. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^3+4x^2-2 là:',3,N'Hàm số',
 	'2 ','4','5','6','A')
 go
+SELECT COUNT(DOKHO),DoKho FROM Cau_Hoi GROUP BY DoKho
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
 VALUES
 	(100,1,7),
 	(200,2,8),
-	(300,3,9)
+	(300,3,9),
+	(121,1,69),
+	(121,2,70),
+	(121,3,71),
+	(121,1,72),
+	(121,2,73),
+	(121,3,74),
+	(121,1,75),
+	(121,2,76),
+	(121,3,77),
+	(121,3,78)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
