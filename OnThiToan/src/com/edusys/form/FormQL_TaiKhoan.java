@@ -86,7 +86,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         tk.setTenTaiKhoan(txthoten.getText());
         tk.setMatKhau((String) txtmk.getText());
         tk.setMKCap2((String) txtmk2.getText());
-        System.out.println("a");
+        
         boolean vaitro;
         if (rdadd.isSelected() == true) {
             vaitro = true;
