@@ -16,10 +16,12 @@ import java.util.ArrayList;
 public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     String INSERT = "INSERT INTO Tai_Khoan (TenTaiKhoan,MatKhau,MKCap2,VaiTro,ID_MaND) VALUES (?,?,?,?,?)";
-    String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,TenTaiKhoan=? WHERE ID_MaND=?";
+    String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,ID_MaND=? WHERE TenTaiKhoan=?";
     String SELECT_BY_ID = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
 
+
     String DELETE="delete from Tai_Khoan where  TenTaiKhoan=? ";
+
 
    
 
@@ -32,15 +34,19 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     @Override
     public void update(TaiKhoan tk) {
-        Helper.JdbcHelper.update(UPDATE, tk.getMatKhau(), tk.getMKCap2(), tk.getVaiTro(), tk.getTenTaiKhoan(), tk.getID_MaND());
+        Helper.JdbcHelper.update(UPDATE, tk.getMatKhau(), tk.getMKCap2(), tk.getVaiTro(), tk.getID_MaND(), tk.getTenTaiKhoan());
     }
 
     @Override
     public void delete(String key) {
 
+
         Helper.JdbcHelper.update(DELETE,key);
 
         Helper.JdbcHelper.update(DELETE, key); //To change body of generated methods, choose Tools | Templates.
+
+
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
     }
 
