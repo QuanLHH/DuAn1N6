@@ -18,7 +18,11 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
     String INSERT = "INSERT INTO Tai_Khoan (TenTaiKhoan,MatKhau,MKCap2,VaiTro,ID_MaND) VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,TenTaiKhoan=? WHERE ID_MaND=?";
     String SELECT_BY_ID = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
+
     String DELETE="delete from Tai_Khoan where  TenTaiKhoan=? ";
+
+   
+
 
     @Override
     public void insert(TaiKhoan tk) {
@@ -33,7 +37,11 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     @Override
     public void delete(String key) {
+
         Helper.JdbcHelper.update(DELETE,key);
+
+        Helper.JdbcHelper.update(DELETE, key); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     public void doiMK(TaiKhoan nv) {
