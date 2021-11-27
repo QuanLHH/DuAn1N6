@@ -19,6 +19,13 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
     String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,ID_MaND=? WHERE TenTaiKhoan=?";
     String SELECT_BY_ID = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
 
+
+    String DELETE="delete from Tai_Khoan where  TenTaiKhoan=? ";
+
+
+   
+
+
     @Override
     public void insert(TaiKhoan tk) {
         Helper.JdbcHelper.update(INSERT, tk.getTenTaiKhoan(), tk.getMatKhau(), tk.getMKCap2(), tk.getVaiTro(), tk.getID_MaND());
@@ -32,7 +39,15 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     @Override
     public void delete(String key) {
+
+
+        Helper.JdbcHelper.update(DELETE,key);
+
+        Helper.JdbcHelper.update(DELETE, key); //To change body of generated methods, choose Tools | Templates.
+
+
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     public void doiMK(TaiKhoan nv) {
