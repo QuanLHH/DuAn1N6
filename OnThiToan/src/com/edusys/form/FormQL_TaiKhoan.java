@@ -165,7 +165,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         new JFormSignUp(this, true).setVisible(true);
         filltable();
     }
-
+    
     
 
     @SuppressWarnings("unchecked")
