@@ -52,7 +52,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
 
     public void moustClick() {
         int row = table.getSelectedRow();
-        String idnd = (String) table.getValueAt(row,1);
+        String idnd = (String) table.getValueAt(row, 1);
         TaiKhoan tk = daotk.selectById(idnd);
         int index = table.getSelectedRow();
         if (index >= 0) {
@@ -68,7 +68,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
             List<TaiKhoan> list = daotk.selectALL();
             for (TaiKhoan tk : list) {
                 Object[] row = {
-                    tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getMatKhau(), tk.getVaiTro()
+                    tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getVaiTro()
                 };
                 model.addRow(row);
             }
@@ -82,7 +82,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         tk.setTenTaiKhoan(txthoten.getText());
         tk.setMatKhau((String) txtmk.getText());
         tk.setMKCap2((String) txtmk2.getText());
-        
         boolean vaitro;
         if (rdadd.isSelected() == true) {
             vaitro = true;
@@ -94,29 +93,28 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     }
 
     public void sua() {
-
-
+        
         int index = table.getSelectedRow();
         String mk = new String(txtmk2.getText());
         if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng để update");
+            JOptionPane.showMessageDialog(this, "Báº¡n chÆ°a chá»n dÃ²ng Ä‘á»ƒ update");
             return;
         }
         TaiKhoan tk = getfrom();
         try {
            if(txthoten.getText().equals("")||txtmk.getText().equals("")||txtmk2.getText().equals("")){
-           JOptionPane.showMessageDialog(this,"Bạn cần nhập đầy đủ thông tin!");
+           JOptionPane.showMessageDialog(this,"Báº¡n cáº§n nháº­p Ä‘áº§y Ä‘á»§ thÃ´ng tin!");
            return;
            }
             if (!mk.equalsIgnoreCase(tk.getMatKhau())) {
-                JOptionPane.showMessageDialog(this, "Mật khẩu xác nhận không đúng! ");
+                JOptionPane.showMessageDialog(this, "Máº­t kháº©u xÃ¡c nháº­n khÃ´ng Ä‘Ãºng! ");
                 return;
             }
             daotk.update(tk);
-            JOptionPane.showMessageDialog(this, "Cập nhật thành công!");
+            JOptionPane.showMessageDialog(this, "Cáº­p nháº­t thÃ nh cÃ´ng!");
             this.filltable();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Bạn cần phải chọn dòng để update");
+            JOptionPane.showMessageDialog(this, "Báº¡n cáº§n pháº£i chá»n dÃ²ng Ä‘á»ƒ update");
         }
 
     }
@@ -124,18 +122,18 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     public void delete() {
          int index = table.getSelectedRow();
          if (index == -1) {
-            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng để Delete");
+            JOptionPane.showMessageDialog(this, "Báº¡n chÆ°a chá»n dÃ²ng Ä‘á»ƒ Delete");
             return;
         }
         TaiKhoan tk = getfrom();
         String ten = txthoten.getText();
-        int chon = JOptionPane.showConfirmDialog(this, "Bạn có thực sự muốn xóa " + txthoten.getText(), "", JOptionPane.YES_NO_OPTION);
+        int chon = JOptionPane.showConfirmDialog(this, "Báº¡n cÃ³ thá»±c sá»± muá»‘n xÃ³a " + txthoten.getText(), "", JOptionPane.YES_NO_OPTION);
         if (chon == 0) {
             daotk.delete(ten);
-            System.out.println("aa");
+
             this.filltable();
             this.clear();
-            JOptionPane.showMessageDialog(this, "Xoa thành công");
+            JOptionPane.showMessageDialog(this, "Xoa thÃ nh cÃ´ng");
         }
     }
 
@@ -164,7 +162,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         filltable();
     }
 
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,7 +184,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         txtmk2 = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         btnthem = new javax.swing.JButton();
-        btnsua = new javax.swing.JButton();
         btnxoa = new javax.swing.JButton();
         btnupdate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -198,15 +194,15 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 102));
-        jLabel1.setText("QUẢN LÍ TÀI KHOẢN");
+        jLabel1.setText("QUáº¢N LÃ TÃ€I KHOáº¢N");
 
-        jLabel2.setText("MãND");
+        jLabel2.setText("MÃ£ND");
 
         txtma.setEditable(false);
 
-        jLabel3.setText("Họ tên");
+        jLabel3.setText("TÃªn tÃ i khoáº£n");
 
-        jLabel5.setText("Vai trò");
+        jLabel5.setText("Vai trÃ²");
 
         buttonGroup1.add(rdadd);
         rdadd.setText("Admin");
@@ -217,28 +213,21 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(rdngd);
-        rdngd.setText("Người dùng");
+        rdngd.setText("NgÆ°á»i dÃ¹ng");
         rdngd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdngdActionPerformed(evt);
             }
         });
 
-        jLabel6.setText("Mật khẩu");
+        jLabel6.setText("Máº­t kháº©u");
 
-        jLabel7.setText("Xác nhận mật khẩu");
+        jLabel7.setText("XÃ¡c nháº­n máº­t kháº©u");
 
         btnthem.setText("Add");
         btnthem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnthemActionPerformed(evt);
-            }
-        });
-
-        btnsua.setText("Update");
-        btnsua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsuaActionPerformed(evt);
             }
         });
 
@@ -263,34 +252,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-
-                        .addGap(85, 85, 85)
-                        .addComponent(btnthem)
-                        .addGap(41, 41, 41)
-                        .addComponent(btnupdate)
-                        .addGap(48, 48, 48)
-                        .addComponent(btnxoa))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel3)
-                            .addComponent(txthoten, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtma)
-                            .addComponent(jLabel6)
-                            .addComponent(txtmk)
-                            .addComponent(txtmk2)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(rdadd)
-                        .addGap(18, 18, 18)
-                        .addComponent(rdngd))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
-                        .addComponent(jLabel5)))
-                .addContainerGap(120, Short.MAX_VALUE))
-
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
@@ -302,10 +263,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                                     .addComponent(txtma)
                                     .addComponent(jLabel6)
                                     .addComponent(txtmk)
-                                    .addComponent(txtmk2)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(104, 104, 104)
-                                        .addComponent(btnsua))))
+                                    .addComponent(txtmk2)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(171, 171, 171)
                                 .addComponent(jLabel5))
@@ -323,7 +281,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnxoa)))
                 .addContainerGap())
-
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,60 +296,37 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-
                 .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(13, 13, 13)
                 .addComponent(txtmk2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdadd)
                     .addComponent(rdngd))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnthem)
-                    .addComponent(btnupdate)
-                    .addComponent(btnxoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(50, 50, 50))
-
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(13, 13, 13)
-                        .addComponent(txtmk2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdadd)
-                            .addComponent(rdngd)))
-                    .addComponent(btnsua))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnthem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnxoa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnupdate))
                 .addContainerGap())
-
         );
 
-        tas.addTab("Cập Nhật", jPanel1);
+        tas.addTab("Cáº­p Nháº­t", jPanel1);
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "MaND", "Họ tên", "Mật khẩu", "Vai trò"
+                "MaND", "TÃªn tÃ i khoáº£n", "Vai trÃ²"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -423,7 +357,7 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        tas.addTab("Danh Sách", jPanel2);
+        tas.addTab("Danh SÃ¡ch", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -469,11 +403,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         moustClick();
     }//GEN-LAST:event_tableMouseClicked
 
-    private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
-        // TODO add your handling code here:
-        sua();
-    }//GEN-LAST:event_btnsuaActionPerformed
-
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         // TODO add your handling code here:
         delete();
@@ -493,7 +422,22 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-      
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FormQL_TaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FormQL_TaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FormQL_TaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FormQL_TaiKhoan.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -508,7 +452,6 @@ public class FormQL_TaiKhoan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnsua;
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btnupdate;
     private javax.swing.JButton btnxoa;
