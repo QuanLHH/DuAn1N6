@@ -157,19 +157,20 @@ VALUES
 	(100,1,7),
 	(200,2,8),
 	(300,3,9),
-	(121,1,69),
-	(121,2,70),
-	(121,3,71),
-	(121,1,72),
-	(121,2,73),
-	(121,3,74),
-	(121,1,75),
-	(121,2,76),
-	(121,3,77),
-	(121,3,78)
+	(113,1,69),
+	(113,1,70),
+	(113,1,71),
+	(113,1,72),
+	(113,1,73),
+	(113,1,74),
+	(113,1,75),
+	(113,1,76),
+	(113,1,77),
+	(113,1,78)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
 SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
+SELECT * FROM Cau_Hoi WHERE 
