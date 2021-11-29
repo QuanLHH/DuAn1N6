@@ -51,7 +51,7 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
     }
     
     public void setCbbDoKho() {
-        ArrayList<BaiThi> list = baiThiDao.selectDoKhoByMaDe(getMaDe);
+        ArrayList<BaiThi> list = baiThiDao.selectDoKhoByMaDe((String) cbb_MaDe.getSelectedItem());
         cbb_DoKho.removeAllItems();
         for (BaiThi x : list) {
             String item = null;
@@ -64,10 +64,6 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
             }
             cbb_DoKho.addItem(item);
         }
-    }
-    
-    public void selectDeThi() {
-        
     }
     
     @SuppressWarnings("unchecked")
@@ -168,21 +164,20 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbb_MaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_MaDeActionPerformed
-        cbb_DoKho.setEnabled(true);
-        getMaDe = (String) cbb_MaDe.getSelectedItem();
+        cbb_DoKho.setEnabled(true);        
         setCbbDoKho();
-        System.out.println(getMaDe);
     }//GEN-LAST:event_cbb_MaDeActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        getMaDe = (String) cbb_MaDe.getSelectedItem();
+        getDoKho = cbb_DoKho.getSelectedIndex() + 1;
         Form_LamBaiThi f = new Form_LamBaiThi();
         f.setVisible(true);
         dispose();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void cbb_DoKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_DoKhoActionPerformed
-        getDoKho = cbb_DoKho.getSelectedIndex() + 1;
-        System.out.println(getDoKho);
+
     }//GEN-LAST:event_cbb_DoKhoActionPerformed
 
     /**

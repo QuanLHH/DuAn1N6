@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author taola
  */
-public class DeThiDAO extends EduSysDAO<DeThi, Integer>{
+public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
 
     @Override
     public void insert(DeThi entity) {
@@ -64,11 +64,79 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer>{
         }
         return list;
     }
-     public ArrayList<DeThi> selectDeThi(String made,int dokho) {
-         String sql = "SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi \n"
-                    + "join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=? AND Bai_Thi.DoKho=?";
-        ArrayList<DeThi> list =selectBySql(sql,made,dokho);
-        
+
+    public ArrayList<DeThi> selectDeThi(String made, int dokho) {
+        String sql = "SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi \n"
+                + "join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=? AND Bai_Thi.DoKho=?";
+        ArrayList<DeThi> list = selectBySql(sql, made, dokho);
+
         return list;
+    }
+
+    public int selectSoCau(String made, int dokho) {
+        String sql = "SElECT COUNT(ID_CauHoi) FROM Bai_Thi WHERE MaDe = ? AND DoKho=?";
+        int soCau = 0;
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(sql, made, dokho);
+            while (rs.next()) {
+                soCau = rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return soCau;
+    }
+
+    public int selectSoCauDe(String made, int dokho) {
+        String sql = "SElECT COUNT(Cau_Hoi.DoKho) FROM Bai_Thi JOIN Cau_Hoi ON Bai_Thi.ID_CauHoi=Cau_Hoi.ID_CauHoi \n"
+                + "	WHERE Cau_Hoi.DoKho=1 AND MaDe = ? AND Bai_Thi.DoKho=?";
+        int soCau = 0;
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(sql, made, dokho);
+            while (rs.next()) {
+                soCau = rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return soCau;
+    }
+
+    public int selectSoCauTB(String made, int dokho) {
+        String sql = "SElECT COUNT(Cau_Hoi.DoKho) FROM Bai_Thi JOIN Cau_Hoi ON Bai_Thi.ID_CauHoi=Cau_Hoi.ID_CauHoi \n"
+                + "	WHERE Cau_Hoi.DoKho=2 AND MaDe = ? AND Bai_Thi.DoKho=?";
+        int soCau = 0;
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(sql, made, dokho);
+            while (rs.next()) {
+                soCau = rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return soCau;
+    }
+
+    public int selectSoCauKho(String made, int dokho) {
+        String sql = "SElECT COUNT(Cau_Hoi.DoKho) FROM Bai_Thi JOIN Cau_Hoi ON Bai_Thi.ID_CauHoi=Cau_Hoi.ID_CauHoi \n"
+                + "	WHERE Cau_Hoi.DoKho=3 AND MaDe = ? AND Bai_Thi.DoKho=?";
+        int soCau = 0;
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(sql, made, dokho);
+            while (rs.next()) {
+                soCau = rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return soCau;
     }
 }
