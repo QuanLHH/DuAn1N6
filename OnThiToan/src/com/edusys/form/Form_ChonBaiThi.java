@@ -8,6 +8,8 @@ package com.edusys.form;
 import PakagesClass.BaiThi;
 import PakagesClass.CauHoi;
 import com.edusys.dao.BaiThiDAO;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 /**
@@ -15,32 +17,59 @@ import java.util.ArrayList;
  * @author taola
  */
 public class Form_ChonBaiThi extends javax.swing.JFrame {
-
-    ArrayList<CauHoi> listCH = new ArrayList<>();
-    ArrayList<BaiThi> listBT = new ArrayList<>();
     com.edusys.dao.BaiThiDAO baiThiDao = new BaiThiDAO();
+    public static String getMaDe = null;
+    public static int getDoKho = 0;
+    
     public Form_ChonBaiThi() {
         initComponents();
         setResizable(false);
         setLocationRelativeTo(null);
         setTitle("Chọn đề thi");
+        setExit();
         this.cbb_DoKho.setEnabled(false);
         setCbbMaDe();
+        setCbbDoKho();
     }
-    public void setCbbMaDe(){
-        listBT = baiThiDao.selectALL();
+
+    void setExit() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
+        });
+    }
+
+    public void setCbbMaDe() {
+        ArrayList<BaiThi> list = baiThiDao.selectMaDe();
         cbb_MaDe.removeAllItems();
-        for(BaiThi x:listBT){
-            String maDe =Integer.toString(x.getMaDe());
-            cbb_MaDe.addItem(maDe);
+        for (BaiThi x : list) {
+            String item = Integer.toString(x.getMaDe());
+            cbb_MaDe.addItem(item);
         }
     }
-    public void setCbbDoKho(){
-        
+    
+    public void setCbbDoKho() {
+        ArrayList<BaiThi> list = baiThiDao.selectDoKhoByMaDe(getMaDe);
+        cbb_DoKho.removeAllItems();
+        for (BaiThi x : list) {
+            String item = null;
+            if (x.getDoKho() == 1) {
+                item = "Dễ";
+            } else if (x.getDoKho() == 2) {
+                item = "Trung bình";
+            } else if (x.getDoKho() == 3) {
+                item = "Khó";
+            }
+            cbb_DoKho.addItem(item);
+        }
     }
+    
     public void selectDeThi() {
         
     }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -68,12 +97,22 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
         jLabel1.setText("Mã đề:");
 
         cbb_DoKho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbb_DoKho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_DoKhoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Độ khó:");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/5266969.png"))); // NOI18N
 
         jToggleButton1.setText("Start");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -96,8 +135,8 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(49, 49, 49))
+                        .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +148,9 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addGap(28, 28, 28)
                 .addComponent(jToggleButton1)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,7 +169,21 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
 
     private void cbb_MaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_MaDeActionPerformed
         cbb_DoKho.setEnabled(true);
+        getMaDe = (String) cbb_MaDe.getSelectedItem();
+        setCbbDoKho();
+        System.out.println(getMaDe);
     }//GEN-LAST:event_cbb_MaDeActionPerformed
+
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        Form_LamBaiThi f = new Form_LamBaiThi();
+        f.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void cbb_DoKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_DoKhoActionPerformed
+        getDoKho = cbb_DoKho.getSelectedIndex() + 1;
+        System.out.println(getDoKho);
+    }//GEN-LAST:event_cbb_DoKhoActionPerformed
 
     /**
      * @param args the command line arguments

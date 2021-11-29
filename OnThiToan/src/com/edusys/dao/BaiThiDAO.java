@@ -7,6 +7,7 @@ package com.edusys.dao;
 
 import PakagesClass.BaiThi;
 import PakagesClass.CauHoi;
+import PakagesClass.DeThi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -97,4 +98,64 @@ public class BaiThiDAO extends EduSysDAO<BaiThi, Integer> {
         return list;
     }
 
+    //VIet anh
+    public ArrayList<BaiThi> selectMaDe() {
+        ArrayList<BaiThi> list = new ArrayList<>();
+        try {
+            int i = 0;
+            String sql = "SELECT MaDe FROM Bai_Thi GROUP BY MaDe";
+            ResultSet rs = Helper.JdbcHelper.query(sql);
+            while (rs.next()) {
+                BaiThi bt = new BaiThi();
+                bt.setMaDe(rs.getInt(1));
+                list.add(bt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public ArrayList<BaiThi> selectDoKhoByMaDe(String made) {
+        ArrayList<BaiThi> list = new ArrayList<>();
+        try {
+            String sql = "SELECT DoKho FROM Bai_Thi WHERE MaDe=? GROUP BY DoKho";
+            ResultSet rs = Helper.JdbcHelper.query(sql, made);
+            while (rs.next()) {
+                BaiThi bt = new BaiThi();
+                bt.setDoKho(rs.getInt(1));
+                list.add(bt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public ArrayList<DeThi> selectDeThi(String made, int doKho) {
+        ArrayList<DeThi> list = new ArrayList<>();
+        try {
+            String sql = "SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi \n"
+                    + "join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=? AND Bai_Thi.DoKho=?";
+            ResultSet rs = Helper.JdbcHelper.query(sql, made, doKho);
+            while (rs.next()) {
+                DeThi dt = new DeThi();
+                dt.setID_CauHoi(rs.getInt(1));
+                dt.setRole_ID(rs.getBoolean(2));
+                dt.setCauHoi(rs.getString(3));
+                dt.setDapAn1(rs.getString(4));
+                dt.setDapAn2(rs.getString(5));
+                dt.setDapAn3(rs.getString(6));
+                dt.setDapAn4(rs.getString(7));
+                dt.setDapAnDung(rs.getString(8));
+                list.add(dt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
