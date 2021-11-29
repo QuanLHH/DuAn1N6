@@ -36,10 +36,10 @@ create table Cau_Hoi(
 	CauHoi nvarchar(250) not null,
 	DoKho int not null,
 	TenBai nvarchar(30),
-	DapAn1 varchar(250) not null,
-	DapAn2 varchar(250) not null,
-	DapAn3 varchar(250) not null,
-	DapAn4 varchar(250) not null,
+	DapAn1 nvarchar(250) not null,
+	DapAn2 nvarchar(250) not null,
+	DapAn3 nvarchar(250) not null,
+	DapAn4 nvarchar(250) not null,
 	DapAnDung varchar(2) not null,
 	NgayTao date not null default(getdate())
 )
@@ -180,7 +180,5 @@ VALUES
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
-SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
-
