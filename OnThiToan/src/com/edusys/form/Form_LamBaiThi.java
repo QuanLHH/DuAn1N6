@@ -5,6 +5,7 @@
  */
 package com.edusys.form;
 
+import PakagesClass.BaiThi;
 import PakagesClass.CauHoi;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,37 +15,46 @@ import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
-
 public class Form_LamBaiThi extends javax.swing.JFrame {
+
     ArrayList<CauHoi> listCH = new ArrayList<>();
+    ArrayList<BaiThi> listBT = new ArrayList<>();
     Timer time;
+
     public Form_LamBaiThi() {
         initComponents();
         setInit();
     }
-    void setInit(){
+
+    void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Ôn toán - Làm bài thi");
         setTime();
     }
-    public void fillCauHoi(){
+
+    public void selectDeThi() {
         
     }
-    void setTime(){
+
+    public void fillCauHoi() {
+
+    }
+
+    void setTime() {
         time = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-                int m =Integer.valueOf((lb_Time1.getText()));
-                int s =Integer.valueOf((lb_Time2.getText()));
+                int m = Integer.valueOf((lb_Time1.getText()));
+                int s = Integer.valueOf((lb_Time2.getText()));
                 s--;
 
-                if(s<=0&&m>0){
-                    s=59;
+                if (s <= 0 && m > 0) {
+                    s = 59;
                     m--;
                 }
-                if(m==0&&s==0){
+                if (m == 0 && s == 0) {
                     time.stop();
                     lb_Time.setText("");
                     lb_Time1.setText("Hết");
@@ -53,12 +63,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                     bt_Stop.setEnabled(false);
                     bt_NopBai.setEnabled(false);
                 }
-                lb_Time1.setText(m+"");
-                lb_Time2.setText(s+"");
+                lb_Time1.setText(m + "");
+                lb_Time2.setText(s + "");
             }
         });
         time.start();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
