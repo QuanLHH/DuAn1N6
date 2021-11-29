@@ -36,10 +36,10 @@ create table Cau_Hoi(
 	CauHoi nvarchar(250) not null,
 	DoKho int not null,
 	TenBai nvarchar(30),
-	DapAn1 varchar(250) not null,
-	DapAn2 varchar(250) not null,
-	DapAn3 varchar(250) not null,
-	DapAn4 varchar(250) not null,
+	DapAn1 nvarchar(250) not null,
+	DapAn2 nvarchar(250) not null,
+	DapAn3 nvarchar(250) not null,
+	DapAn4 nvarchar(250) not null,
 	DapAnDung varchar(2) not null,
 	NgayTao date not null default(getdate())
 )
@@ -175,19 +175,28 @@ VALUES
 	(100,1,7),
 	(200,2,8),
 	(300,3,9),
-	(121,1,69),
-	(121,2,70),
-	(121,3,71),
-	(121,1,72),
-	(121,2,73),
-	(121,3,74),
-	(121,1,75),
-	(121,2,76),
-	(121,3,77),
-	(121,3,78)
+	(113,1,69),
+	(113,1,70),
+	(113,1,71),
+	(113,1,72),
+	(113,1,73),
+	(113,1,74),
+	(113,1,75),
+	(113,1,76),
+	(113,1,77),
+	(113,1,78),
+	(113,2,71),
+	(113,2,72),
+	(113,2,73),
+	(113,2,74),
+	(113,2,75),
+	(113,2,76),
+	(113,2,77),
+	(113,2,78),
+	(113,2,79),
+	(113,2,80)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
-SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
