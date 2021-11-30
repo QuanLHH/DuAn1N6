@@ -248,8 +248,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             public void run() {
                 while (true) {
                     SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-                    int m = Integer.valueOf((lb_Time1.getText()));
-                    int s = Integer.valueOf((lb_Time2.getText()));
+                    int m = Integer.valueOf((lb_Minutes.getText()));
+                    int s = Integer.valueOf((lb_Seconds.getText()));
                     s--;
 
                     if (s <= 0 && m > 0) {
@@ -259,14 +259,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                     if (m == 0 && s == 0) {
                         time.stop();
                         lb_Time.setText("");
-                        lb_Time1.setText("Hết");
-                        lb_Time2.setText("giờ");
+                        lb_Minutes.setText("Hết");
+                        lb_Seconds.setText("giờ");
                         JOptionPane.showMessageDialog(rootPane, "Hết giờ!");
                         bt_Stop.setEnabled(false);
                         bt_NopBai.setEnabled(false);
                     }
-                    lb_Time1.setText(m + "");
-                    lb_Time2.setText(s + "");
+                    lb_Minutes.setText(m + "");
+                    lb_Seconds.setText(s + "");
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -342,6 +342,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         this.first.setIcon(firstImg);
         ImageIcon restartImg = new ImageIcon("hinh/Refresh.png");
         this.bt_restart.setIcon(restartImg);
+        ImageIcon dongHo = new ImageIcon("hinh/Clock.png");
+        this.lb_dongHo.setIcon(dongHo);
     }
 
     @SuppressWarnings("unchecked")
@@ -381,10 +383,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lb_Time = new javax.swing.JLabel();
-        lb_Img = new javax.swing.JLabel();
+        lb_dongHo = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lb_Time1 = new javax.swing.JLabel();
-        lb_Time2 = new javax.swing.JLabel();
+        lb_Minutes = new javax.swing.JLabel();
+        lb_Seconds = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         SP_BaiThi = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
@@ -467,6 +469,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         bt_Stop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_StopActionPerformed(evt);
+            }
+        });
+
+        bt_NopBai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_NopBaiActionPerformed(evt);
             }
         });
 
@@ -643,21 +651,20 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         lb_Time.setText(":");
         lb_Time.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_Img.setBackground(new java.awt.Color(204, 204, 204));
-        lb_Img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/Clock.png"))); // NOI18N
+        lb_dongHo.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("  Time còn lại");
 
-        lb_Time1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lb_Time1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_Time1.setText("45");
-        lb_Time1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lb_Minutes.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lb_Minutes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Minutes.setText("45");
+        lb_Minutes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_Time2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lb_Time2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_Time2.setText("00");
-        lb_Time2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lb_Seconds.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lb_Seconds.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Seconds.setText("00");
+        lb_Seconds.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -665,27 +672,27 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(lb_Time1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(lb_Minutes, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(lb_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(lb_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lb_Seconds, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(lb_Img)
+                .addComponent(lb_dongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(lb_Img, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_dongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_Time1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_Minutes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lb_Time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_Time2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lb_Seconds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1477,7 +1484,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_pauseActionPerformed
 
     private void bt_resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_resumeActionPerformed
-        bt_Stop.setEnabled(true);
+        bt_pause.setEnabled(true);
+        bt_resume.setEnabled(false);
         player.resume();
     }//GEN-LAST:event_bt_resumeActionPerformed
 
@@ -1581,6 +1589,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         bt_resume.setEnabled(false);
     }//GEN-LAST:event_bt_restartActionPerformed
 
+    private void bt_NopBaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBaiActionPerformed
+        new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+    }//GEN-LAST:event_bt_NopBaiActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1666,10 +1678,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JLabel lb_CauHoi3;
     private javax.swing.JLabel lb_CauHoi4;
     private javax.swing.JLabel lb_CauHoi5;
-    private javax.swing.JLabel lb_Img;
+    private javax.swing.JLabel lb_Minutes;
+    private javax.swing.JLabel lb_Seconds;
     private javax.swing.JLabel lb_Time;
-    private javax.swing.JLabel lb_Time1;
-    private javax.swing.JLabel lb_Time2;
+    private javax.swing.JLabel lb_dongHo;
     private javax.swing.JLabel lb_tongCau;
     private javax.swing.JButton next;
     private javax.swing.JLabel page1;
