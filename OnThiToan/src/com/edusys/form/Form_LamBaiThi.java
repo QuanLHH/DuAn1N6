@@ -201,7 +201,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             } else if (dapAn.equals("")) {
                 chuoi.clearSelection();
             }
-        } finally {
+        } catch(Exception e) {
+            e.printStackTrace();
             return;
         }
     }
@@ -1418,8 +1419,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_prevKeyReleased
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-
         last();
+        refresh();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void bt_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_StartActionPerformed
@@ -1440,6 +1441,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         first();
+        refresh();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void bt_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_StopActionPerformed
