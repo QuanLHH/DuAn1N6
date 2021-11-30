@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.ButtonGroup;
 import javax.swing.ButtonModel;
+import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -41,18 +42,19 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
     public Form_LamBaiThi() {
         initComponents();
-        setInit();
-        setExit();
-
-    }
-
-    void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Ôn toán - Làm bài thi");
         setTime();
+        setImage();
+        setExit();
+        setInit();
+    }
+
+    void setInit() {
         this.bt_pause.setEnabled(false);
         this.bt_resume.setEnabled(false);
+        this.bt_restart.setEnabled(false);
         this.model = (DefaultTableModel) tb_LamBaiThi.getModel();
         this.getMaDe = formChonDT.getMaDe;
         this.getDoKho = formChonDT.getDoKho;
@@ -186,7 +188,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         tf_D5.setText(listDT.get(so + 4).getDapAn4());
     }
 
-    public void lamTuoi(String soCau, JCheckBox a, JCheckBox b, JCheckBox c, JCheckBox d,ButtonGroup chuoi) {
+    public void lamTuoi(String soCau, JCheckBox a, JCheckBox b, JCheckBox c, JCheckBox d, ButtonGroup chuoi) {
         try {
             int cau = Integer.valueOf(soCau);
             String dapAn = (model.getValueAt(cau - 1, 1).toString());
@@ -201,7 +203,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             } else if (dapAn.equals("")) {
                 chuoi.clearSelection();
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return;
         }
@@ -213,12 +215,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         String cau3 = lb_Cau3.getText();
         String cau4 = lb_Cau4.getText();
         String cau5 = lb_Cau5.getText();
-        lamTuoi(cau1, cb_A1, cb_B1, cb_C1, cb_D1,buttonGroup1);
-        lamTuoi(cau2, cb_A2, cb_B2, cb_C2, cb_D2,buttonGroup2);
-        lamTuoi(cau3, cb_A3, cb_B3, cb_C3, cb_D3,buttonGroup3);
-        lamTuoi(cau4, cb_A4, cb_B4, cb_C4, cb_D4,buttonGroup4);
-        lamTuoi(cau5, cb_A5, cb_B5, cb_C5, cb_D5,buttonGroup5);
-        
+        lamTuoi(cau1, cb_A1, cb_B1, cb_C1, cb_D1, buttonGroup1);
+        lamTuoi(cau2, cb_A2, cb_B2, cb_C2, cb_D2, buttonGroup2);
+        lamTuoi(cau3, cb_A3, cb_B3, cb_C3, cb_D3, buttonGroup3);
+        lamTuoi(cau4, cb_A4, cb_B4, cb_C4, cb_D4, buttonGroup4);
+        lamTuoi(cau5, cb_A5, cb_B5, cb_C5, cb_D5, buttonGroup5);
+
     }
 
     public void fillCauHoi() {
@@ -246,8 +248,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             public void run() {
                 while (true) {
                     SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-                    int m = Integer.valueOf((lb_Time1.getText()));
-                    int s = Integer.valueOf((lb_Time2.getText()));
+                    int m = Integer.valueOf((lb_Minutes.getText()));
+                    int s = Integer.valueOf((lb_Seconds.getText()));
                     s--;
 
                     if (s <= 0 && m > 0) {
@@ -257,14 +259,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                     if (m == 0 && s == 0) {
                         time.stop();
                         lb_Time.setText("");
-                        lb_Time1.setText("Hết");
-                        lb_Time2.setText("giờ");
+                        lb_Minutes.setText("Hết");
+                        lb_Seconds.setText("giờ");
                         JOptionPane.showMessageDialog(rootPane, "Hết giờ!");
                         bt_Stop.setEnabled(false);
                         bt_NopBai.setEnabled(false);
                     }
-                    lb_Time1.setText(m + "");
-                    lb_Time2.setText(s + "");
+                    lb_Minutes.setText(m + "");
+                    lb_Seconds.setText(s + "");
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -281,7 +283,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             @Override
             public void run() {
                 try {
-                    Player play = new Player(new FileInputStream("hinh/mp3/nhackhongloi.mp3"));
+                    Player play = new Player(new FileInputStream("hinh/mp3/tay_trai_chi_trang.mp3"));
                     play.play();
                     Thread.sleep(1000);
                 } catch (Exception e) {
@@ -317,6 +319,33 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         model.setValueAt(chuoi, cau5 - 1, 1);
     }
 
+    void setImage() {
+        ImageIcon img1 = new ImageIcon("hinh/restart32px.png");
+        this.khoiDongLai.setIcon(img1);
+        ImageIcon img2 = new ImageIcon("hinh/Stop.png");
+        this.bt_Stop.setIcon(img2);
+        ImageIcon img3 = new ImageIcon("hinh/Accept.png");
+        this.bt_NopBai.setIcon(img3);
+        ImageIcon img4 = new ImageIcon("hinh/Music.png");
+        this.bt_Start.setIcon(img4);
+        ImageIcon img5 = new ImageIcon("hinh/pause-button.png");
+        this.bt_pause.setIcon(img5);
+        ImageIcon img6 = new ImageIcon("hinh/resume.png");
+        this.bt_resume.setIcon(img6);
+        ImageIcon nextImg = new ImageIcon("hinh/right-arrow.png");
+        this.next.setIcon(nextImg);
+        ImageIcon prevImg = new ImageIcon("hinh/left-arrow.png");
+        this.prev.setIcon(prevImg);
+        ImageIcon lastImg = new ImageIcon("hinh/previous.png");
+        this.last.setIcon(lastImg);
+        ImageIcon firstImg = new ImageIcon("hinh/nexts.png");
+        this.first.setIcon(firstImg);
+        ImageIcon restartImg = new ImageIcon("hinh/Refresh.png");
+        this.bt_restart.setIcon(restartImg);
+        ImageIcon dongHo = new ImageIcon("hinh/Clock.png");
+        this.lb_dongHo.setIcon(dongHo);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -342,7 +371,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         lb_tongCau = new javax.swing.JLabel();
         soCauDe = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        bt_NopBai1 = new javax.swing.JButton();
+        khoiDongLai = new javax.swing.JButton();
         bt_Start = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -350,12 +379,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         bt_resume = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
+        bt_restart = new javax.swing.JButton();
+        jLabel15 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         lb_Time = new javax.swing.JLabel();
-        lb_Img = new javax.swing.JLabel();
+        lb_dongHo = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        lb_Time1 = new javax.swing.JLabel();
-        lb_Time2 = new javax.swing.JLabel();
+        lb_Minutes = new javax.swing.JLabel();
+        lb_Seconds = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         SP_BaiThi = new javax.swing.JScrollPane();
         jPanel6 = new javax.swing.JPanel();
@@ -420,9 +451,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         cb_B5 = new javax.swing.JCheckBox();
         cb_A5 = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
-        jButton4 = new javax.swing.JButton();
+        last = new javax.swing.JButton();
         prev = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        first = new javax.swing.JButton();
         next = new javax.swing.JButton();
         page1 = new javax.swing.JLabel();
         page2 = new javax.swing.JLabel();
@@ -435,14 +466,17 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(204, 204, 204));
 
         bt_Stop.setBackground(new java.awt.Color(204, 204, 204));
-        bt_Stop.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/Stop.png"))); // NOI18N
         bt_Stop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_StopActionPerformed(evt);
             }
         });
 
-        bt_NopBai.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/Accept.png"))); // NOI18N
+        bt_NopBai.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_NopBaiActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Số câu khó:");
 
@@ -457,14 +491,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
         jLabel7.setText("Số câu dễ:");
 
-        bt_NopBai1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/Refresh.png"))); // NOI18N
-        bt_NopBai1.addActionListener(new java.awt.event.ActionListener() {
+        khoiDongLai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_NopBai1ActionPerformed(evt);
+                khoiDongLaiActionPerformed(evt);
             }
         });
 
-        bt_Start.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/Music.png"))); // NOI18N
         bt_Start.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_StartActionPerformed(evt);
@@ -475,7 +507,6 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
         jLabel1.setText("Mở nhạc");
 
-        bt_pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/pause-button.png"))); // NOI18N
         bt_pause.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_pauseActionPerformed(evt);
@@ -484,7 +515,6 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
         jLabel10.setText("  Pause");
 
-        bt_resume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/continue_next_go on_keep on_move_icon.png"))); // NOI18N
         bt_resume.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bt_resumeActionPerformed(evt);
@@ -492,6 +522,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         });
 
         jLabel14.setText("Resume");
+
+        bt_restart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_restartActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setText("Restart");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -501,7 +539,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(bt_NopBai1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(khoiDongLai, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(45, 45, 45)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
@@ -524,6 +562,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bt_resume, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bt_restart, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -571,15 +613,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(bt_resume, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bt_NopBai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bt_Stop, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bt_NopBai1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(khoiDongLai, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -592,7 +629,18 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel5)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel10))))
+                            .addComponent(jLabel10)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(bt_restart, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel15))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(bt_resume, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel14)))))
                 .addGap(23, 23, 23))
         );
 
@@ -603,21 +651,20 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         lb_Time.setText(":");
         lb_Time.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_Img.setBackground(new java.awt.Color(204, 204, 204));
-        lb_Img.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/Clock.png"))); // NOI18N
+        lb_dongHo.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel9.setText("  Time còn lại");
 
-        lb_Time1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lb_Time1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_Time1.setText("45");
-        lb_Time1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lb_Minutes.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lb_Minutes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Minutes.setText("45");
+        lb_Minutes.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_Time2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        lb_Time2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_Time2.setText("00");
-        lb_Time2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lb_Seconds.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lb_Seconds.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_Seconds.setText("00");
+        lb_Seconds.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -625,27 +672,27 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(lb_Time1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(lb_Minutes, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(lb_Time, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(lb_Time2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lb_Seconds, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(34, 34, 34)
-                .addComponent(lb_Img)
+                .addComponent(lb_dongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addComponent(lb_Img, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lb_dongHo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lb_Time1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lb_Minutes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lb_Time, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lb_Time2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(lb_Seconds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -1228,14 +1275,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
         SP_BaiThi.setViewportView(jPanel6);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/nexts.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        last.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                lastActionPerformed(evt);
             }
         });
 
-        prev.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/left-arrow.png"))); // NOI18N
         prev.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 prevMousePressed(evt);
@@ -1252,14 +1297,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/previous.png"))); // NOI18N
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        first.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                firstActionPerformed(evt);
             }
         });
 
-        next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Hinh/right-arrow.png"))); // NOI18N
         next.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nextActionPerformed(evt);
@@ -1304,12 +1347,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SP_BaiThi, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(first, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(55, 55, 55)
                         .addComponent(prev, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1321,7 +1364,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                         .addGap(17, 17, 17)
                         .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(last, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(230, 230, 230))))
         );
         jPanel5Layout.setVerticalGroup(
@@ -1333,10 +1376,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                     .addComponent(SP_BaiThi, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(last, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(next, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(prev, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(first, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(page1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(page2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1405,11 +1448,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         refresh();
     }//GEN-LAST:event_prevActionPerformed
 
-    private void bt_NopBai1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBai1ActionPerformed
-        Form_ChonBaiThi f = new Form_ChonBaiThi();
-        f.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_bt_NopBai1ActionPerformed
+    private void khoiDongLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_khoiDongLaiActionPerformed
+        int i = JOptionPane.showConfirmDialog(rootPane, "Bạn muốn làm lại bài thi?", "", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            Form_LamBaiThi f = new Form_LamBaiThi();
+            f.setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_khoiDongLaiActionPerformed
 
     private void prevMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_prevMousePressed
         // TODO add your handling code here:
@@ -1419,13 +1465,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
     }//GEN-LAST:event_prevKeyReleased
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void lastActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastActionPerformed
         last();
         refresh();
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_lastActionPerformed
 
     private void bt_StartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_StartActionPerformed
         bt_pause.setEnabled(true);
+        bt_restart.setEnabled(true);
         bt_Start.setEnabled(false);
         playMp3();
     }//GEN-LAST:event_bt_StartActionPerformed
@@ -1437,13 +1484,15 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_pauseActionPerformed
 
     private void bt_resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_resumeActionPerformed
+        bt_pause.setEnabled(true);
+        bt_resume.setEnabled(false);
         player.resume();
     }//GEN-LAST:event_bt_resumeActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void firstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstActionPerformed
         first();
         refresh();
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_firstActionPerformed
 
     private void bt_StopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_StopActionPerformed
         time.suspend();
@@ -1533,6 +1582,17 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         fillDapAnCau5("D");
     }//GEN-LAST:event_cb_D5ActionPerformed
 
+    private void bt_restartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_restartActionPerformed
+        player.stop();
+        playMp3();
+        bt_pause.setEnabled(true);
+        bt_resume.setEnabled(false);
+    }//GEN-LAST:event_bt_restartActionPerformed
+
+    private void bt_NopBaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBaiActionPerformed
+        new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+    }//GEN-LAST:event_bt_NopBaiActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -1549,10 +1609,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JPanel JP_5;
     private javax.swing.JScrollPane SP_BaiThi;
     private javax.swing.JButton bt_NopBai;
-    private javax.swing.JButton bt_NopBai1;
     private javax.swing.JButton bt_Start;
     private javax.swing.JButton bt_Stop;
     private javax.swing.JButton bt_pause;
+    private javax.swing.JButton bt_restart;
     private javax.swing.JButton bt_resume;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1580,14 +1640,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JCheckBox cb_D4;
     private javax.swing.JCheckBox cb_D5;
     private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton first;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1606,6 +1666,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JLabel jlb;
     private javax.swing.JLabel jlb_cau1;
     private javax.swing.JLabel jlb_cau2;
+    private javax.swing.JButton khoiDongLai;
+    private javax.swing.JButton last;
     private javax.swing.JLabel lb_Cau1;
     private javax.swing.JLabel lb_Cau2;
     private javax.swing.JLabel lb_Cau3;
@@ -1616,10 +1678,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JLabel lb_CauHoi3;
     private javax.swing.JLabel lb_CauHoi4;
     private javax.swing.JLabel lb_CauHoi5;
-    private javax.swing.JLabel lb_Img;
+    private javax.swing.JLabel lb_Minutes;
+    private javax.swing.JLabel lb_Seconds;
     private javax.swing.JLabel lb_Time;
-    private javax.swing.JLabel lb_Time1;
-    private javax.swing.JLabel lb_Time2;
+    private javax.swing.JLabel lb_dongHo;
     private javax.swing.JLabel lb_tongCau;
     private javax.swing.JButton next;
     private javax.swing.JLabel page1;
