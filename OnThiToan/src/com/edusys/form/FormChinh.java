@@ -73,6 +73,9 @@ public class FormChinh extends javax.swing.JFrame {
         lbt.setVisible(true);
         
     }
+    void QLBT(){
+        new JForm_QLBaiThi(this, true).setVisible(true);
+    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -99,7 +102,7 @@ public class FormChinh extends javax.swing.JFrame {
         mnuQuanLy = new javax.swing.JMenu();
         mniQLTK = new javax.swing.JMenuItem();
         mniQLCH = new javax.swing.JMenuItem();
-        mniQLDT = new javax.swing.JMenuItem();
+        mniQLBThi = new javax.swing.JMenuItem();
         mnuThongTin = new javax.swing.JMenu();
         mnuKiemTra = new javax.swing.JMenu();
 
@@ -221,15 +224,16 @@ public class FormChinh extends javax.swing.JFrame {
         });
         mnuQuanLy.add(mniQLCH);
 
-        mniQLDT.setText("Quản Lý Đề Thi");
-        mnuQuanLy.add(mniQLDT);
+        mniQLBThi.setText("Quản Lý Bài Thi");
+        mniQLBThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mniQLBThiActionPerformed(evt);
+            }
+        });
+        mnuQuanLy.add(mniQLBThi);
 
         jMenuBar3.add(mnuQuanLy);
-
-        mnuThongTin.setText("Thông Tin");
         jMenuBar3.add(mnuThongTin);
-
-        mnuKiemTra.setText("Kiểm Tra");
         jMenuBar3.add(mnuKiemTra);
 
         setJMenuBar(jMenuBar3);
@@ -300,6 +304,11 @@ public class FormChinh extends javax.swing.JFrame {
         LamBaiTap();
     }//GEN-LAST:event_btnLBTapActionPerformed
 
+    private void mniQLBThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLBThiActionPerformed
+        // TODO add your handling code here:
+        QLBT();
+    }//GEN-LAST:event_mniQLBThiActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -368,8 +377,8 @@ public class FormChinh extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniDMK;
     private javax.swing.JMenuItem mniDangxuat;
     private javax.swing.JMenuItem mniKetthuc;
+    private javax.swing.JMenuItem mniQLBThi;
     private javax.swing.JMenuItem mniQLCH;
-    private javax.swing.JMenuItem mniQLDT;
     private javax.swing.JMenuItem mniQLTK;
     private javax.swing.JMenu mnuHethong;
     private javax.swing.JMenu mnuKiemTra;
