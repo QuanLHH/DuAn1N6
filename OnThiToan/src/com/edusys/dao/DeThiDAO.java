@@ -5,6 +5,7 @@
  */
 package com.edusys.dao;
 
+import PakagesClass.BaiThiChiTiet;
 import PakagesClass.DeThi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -14,6 +15,25 @@ import java.util.ArrayList;
  * @author taola
  */
 public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
+
+    String INSERT = "INSERT INTO ChiTiet_BaiThi(ID_MaND,ID_BaiThi,SoCauDung,SoCauSai,Diem)VALUES(?,?,?,?,?)";
+    String DELETE="DELETE FROM ChiTiet_BaiThi WHERE ID_BaiThi=?";
+    String SelectByID = "SELECT TOP 1 ID_BaiThi FROM Bai_Thi WHERE ID_CauHoi=? AND MaDe=? AND DoKho=?";
+
+    public int selectByIds(Integer id, String made, int dokho) {
+        int id_bt = 0;
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(SelectByID, id, made, dokho);
+            while (rs.next()) {
+                id_bt = rs.getInt(1);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return id_bt;
+    }
 
     @Override
     public void insert(DeThi entity) {
@@ -27,7 +47,7 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
 
     @Override
     public void delete(Integer key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Helper.JdbcHelper.update(DELETE, key);
     }
 
     @Override
@@ -138,5 +158,10 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
             throw new RuntimeException();
         }
         return soCau;
+    }
+
+    public void inserts(BaiThiChiTiet bt) {
+        Helper.JdbcHelper.update(INSERT, bt.getID_MaND(), bt.getID_BaiThi(), bt.getSoCauDung()
+                , bt.getSoCauSai(), bt.getDiem());
     }
 }
