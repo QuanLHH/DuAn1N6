@@ -73,6 +73,11 @@ public class FormChinh extends javax.swing.JFrame {
         lbt.setVisible(true);
         
     }
+    void ChonBaiThi(){
+        Form_ChonBaiThi cbt = new Form_ChonBaiThi();
+        cbt.setVisible(true);
+        
+    }
     void QLBT(){
         new JForm_QLBaiThi(this, true).setVisible(true);
     }
@@ -163,18 +168,33 @@ public class FormChinh extends javax.swing.JFrame {
         btnXemTop.setFocusable(false);
         btnXemTop.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnXemTop.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnXemTop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXemTopActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnXemTop);
 
         btnTaiLieu.setText("Tài Liệu");
         btnTaiLieu.setFocusable(false);
         btnTaiLieu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnTaiLieu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnTaiLieu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTaiLieuActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnTaiLieu);
 
         btnPhanHoi.setText("Phản Hồi");
         btnPhanHoi.setFocusable(false);
         btnPhanHoi.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnPhanHoi.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPhanHoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPhanHoiActionPerformed(evt);
+            }
+        });
         jToolBar1.add(btnPhanHoi);
 
         mnuHethong.setText("Hệ Thống");
@@ -224,7 +244,7 @@ public class FormChinh extends javax.swing.JFrame {
         });
         mnuQuanLy.add(mniQLCH);
 
-        mniQLBThi.setText("Quản Lý Bài Thi");
+        mniQLBThi.setText("Quản Lý Đề Thi");
         mniQLBThi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mniQLBThiActionPerformed(evt);
@@ -253,7 +273,7 @@ public class FormChinh extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addComponent(lblAnh, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -272,6 +292,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnLBTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLBTActionPerformed
         // TODO add your handling code here:
+        ChonBaiThi();
     }//GEN-LAST:event_btnLBTActionPerformed
 
     private void btnDangXuatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDangXuatActionPerformed
@@ -308,6 +329,18 @@ public class FormChinh extends javax.swing.JFrame {
         // TODO add your handling code here:
         QLBT();
     }//GEN-LAST:event_mniQLBThiActionPerformed
+
+    private void btnPhanHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhanHoiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnPhanHoiActionPerformed
+
+    private void btnXemTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTopActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnXemTopActionPerformed
+
+    private void btnTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiLieuActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTaiLieuActionPerformed
 
     /**
      * @param args the command line arguments
