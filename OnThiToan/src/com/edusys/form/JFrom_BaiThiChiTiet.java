@@ -5,26 +5,35 @@
  */
 package com.edusys.form;
 
+import PakagesClass.TaiKhoan;
+import utils.Auth2;
+
 /**
  *
  * @author taola
  */
 public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
 
-    /**
-     * Creates new form JFrom_ChiTietBaiThi
-     */
+    Auth2 auth = new Auth2();
+    TaiKhoan user = new TaiKhoan();
     public JFrom_BaiThiChiTiet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setInit();
-
+        user=auth.use;
+        showTK();
     }
 
     void setInit(){
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Bài thi chi tiết!");
+    }
+    void showTK(){
+        
+        lb_TaiKhoan.setText(user.getTenTaiKhoan());
+        ID_NguoiDung.setText(Integer.toString(user.getID_MaND()));
+        
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

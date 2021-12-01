@@ -55,7 +55,7 @@ create table Bai_Thi(
 )
 go
 create table ChiTiet_BaiThi(
-	ID_MaND int not null identity(1,1) primary key,
+	ID_MaND int not null primary key,
 	ID_BaiThi int not null,
 	SoCauDung int not null,
 	SoCauSai int not null,
@@ -195,8 +195,12 @@ VALUES
 	(113,2,78),
 	(113,2,79),
 	(113,2,80)
+INSERT INTO ChiTiet_BaiThi(ID_MaND,ID_BaiThi,SoCauDung,SoCauSai,Diem)
+VALUES (3,14,25,15,6.25)
+GO
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
 SElECT*FROM Bai_Thi
+SELECT*FROM ChiTiet_BaiThi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai

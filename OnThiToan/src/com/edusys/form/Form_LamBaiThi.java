@@ -55,6 +55,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         this.bt_pause.setEnabled(false);
         this.bt_resume.setEnabled(false);
         this.bt_restart.setEnabled(false);
+        this.first.setEnabled(false);
         this.model = (DefaultTableModel) tb_LamBaiThi.getModel();
         this.getMaDe = formChonDT.getMaDe;
         this.getDoKho = formChonDT.getDoKho;
@@ -91,9 +92,11 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         int page = Integer.valueOf(page1.getText());
         page1.setText((page + 1) + "");
         prev.setEnabled(true);
+        first.setEnabled(true);
         try {
             if (page >= (tongSoCau / 5) - 1) {
                 next.setEnabled(false);
+                last.setEnabled(false);
             }
             setSoCau((Integer.valueOf(lb_Cau1.getText()) + 5));
 
@@ -105,11 +108,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     void prev() {
         int page = Integer.valueOf(page1.getText());
         next.setEnabled(true);
+        last.setEnabled(true);
         page1.setText((page - 1) + "");
         try {
             if (page <= 2) {
                 page1.setText("1");
                 prev.setEnabled(false);
+                first.setEnabled(false);
             }
             setSoCau((Integer.valueOf(lb_Cau1.getText()) - 5));
         } catch (Exception e) {
@@ -121,8 +126,11 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         int page = Integer.valueOf(page1.getText());
         next.setEnabled(true);
         prev.setEnabled(false);
+        first.setEnabled(false);
+        last.setEnabled(true); 
         page1.setText(1 + "");
-        setCauHoi(0);
+        i=0;
+        setCauHoi(i);
         setSoCau(1);
     }
 
@@ -131,15 +139,19 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         int pages = Integer.valueOf(page2.getText());
         next.setEnabled(false);
         prev.setEnabled(true);
+        last.setEnabled(false);
+        first.setEnabled(true);
         page1.setText(pages + "");
-        setCauHoi(tongSoCau - 5);
+        i=(tongSoCau-5);
+        setCauHoi(i);
         setSoCau(tongSoCau - 4);
+        
     }
 
     public void nextDeThi() {
         try {
             System.out.println("Cs=" + i);
-            i = i + 5;
+            i = i+5;
             setCauHoi(i);
         } catch (Exception e) {
             return;
@@ -336,9 +348,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         this.next.setIcon(nextImg);
         ImageIcon prevImg = new ImageIcon("hinh/left-arrow.png");
         this.prev.setIcon(prevImg);
-        ImageIcon lastImg = new ImageIcon("hinh/previous.png");
+        ImageIcon lastImg = new ImageIcon("hinh/nexts.png");
         this.last.setIcon(lastImg);
-        ImageIcon firstImg = new ImageIcon("hinh/nexts.png");
+        ImageIcon firstImg = new ImageIcon("hinh/previous.png");
         this.first.setIcon(firstImg);
         ImageIcon restartImg = new ImageIcon("hinh/Refresh.png");
         this.bt_restart.setIcon(restartImg);
