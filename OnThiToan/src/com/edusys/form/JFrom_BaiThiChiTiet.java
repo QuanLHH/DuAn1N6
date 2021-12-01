@@ -5,7 +5,12 @@
  */
 package com.edusys.form;
 
+import PakagesClass.BaiThiChiTiet;
+import PakagesClass.NguoiDung;
 import PakagesClass.TaiKhoan;
+import com.edusys.dao.DeThiDAO;
+import com.edusys.dao.NguoiDungDAO;
+import javax.swing.ImageIcon;
 import utils.Auth2;
 
 /**
@@ -16,25 +21,55 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
 
     Auth2 auth = new Auth2();
     TaiKhoan user = new TaiKhoan();
+    Form_LamBaiThi formLBT = new Form_LamBaiThi();
+    com.edusys.dao.NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
+    com.edusys.dao.DeThiDAO deThiDAO = new DeThiDAO();
+    int cauDung = 0;
+    int cauSai = 0;
+    float diem = 0;
+
     public JFrom_BaiThiChiTiet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setInit();
-        user=auth.use;
+        user = auth.use;
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         showTK();
+        ImageIcon restartImg = new ImageIcon("hinh/Accept.png");
+        this.bt_img.setIcon(restartImg);
     }
 
-    void setInit(){
+    void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Bài thi chi tiết!");
     }
-    void showTK(){
-        
+
+    void showTK() {
+        NguoiDung nd = nguoiDungDAO.selectById(user.getID_MaND());
         lb_TaiKhoan.setText(user.getTenTaiKhoan());
+        lb_HoTen.setText(nd.getHoTen());
         ID_NguoiDung.setText(Integer.toString(user.getID_MaND()));
-        
+        lb_TongCau.setText(Integer.toString(formLBT.tongSoCau));
+        lb_SOCauDUng.setText(Integer.toString(formLBT.soCauDung));
+        lb_SoCauSai.setText(Integer.toString(formLBT.soCauSai));
+        cauDung = formLBT.soCauDung;
+        cauSai = formLBT.soCauSai;
+        diem = formLBT.diem;
+        lb_Diem.setText(formLBT.diem + "");
+        BaiThiChiTiet bt = new BaiThiChiTiet();
+        bt.setID_BaiThi(formLBT.id_baiThi);
+        bt.setID_MaND(user.getID_MaND());
+        bt.setSoCauDung(cauDung);
+        bt.setSoCauSai(cauSai);
+        bt.setDiem(diem);
+        formLBT.soCauSai = 0;
+        formLBT.soCauDung = 0;
+        formLBT.diem = 0;
+        deThiDAO.delete(bt.getID_BaiThi());
+        deThiDAO.inserts(bt);
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -56,6 +91,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         lb_SoCauSai = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         lb_Diem = new javax.swing.JLabel();
+        bt_img = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -73,10 +109,13 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Tài khoản:");
 
+        lb_TaiKhoan.setText(" ");
         lb_TaiKhoan.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        lb_HoTen.setText(" ");
         lb_HoTen.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        ID_NguoiDung.setText(" ");
         ID_NguoiDung.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -134,31 +173,42 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel7.setText("Điểm:");
 
+        lb_Diem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
+
+        bt_img.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_imgActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lb_Diem, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(41, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lb_SoCauSai, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lb_SOCauDUng, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
                         .addGap(18, 18, 18)
-                        .addComponent(lb_TongCau, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lb_Diem, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_img))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(41, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lb_SoCauSai, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lb_SOCauDUng, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(lb_TongCau, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -176,10 +226,11 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(lb_SoCauSai, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_Diem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(bt_img, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -211,7 +262,12 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
+    private void bt_imgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_imgActionPerformed
+        dispose();
+
+    }//GEN-LAST:event_bt_imgActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -254,6 +310,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ID_NguoiDung;
+    private javax.swing.JToggleButton bt_img;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

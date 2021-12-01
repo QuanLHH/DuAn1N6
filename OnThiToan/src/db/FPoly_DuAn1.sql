@@ -204,3 +204,7 @@ SELECT*FROM Tai_Lieu
 SElECT*FROM Bai_Thi
 SELECT*FROM ChiTiet_BaiThi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
+
+SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi 
+join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=113 AND Bai_Thi.DoKho=1
+SELECT TOP 1 ID_BaiThi FROM Bai_Thi WHERE ID_CauHoi=69 AND MaDe=113 AND DoKho=1

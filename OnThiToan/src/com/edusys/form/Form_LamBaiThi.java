@@ -27,8 +27,6 @@ import javax.swing.table.DefaultTableModel;
 import javazoom.jl.player.Player;
 
 public class Form_LamBaiThi extends javax.swing.JFrame {
-
-    ArrayList<CauHoi> listCH = new ArrayList<>();
     ArrayList<DeThi> listDT = new ArrayList<>();
     Form_ChonBaiThi formChonDT;
     com.edusys.dao.DeThiDAO deThiDao = new DeThiDAO();
@@ -38,7 +36,12 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     String getMaDe = null;
     int getDoKho = 0;
     int i = 0;
-    int tongSoCau = 0;
+    public static int id_baiThi = 0;
+    public static int id_CauHoi = 0;
+    public static int tongSoCau = 0;
+    public static int soCauDung = 0;
+    public static int soCauSai = 0;
+    public static float diem = 0;
 
     public Form_LamBaiThi() {
         initComponents();
@@ -61,10 +64,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         this.getDoKho = formChonDT.getDoKho;
         this.formChonDT = new Form_ChonBaiThi();
         this.listDT = deThiDao.selectDeThi(getMaDe, getDoKho);
-        this.tongSoCau = deThiDao.selectSoCau(getMaDe, getDoKho);
+        this.tongSoCau = deThiDao.selectSoCau(getMaDe, getDoKho);        
         setCauHoi(i);
         fillCauHoi();
         fillTable();
+        id_CauHoi= listDT.get(0).getID_CauHoi();
+        id_baiThi = deThiDao.selectByIds(id_CauHoi, getMaDe, getDoKho);
+        System.out.println("ID_CauHoi:"+id_CauHoi+"ID_BaiThi:"+id_baiThi);
         prev.setEnabled(false);
         page1.setText("1");
         page2.setText((tongSoCau / 5) + "");
@@ -127,9 +133,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         next.setEnabled(true);
         prev.setEnabled(false);
         first.setEnabled(false);
-        last.setEnabled(true); 
+        last.setEnabled(true);
         page1.setText(1 + "");
-        i=0;
+        i = 0;
         setCauHoi(i);
         setSoCau(1);
     }
@@ -142,16 +148,16 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         last.setEnabled(false);
         first.setEnabled(true);
         page1.setText(pages + "");
-        i=(tongSoCau-5);
+        i = (tongSoCau - 5);
         setCauHoi(i);
         setSoCau(tongSoCau - 4);
-        
+
     }
 
     public void nextDeThi() {
         try {
             System.out.println("Cs=" + i);
-            i = i+5;
+            i = i + 5;
             setCauHoi(i);
         } catch (Exception e) {
             return;
@@ -198,6 +204,19 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         tf_B5.setText(listDT.get(so + 4).getDapAn2());
         tf_C5.setText(listDT.get(so + 4).getDapAn3());
         tf_D5.setText(listDT.get(so + 4).getDapAn4());
+    }
+
+    public void checkBai() {
+        float tong = tongSoCau;
+        for (int i = 0; i < listDT.size(); i++) {
+            if (listDT.get(i).getDapAnDung().equalsIgnoreCase(tb_LamBaiThi.getValueAt(i, 1).toString())) {
+                soCauDung++;
+            } else {
+                soCauSai++;
+            }
+
+        }
+        diem = ((10 / tong) * soCauDung);
     }
 
     public void lamTuoi(String soCau, JCheckBox a, JCheckBox b, JCheckBox c, JCheckBox d, ButtonGroup chuoi) {
@@ -1602,7 +1621,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_restartActionPerformed
 
     private void bt_NopBaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBaiActionPerformed
-        new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+        int dem = JOptionPane.showConfirmDialog(rootPane, "Nộp bài thi?", "Nộp bài", JOptionPane.YES_NO_OPTION);
+        if (dem == 0) {
+            checkBai();
+            new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+        }
+
+
     }//GEN-LAST:event_bt_NopBaiActionPerformed
 
     public static void main(String args[]) {
