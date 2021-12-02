@@ -15,13 +15,13 @@ import java.util.List;
  *
  * @author DELL
  */
-public class TaiLieuDao extends EduSysDAO<TaiLieu, String>{
+public class TaiLieuDao extends EduSysDAO<TaiLieu, Integer>{
     String INSERT = "INSERT INTO Tai_Lieu(TenTaiLieu,LyThuyet) VALUES (?,?)";
-    String UPDATE = "UPDATE Tai_Lieu SET TenTaiLieu=?,LyThuyet=?";
+    String UPDATE = "UPDATE Tai_Lieu SET TenTaiLieu=?,LyThuyet=? where ID_MaTaiLieu like ?";
     String Delete = "delete  from Tai_Lieu where ID_MaTaiLieu like ?";
-    String SELECT_BY_ID = "SELECT*FROM Tai_Lieu WHERE TenTaiLieu=?";
+    String SELECT_BY_ID = "SELECT*FROM Tai_Lieu WHERE ID_MaTaiLieu =?";
     String SELECTALL = "SELECT * FROM Tai_Lieu";
-      String SELECTBYID = "SELECT ID_MaTaiLieu,TenTaiLieu,LyThuyet FROM Tai_Lieu WHERE TenTaiLieu like ?";
+    String SELECTBYID = "SELECT ID_MaTaiLieu,TenTaiLieu,LyThuyet FROM Tai_Lieu WHERE TenTaiLieu like ?";
     @Override
     public void insert(TaiLieu tl) {
         Helper.JdbcHelper.update(INSERT, tl.getTentl(),tl.getLythuyet());
@@ -29,12 +29,12 @@ public class TaiLieuDao extends EduSysDAO<TaiLieu, String>{
 
     @Override
     public void update(TaiLieu tl) {
-        Helper.JdbcHelper.update(UPDATE,tl.getTentl(),tl.getLythuyet());
+        Helper.JdbcHelper.update(UPDATE,tl.getTentl(),tl.getLythuyet(),tl.getID_MaTaiLieu());
     }
 
     @Override
-    public void delete(String key) {
-      Helper.JdbcHelper.update(DELETE, key);
+    public void delete(Integer key) {
+      Helper.JdbcHelper.update(Delete, key);
     }
 
     @Override
@@ -44,8 +44,8 @@ public class TaiLieuDao extends EduSysDAO<TaiLieu, String>{
     }
 
     @Override
-    public TaiLieu selectById(String key) {
-         ArrayList<TaiLieu> list = selectBySql(SELECTBYID, key);
+    public TaiLieu selectById(Integer key) {
+         List<TaiLieu> list = selectBySql(SELECT_BY_ID, key);
         if (list.isEmpty()) {
             return null;
         }

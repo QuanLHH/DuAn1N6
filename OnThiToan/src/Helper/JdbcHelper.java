@@ -66,7 +66,5 @@ public class JdbcHelper {
         }
     }
 
-    public static void update(int DELETE, String key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+  
 }
