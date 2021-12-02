@@ -15,6 +15,7 @@ go
 create table Tai_Lieu(
 	ID_MaTaiLieu int not null identity(1,1) primary key,
 	TenTaiLieu nvarchar(40) not null,
+	LinkVideo varchar(200) not null,
 	LyThuyet nvarchar(200) not null
 )
 go
@@ -35,10 +36,10 @@ create table Cau_Hoi(
 	CauHoi nvarchar(250) not null,
 	DoKho int not null,
 	TenBai nvarchar(30),
-	DapAn1 nvarchar(250) not null,
-	DapAn2 nvarchar(250) not null,
-	DapAn3 nvarchar(250) not null,
-	DapAn4 nvarchar(250) not null,
+	DapAn1 varchar(250) not null,
+	DapAn2 varchar(250) not null,
+	DapAn3 varchar(250) not null,
+	DapAn4 varchar(250) not null,
 	DapAnDung varchar(2) not null,
 	NgayTao date not null default(getdate())
 )
@@ -54,8 +55,7 @@ create table Bai_Thi(
 )
 go
 create table ChiTiet_BaiThi(
-	ID_BaiThiCT int not null identity(1,1) primary key,
-	ID_MaND int not null,
+	ID_MaND int not null identity(1,1) primary key,
 	ID_BaiThi int not null,
 	SoCauDung int not null,
 	SoCauSai int not null,
@@ -97,10 +97,10 @@ VALUES ('vietanhvs','492002','2002',1,1),
 	('huyhoang','12345','2002',1,4),
 	('congtruong','12345','2002',0,5)
 go
-INSERT INTO Tai_Lieu(TenTaiLieu,LyThuyet)
-VALUES (N'Đạo Hàm',
+INSERT INTO Tai_Lieu(TenTaiLieu,LinkVideo,LyThuyet)
+VALUES (N'Đạo Hàm','https://www.youtube.com/watch?v=HIGllE3N-iw',
 	'https://loigiaihay.com/ly-thuyet-dinh-nghia-va-y-nghia-cua-dao-ham-c46a5878.html'),
-	(N'Nguyên Hàm',
+	(N'Nguyên Hàm','https://www.youtube.com/watch?v=ZgxXaJMg9vQ',
 	'https://vungoi.vn/lop-12/chi-tiet-ly-thuyet-nguyen-ham-5af3eae81261631175a05d3e.html')
 go
 -- de thi
@@ -115,7 +115,8 @@ go
 -- bai tap	
 INSERT INTO Cau_Hoi(Role_ID,CauHoi,DoKho,TenBai,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung)
 VALUES 
-	(1,N'Tìm giao điểm của đồ thị hàm số (C): y=x^3+x^2-5x+3 và (D):y=x^2+2x-3',1,'',
+	(0,N'Câu 1.Tính đạo hàm của các hàm số sau: Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x-2. Tính f(-2)?',1,N'Đạo Hàm',
+VALUES(1,N'Tìm giao điểm của đồ thị hàm số (C): y=x^3+x^2-5x+3 và (D):y=x^2+2x-3',1,'',
     'pi/12','pi/12','5pi/12','5pi/6','C'),
 	(1,N'Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,'',
 	'R','R\{1;−2}','(−2;1).','[2;1].','B'),
@@ -158,7 +159,15 @@ VALUES
 	(100,1,1),
 	(200,2,2),
 	(300,3,3)
-
+	'f(4)=17','f(4)=20','f(4)=5','f(4)=10','D'),
+	(0,N'Câu 4. Tập xác định của hàm số y = 3*(x+2)/(x-1) là:',3,N'Tập xác định',
+	'R\{1}','(1;+∞).','R','(−∞;1).','D'),
+	(0,N'Câu 5. Tập xác định của hàm số y = 7^(x-2+x−2) là:',2,N'Tập xác định',
+	'R','R\{1;−2}','(−2;1).','[2;1].','B'),
+	(0,N'Câu 6. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^2+3x^2-4 là:',3,N'Hàm số',
+	N'3 căn 5 ',N'4 căn 5',N'5 căn 5 ',N'6 căn 5','D'),
+	(0,N'Câu 7. Khoảng cách giữa 2 điểm cực trị của đồ thị hàm số y=x^3+4x^2-2 là:',3,N'Hàm số',
+	'2 ','4','5','6','A')
 go
 SELECT COUNT(DOKHO),DoKho FROM Cau_Hoi GROUP BY DoKho
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
@@ -166,37 +175,19 @@ VALUES
 	(100,1,7),
 	(200,2,8),
 	(300,3,9),
-	(113,1,69),
-	(113,1,70),
-	(113,1,71),
-	(113,1,72),
-	(113,1,73),
-	(113,1,74),
-	(113,1,75),
-	(113,1,76),
-	(113,1,77),
-	(113,1,78),
-	(113,2,71),
-	(113,2,72),
-	(113,2,73),
-	(113,2,74),
-	(113,2,75),
-	(113,2,76),
-	(113,2,77),
-	(113,2,78),
-	(113,2,79),
-	(113,2,80)
-
+	(121,1,69),
+	(121,2,70),
+	(121,3,71),
+	(121,1,72),
+	(121,2,73),
+	(121,3,74),
+	(121,1,75),
+	(121,2,76),
+	(121,3,77),
+	(121,3,78)
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
-
 SELECT ID_CauHoi,dokho FROM Cau_Hoi
-
 SElECT*FROM Bai_Thi
-SELECT*FROM ChiTiet_BaiThi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
-
-SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi 
-join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=113 AND Bai_Thi.DoKho=1
-SELECT TOP 1 ID_BaiThi FROM Bai_Thi WHERE ID_CauHoi=69 AND MaDe=113 AND DoKho=1

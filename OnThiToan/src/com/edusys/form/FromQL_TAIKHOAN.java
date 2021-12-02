@@ -65,11 +65,7 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
             List<TaiKhoan> list = daotk.selectALL();
             for (TaiKhoan tk : list) {
                 Object[] row = {
-
                     tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getVaiTro()==true?"Admin":"Nhân Viên"
-
-                    tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getVaiTro()
-
                 };
                 model.addRow(row);
             }
@@ -188,9 +184,6 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
         txtmk2 = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         btnthem = new javax.swing.JButton();
-
-        btnsua = new javax.swing.JButton();
-
         btnxoa = new javax.swing.JButton();
         btnupdate = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -235,15 +228,6 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
             }
         });
 
-
-        btnsua.setText("Update");
-        btnsua.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnsuaActionPerformed(evt);
-            }
-        });
-
-
         btnxoa.setText("Delete");
         btnxoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,14 +258,7 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
                             .addComponent(txtma)
                             .addComponent(jLabel6)
                             .addComponent(txtmk)
-
                             .addComponent(txtmk2)))
-
-                            .addComponent(txtmk2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(104, 104, 104)
-                                .addComponent(btnsua))))
-
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(171, 171, 171)
                         .addComponent(jLabel5))
@@ -313,7 +290,6 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-
                 .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
@@ -325,22 +301,6 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdadd)
                     .addComponent(rdngd))
-
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtmk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addGap(13, 13, 13)
-                        .addComponent(txtmk2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rdadd)
-                            .addComponent(rdngd)))
-                    .addComponent(btnsua))
-
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnxoa)
@@ -433,12 +393,6 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnthemActionPerformed
 
-
-    private void btnsuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnsuaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnsuaActionPerformed
-
-
     private void btnxoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnxoaActionPerformed
         // TODO add your handling code here:
         delete();
@@ -490,9 +444,6 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-
-    private javax.swing.JButton btnsua;
-
     private javax.swing.JButton btnthem;
     private javax.swing.JButton btnupdate;
     private javax.swing.JButton btnxoa;

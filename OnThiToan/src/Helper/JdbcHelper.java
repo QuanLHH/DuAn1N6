@@ -65,6 +65,4 @@ public class JdbcHelper {
             throw new RuntimeException();
         }
     }
-
-  
 }

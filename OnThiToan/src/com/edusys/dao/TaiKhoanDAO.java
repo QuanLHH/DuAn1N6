@@ -5,6 +5,8 @@ package com.edusys.dao;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
 import Helper.JdbcHelper;
 import PakagesClass.TaiKhoan;
 import java.sql.ResultSet;
@@ -16,8 +18,7 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
     String INSERT = "INSERT INTO Tai_Khoan (TenTaiKhoan,MatKhau,MKCap2,VaiTro,ID_MaND) VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE Tai_Khoan SET MatKhau=?,MKCap2=?,VaiTro=?,TenTaiKhoan=? WHERE ID_MaND=?";
     String SELECT_BY_ID = "SELECT*FROM Tai_Khoan WHERE TenTaiKhoan=?";
-
-    String DELETE = "delete from Tai_Khoan where  TenTaiKhoan=? ";
+    String DELETE="DELETE FROM Tai_Khoan WHERE TenTaiKhoan=?";
 
     @Override
     public void insert(TaiKhoan tk) {
@@ -32,9 +33,7 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
 
     @Override
     public void delete(String key) {
-
-        Helper.JdbcHelper.update(DELETE, key);
-
+    Helper.JdbcHelper.update(DELETE, key);
     }
 
     public void doiMK(TaiKhoan nv) {
@@ -74,7 +73,7 @@ public class TaiKhoanDAO extends EduSysDAO<TaiKhoan, String> {
     @Override
     public TaiKhoan selectById(String key) {
         ArrayList<TaiKhoan> list = selectBySql(SELECT_BY_ID, key);
-        if (list.isEmpty()) {
+        if(list.isEmpty()){
             return null;
         }
         return list.get(0);
