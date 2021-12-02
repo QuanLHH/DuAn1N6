@@ -67,7 +67,7 @@ create table ChiTiet_BaiThi(
 )
 create table Bai_Tap(
 	ID_BaiTap int not null identity(1,1) primary key,
-	DoKho int ,
+	DoKho int,
 	ID_CauHoi int not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi)
 
@@ -190,6 +190,9 @@ VALUES
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
+
+SELECT ID_CauHoi,dokho FROM Cau_Hoi
+
 SElECT*FROM Bai_Thi
 SELECT*FROM ChiTiet_BaiThi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai

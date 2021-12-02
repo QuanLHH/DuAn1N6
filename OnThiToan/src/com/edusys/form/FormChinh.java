@@ -64,7 +64,7 @@ public class FormChinh extends javax.swing.JFrame {
         new JForm_QLCauHoi(this, true).setVisible(true);
     }
     void QLTK(){
-        FormQL_TaiKhoan tk = new FormQL_TaiKhoan();
+        FromQL_TAIKHOAN tk=new FromQL_TAIKHOAN();
         tk.setVisible(true);
       
     }
