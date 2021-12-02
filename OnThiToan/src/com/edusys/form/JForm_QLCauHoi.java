@@ -1028,7 +1028,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pn_total, javax.swing.GroupLayout.PREFERRED_SIZE, 542, Short.MAX_VALUE)
+            .addComponent(pn_total, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
         );
 
         pack();
