@@ -6,9 +6,6 @@
 package com.edusys.dao;
 
 
-public class DeThiDAO {
-    String INSERT="";
-
 import PakagesClass.BaiThiChiTiet;
 import PakagesClass.DeThi;
 import java.sql.ResultSet;
