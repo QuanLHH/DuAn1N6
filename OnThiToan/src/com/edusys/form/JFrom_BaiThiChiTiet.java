@@ -66,7 +66,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         formLBT.soCauSai = 0;
         formLBT.soCauDung = 0;
         formLBT.diem = 0;
-        deThiDAO.delete(bt.getID_BaiThi());
+        
         deThiDAO.inserts(bt);
     }
 
