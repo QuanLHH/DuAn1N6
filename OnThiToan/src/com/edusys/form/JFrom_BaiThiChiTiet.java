@@ -57,9 +57,17 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         cauSai = formLBT.soCauSai;
         diem = formLBT.diem;
         lb_Diem.setText(formLBT.diem + "");
+        BaiThiChiTiet bt = new BaiThiChiTiet();
+        bt.setID_BaiThi(formLBT.id_baiThi);
+        bt.setID_MaND(user.getID_MaND());
+        bt.setSoCauDung(cauDung);
+        bt.setSoCauSai(cauSai);
+        bt.setDiem(diem);
         formLBT.soCauSai = 0;
         formLBT.soCauDung = 0;
         formLBT.diem = 0;
+        deThiDAO.delete(bt.getID_BaiThi());
+        deThiDAO.inserts(bt);
     }
 
     @SuppressWarnings("unchecked")
