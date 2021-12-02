@@ -14,18 +14,6 @@ public class CauHoi {
 
     public CauHoi() {
     }
-    public CauHoi(CauHoi ch){
-    this.ID_CauHoi = ch.getID_CauHoi();
-        this.CauHoi = ch.getCauHoi();
-        this.doKho = ch.getDoKho();
-        this.tenBai = ch.getTenBai();
-        this.DapAn1 = ch.getDapAn1();
-        this.DapAn2 = ch.getDapAn2();
-        this.DapAn3 = ch.getDapAn3();
-        this.DapAn4 = ch.getDapAn4();
-        this.DapAnDung = ch.getDapAnDung();
-        this.ngayTao = ngayTao;
-    }
 
     public CauHoi(int ID_CauHoi, String CauHoi, int doKho, String tenBai, String DapAn1, String DapAn2, String DapAn3, String DapAn4, String DapAnDung, Date ngayTao) {
         this.ID_CauHoi = ID_CauHoi;
@@ -126,10 +114,6 @@ public class CauHoi {
 
     public void setNgayTao(Date ngayTao) {
         this.ngayTao = ngayTao;
-    }
-
-    public void get(int nextInt) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
