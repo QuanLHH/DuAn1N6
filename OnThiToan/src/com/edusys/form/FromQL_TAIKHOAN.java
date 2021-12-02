@@ -64,16 +64,15 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
         try {
             List<TaiKhoan> list = daotk.selectALL();
             for (TaiKhoan tk : list) {
-                Object[] row = {
-
-                    tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getVaiTro()==true?"Admin":"Nhân Viên"
-
-                    tk.getID_MaND(), tk.getTenTaiKhoan(), tk.getVaiTro()
-
+                Object[] row = new Object[] {
+                    tk.getID_MaND(),
+                    tk.getTenTaiKhoan(),
+                    tk.getVaiTro() == true ? "Admin" : "Nhân Viên"
                 };
                 model.addRow(row);
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -296,9 +295,7 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(btnupdate)
                         .addGap(40, 40, 40)
-                        .addComponent(btnxoa)))
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
+                        .addComponent(btnxoa)));
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
