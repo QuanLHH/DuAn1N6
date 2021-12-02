@@ -1625,6 +1625,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         if (dem == 0) {
             checkBai();
             new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+            dispose();
         }
 
 
