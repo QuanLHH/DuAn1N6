@@ -5,7 +5,10 @@
  */
 package com.edusys.form;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import utils.MsgBox;
 
 /**
@@ -78,10 +81,20 @@ public class FormChinh extends javax.swing.JFrame {
         cbt.setVisible(true);
         
     }
-    void QLBT(){
-        new JForm_QLBaiThi(this, true).setVisible(true);
+
+    void FQuanLyDeThi(){
+        FromQL_DeThi f = new FromQL_DeThi();
+        f.setVisible(true);
+        dispose();
     }
-    
+    void setExit() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
+        });
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -327,7 +340,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void mniQLBThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mniQLBThiActionPerformed
         // TODO add your handling code here:
-        QLBT();
+        FQuanLyDeThi();
     }//GEN-LAST:event_mniQLBThiActionPerformed
 
     private void btnPhanHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhanHoiActionPerformed
