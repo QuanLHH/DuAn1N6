@@ -1,38 +1,28 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.edusys.form;
 
-import PakagesClass.TaiKhoan;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JMenuItem;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
-import utils.Auth2;
 import utils.MsgBox;
 
-
+/**
+ *
+ * @author taola
+ */
 public class FormChinh extends javax.swing.JFrame {
-    Auth2 auth = new Auth2();
+
+    /**
+     * Creates new form FormChinh
+     */
     public FormChinh() {
         initComponents();
-        role_Admin(mnuQuanLy);
         setInit();
-        
-    }
-    void role_Admin(JMenuItem j){
-        TaiKhoan tk = this.auth.use;
-        if(tk.getVaiTro()==false){
-            j.setEnabled(false);
-        }else if(tk.getVaiTro()==true){
-            j.setEnabled(true);
-        }
-    }
-
-    public void setInit() {
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setTitle("Ôn thi đại học môn toán");
         ImageIcon icon = new ImageIcon("Hinh/Exit.png");
         this.btnDangXuat.setIcon(icon);
         ImageIcon icon1 = new ImageIcon("Hinh/Stop.png");
@@ -49,55 +39,54 @@ public class FormChinh extends javax.swing.JFrame {
         this.lblAnh.setIcon(icon6);
         ImageIcon icon7 = new ImageIcon("Hinh/Best.png");
         this.btnXemTop.setIcon(icon7);
+        
     }
 
-    void openLogin() {
+    public void setInit() {
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Ôn thi đại học môn toán");
+
+    }
+    void openLogin(){
         FormLogin_Start login = new FormLogin_Start();
         login.setVisible(true);
-
+        
     }
-
-    void openDMK() {
-        new JFormDMK(this, true).setVisible(true);
+    void openDMK(){ 
+        new JFormDMK(this,true).setVisible(true);
     }
-
-    void dangxuat() {
-
+    void dangxuat(){
+        
     }
-
-    void ketThuc() {
-        if (MsgBox.confirm(this, "Bạn muốn kết thúc?"));
+    void ketThuc(){
+        if(MsgBox.confirm(this, "Bạn muốn kết thúc?"));
         System.exit(0);
     }
-
-    void QLCH() {
+    void QLCH(){
         new JForm_QLCauHoi(this, true).setVisible(true);
     }
-
-    void QLTK() {
-        FromQL_TAIKHOAN tk = new FromQL_TAIKHOAN();
+    void QLTK(){
+        FromQL_TAIKHOAN tk=new FromQL_TAIKHOAN();
         tk.setVisible(true);
-
+      
     }
-
-    void LamBaiTap() {
+    void LamBaiTap(){
         formlambaitap lbt = new formlambaitap();
         lbt.setVisible(true);
-
+        
     }
-
-    void ChonBaiThi() {
+    void ChonBaiThi(){
         Form_ChonBaiThi cbt = new Form_ChonBaiThi();
         cbt.setVisible(true);
-
+        
     }
 
-    void FQuanLyDeThi() {
+    void FQuanLyDeThi(){
         FromQL_DeThi f = new FromQL_DeThi();
         f.setVisible(true);
         dispose();
     }
-
     void setExit() {
         addWindowListener(new WindowAdapter() {
             @Override
@@ -106,7 +95,6 @@ public class FormChinh extends javax.swing.JFrame {
             }
         });
     }
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

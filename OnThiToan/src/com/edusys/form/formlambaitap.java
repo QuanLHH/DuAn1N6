@@ -8,8 +8,6 @@ package com.edusys.form;
 import PakagesClass.CauHoi;
 import com.edusys.dao.CauHoiDAO;
 import com.edusys.utils.XImage;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -44,14 +42,7 @@ public class formlambaitap extends javax.swing.JFrame {
          table.setRowSelectionInterval(0,0);
         edit();  
     }
-    void setExit(){
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e){
-                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            }
-        });
-    }
+
     public void cbbtenbai() {
         ArrayList<CauHoi> list = CauHoiDao.selecttenbai();
         cbbtenbai.removeAllItems();
