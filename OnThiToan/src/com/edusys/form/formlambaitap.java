@@ -30,7 +30,7 @@ public class formlambaitap extends javax.swing.JFrame {
     public formlambaitap() {
         initComponents();
         innit();
-        
+        setExit();
 
     }
 
