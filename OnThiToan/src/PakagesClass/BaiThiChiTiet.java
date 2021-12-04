@@ -1,20 +1,42 @@
 
 package PakagesClass;
 
-public class BaiThiChiTiet {
-    private int ID_MaND,ID_BaiThi,SoCauDung,SoCauSai;
-    private float Diem;
+import java.util.Date;
 
+public class BaiThiChiTiet {
+    private int ID_BaiThiCT,ID_MaND,ID_BaiThi,SoCauDung,SoCauSai;
+    private float Diem;
+    private Date ngayThi;
     public BaiThiChiTiet() {
     }
 
-    public BaiThiChiTiet(int ID_MaND, int ID_BaiThi, int SoCauDung, int SoCauSai, float Diem) {
+    public BaiThiChiTiet(int ID_BaiThiCT, int ID_MaND, int ID_BaiThi, int SoCauDung, int SoCauSai, float Diem, Date ngayThi) {
+        this.ID_BaiThiCT = ID_BaiThiCT;
         this.ID_MaND = ID_MaND;
         this.ID_BaiThi = ID_BaiThi;
         this.SoCauDung = SoCauDung;
         this.SoCauSai = SoCauSai;
         this.Diem = Diem;
+        this.ngayThi = ngayThi;
     }
+
+    public int getID_BaiThiCT() {
+        return ID_BaiThiCT;
+    }
+
+    public void setID_BaiThiCT(int ID_BaiThiCT) {
+        this.ID_BaiThiCT = ID_BaiThiCT;
+    }
+
+    public Date getNgayThi() {
+        return ngayThi;
+    }
+
+    public void setNgayThi(Date ngayThi) {
+        this.ngayThi = ngayThi;
+    }
+
+    
 
     public int getID_MaND() {
         return ID_MaND;
