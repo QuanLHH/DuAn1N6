@@ -5,9 +5,9 @@
  */
 package com.edusys.dao;
 
-
 import PakagesClass.BaiThiChiTiet;
 import PakagesClass.DeThi;
+import PakagesClass.ThongTinBaiThi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
 
     String INSERT = "INSERT INTO ChiTiet_BaiThi(ID_MaND,ID_BaiThi,SoCauDung,SoCauSai,Diem)VALUES(?,?,?,?,?)";
-    String DELETE="DELETE FROM ChiTiet_BaiThi WHERE ID_BaiThi=?";
+    String DELETE = "DELETE FROM ChiTiet_BaiThi WHERE ID_BaiThi=?";
     String SelectByID = "SELECT TOP 1 ID_BaiThi FROM Bai_Thi WHERE ID_CauHoi=? AND MaDe=? AND DoKho=?";
 
     public int selectByIds(Integer id, String made, int dokho) {
@@ -162,8 +162,47 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
     }
 
     public void inserts(BaiThiChiTiet bt) {
-        Helper.JdbcHelper.update(INSERT, bt.getID_MaND(), bt.getID_BaiThi(), bt.getSoCauDung()
-                , bt.getSoCauSai(), bt.getDiem());
+        Helper.JdbcHelper.update(INSERT, bt.getID_MaND(), bt.getID_BaiThi(), bt.getSoCauDung(),
+                bt.getSoCauSai(), bt.getDiem());
     }
 
+    // select baithichitiet
+    public ArrayList<BaiThiChiTiet> sqlBaiThiChiTiet(String sql, Object... args) {
+        ArrayList<BaiThiChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(sql, args);
+            while (rs.next()) {
+                BaiThiChiTiet dt = new BaiThiChiTiet();
+                dt.setID_BaiThiCT(rs.getInt(1));
+                dt.setID_MaND(rs.getInt(2));
+                dt.setID_BaiThi(rs.getInt(3));
+                dt.setSoCauDung(rs.getInt(4));
+                dt.setSoCauSai(rs.getInt(5));
+                dt.setDiem(rs.getFloat(6));
+                dt.setNgayThi(rs.getDate(7));
+                list.add(dt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return list;
+    }
+
+    public BaiThiChiTiet selectNewID_BaiThiCT() {
+        String sql = "SELECT TOP 1 * FROM ChiTiet_BaiThi ORDER BY ID_BaiThiCT DESC";
+        ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(sql);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
+    
+    public void insertTTBaiThi(ThongTinBaiThi bt) {
+        String InsertTTBaiThi = "INSERT INTO ThongTin_BaiThi(ID_CauHoi,ID_BaiThiCT,MaDe,DoKho,DapAnChon) "
+                + "VALUES(?,?,?,?,?)";
+        Helper.JdbcHelper.update(InsertTTBaiThi, bt.getID_CauHoi(), bt.getID_BaiThiCT(),
+                bt.getMaDe(), bt.getDoKho(),bt.getDapAnChon());
+    }
 }

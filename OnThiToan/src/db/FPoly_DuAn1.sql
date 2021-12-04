@@ -203,6 +203,15 @@ VALUES
 	(113,1,7),
 	(113,1,8),
 	(113,1,9),
+	(113,2,1),
+	(113,2,2),
+	(113,2,3),
+	(113,2,4),
+	(113,2,5),
+	(113,2,6),
+	(113,2,7),
+	(113,2,8),
+	(113,2,9),
 	(113,1,69),
 	(113,1,70),
 	(113,1,71),
@@ -227,7 +236,10 @@ VALUES
 insert into ThongTin_BaiThi(ID_CauHoi,ID_BaiThiCT,MaDe,DoKho,DapAnChon)
 values (69,1,113,1,'A'),
 	(70,1,113,1,'B'),
-	(71,1,113,1,'D')
+	(71,1,113,1,'D'),
+	(69,2,113,1,'A'),
+	(70,2,113,1,'B'),
+	(71,2,113,1,'D')
 go
 -- Phản hồi --
 insert into Phan_Hoi(ID_MaND,DanhGia,NhanXet)
@@ -239,7 +251,12 @@ SELECT*FROM Tai_Lieu
 SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT*FROM ChiTiet_BaiThi
+SELECT*FROM ThongTin_BaiThi
 
+SELECT TOP 1 * FROM ChiTiet_BaiThi ORDER BY ID_BaiThiCT DESC
+SELECT ID_TTBaiThi,ID_CauHoi,ThongTin_BaiThi. ID_BaiThiCT,MaDe,DoKho,DapAnChon,ID_MaND FROM ThongTin_BaiThi join ChiTiet_BaiThi 
+on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT
+rollback
 -- Truy vấn theo thông tin
 SELECT ID_CauHoi,dokho FROM Cau_Hoi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
