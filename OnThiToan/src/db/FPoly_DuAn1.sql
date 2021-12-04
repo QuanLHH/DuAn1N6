@@ -2,6 +2,7 @@ CREATE DATABASE FPoly_DuAn1
 GO
 USE FPoly_DuAn1
 GO
+
 create table Nguoi_Dung(
 	ID_MaND int not null identity(1,1) primary key,
 	HoTen nvarchar(40) not null,
@@ -53,6 +54,7 @@ create table Bai_Thi(
 
 )
 go
+
 create table ChiTiet_BaiThi(
 	ID_BaiThiCT int not null identity(1,1) primary key,
 	ID_MaND int not null,
@@ -65,14 +67,29 @@ create table ChiTiet_BaiThi(
 	foreign key (ID_MaND) references Nguoi_Dung (ID_MaND)
 
 )
+go
+
+create table ThongTin_BaiThi(
+	ID_TTBaiThi int not null identity(1,1) primary key,
+	ID_CauHoi int not null,
+	ID_BaiThiCT int not null,
+	MaDe int not null,
+	DoKho int not null,
+	DapAnChon varchar(2) not null,
+	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi),
+	foreign key (ID_BaiThiCT) references ChiTiet_BaiThi (ID_BaiThiCT)
+)
+go
+
 create table Bai_Tap(
 	ID_BaiTap int not null identity(1,1) primary key,
-	DoKho int ,
+	DoKho int,
 	ID_CauHoi int not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi)
 
 )
 go
+
 create table ChiTiet_BaiTap(
 	ID_MaND int not null identity(1,1) primary key,
 	ID_BaiTap int not null,
@@ -83,6 +100,17 @@ create table ChiTiet_BaiTap(
 	foreign key (ID_MaND) references Nguoi_Dung (ID_MaND)
 
 )
+create table Phan_Hoi(
+	ID_PhanHoi int not null identity(1,1) primary key,
+	ID_MaND int not null,
+	DanhGia varchar(10) not null,
+	NhanXet nvarchar(200) not null,
+	foreign key (ID_MaND) references Nguoi_Dung (ID_MaND)
+)
+
+go
+----------------------- Thêm dữ liệu bảng---------------------
+-- Người dùng --
 INSERT INTO Nguoi_Dung (HoTen,GioiTinh,SDT,NgaySinh,Email)
 VALUES (N'Hạ Việt Anh','Nam','0984297473','2002-09-04','anhhvph14045@gmail.com'),
 		(N'Lê Hồng Quân','Nam','0987654321','2000-01-01','hongquan@gmail.com'),
@@ -90,6 +118,7 @@ VALUES (N'Hạ Việt Anh','Nam','0984297473','2002-09-04','anhhvph14045@gmail.c
 		(N'Nguyễn Huy Hoàng',N'Nữ','0331246589','2002-07-11','hoang2404@gmail.com'),
 		(N'Đinh Công Trường',N'Nữ','0983453489','2002-11-21','truongdc@gmail.com')
 go
+-- Tài khoản --
 INSERT INTO Tai_Khoan(TenTaiKhoan,MatKhau,MKCap2,VaiTro,ID_MaND)
 VALUES ('vietanhvs','492002','2002',1,1),
 	('hongquan','12345','2000',1,2),
@@ -97,6 +126,7 @@ VALUES ('vietanhvs','492002','2002',1,1),
 	('huyhoang','12345','2002',1,4),
 	('congtruong','12345','2002',0,5)
 go
+-- Tài liệu --
 INSERT INTO Tai_Lieu(TenTaiLieu,LyThuyet)
 VALUES (N'Đạo Hàm',
 	'https://loigiaihay.com/ly-thuyet-dinh-nghia-va-y-nghia-cua-dao-ham-c46a5878.html'),
@@ -153,6 +183,7 @@ VALUES (0,N'Câu 1.Tính đạo hàm của các hàm số sau: Tại các điể
 	(0,N'Câu 3.Tại các điểm được chỉ ra: 1.Cho f(x)= x^3+x^2-10. Tính f(4)?',3,N'Đạo Hàm',
 	'f(4)=17','f(4)=20','f(4)=5','f(4)=10','D')
 go
+-- Bài thi --
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
 VALUES
 	(100,1,1),
@@ -160,12 +191,18 @@ VALUES
 	(300,3,3)
 
 go
-SELECT COUNT(DOKHO),DoKho FROM Cau_Hoi GROUP BY DoKho
+
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
 VALUES
-	(100,1,7),
-	(200,2,8),
-	(300,3,9),
+	(113,1,1),
+	(113,1,2),
+	(113,1,3),
+	(113,1,4),
+	(113,1,5),
+	(113,1,6),
+	(113,1,7),
+	(113,1,8),
+	(113,1,9),
 	(113,1,69),
 	(113,1,70),
 	(113,1,71),
@@ -186,13 +223,27 @@ VALUES
 	(113,2,78),
 	(113,2,79),
 	(113,2,80)
-
+-- Thông tin bài thi --
+insert into ThongTin_BaiThi(ID_CauHoi,ID_BaiThiCT,MaDe,DoKho,DapAnChon)
+values (69,1,113,1,'A'),
+	(70,1,113,1,'B'),
+	(71,1,113,1,'D')
+go
+-- Phản hồi --
+insert into Phan_Hoi(ID_MaND,DanhGia,NhanXet)
+values(1,'5 sao','Ứng dụng quá tuyệt vời!')
+-- gọi table
 SELECT*FROM Nguoi_Dung
 SELECT*FROM Tai_Khoan
 SELECT*FROM Tai_Lieu
+SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT*FROM ChiTiet_BaiThi
+
+-- Truy vấn theo thông tin
+SELECT ID_CauHoi,dokho FROM Cau_Hoi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
+SELECT COUNT(DOKHO),DoKho FROM Cau_Hoi GROUP BY DoKho
 
 SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi 
 join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=113 AND Bai_Thi.DoKho=1

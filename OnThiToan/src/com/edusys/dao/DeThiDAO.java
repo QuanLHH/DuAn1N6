@@ -5,6 +5,7 @@
  */
 package com.edusys.dao;
 
+
 import PakagesClass.BaiThiChiTiet;
 import PakagesClass.DeThi;
 import java.sql.ResultSet;
@@ -164,4 +165,5 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
         Helper.JdbcHelper.update(INSERT, bt.getID_MaND(), bt.getID_BaiThi(), bt.getSoCauDung()
                 , bt.getSoCauSai(), bt.getDiem());
     }
+
 }

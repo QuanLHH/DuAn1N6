@@ -243,4 +243,32 @@ public class CauHoiDAO extends EduSysDAO<CauHoi, Integer> {
         }
         return list;
     }
+    
+
+    public ArrayList<CauHoi> dokho(int dokho){
+        ArrayList<CauHoi> listch=new ArrayList<>();
+        try {
+            String sql="select *from Cau_Hoi where DoKho =?";
+            ResultSet rs=Helper.JdbcHelper.query(sql,dokho);
+            while (rs.next()) {                
+                 CauHoi ch = new CauHoi();
+                ch.setID_CauHoi(rs.getInt(1));
+                ch.setRole_ID(rs.getBoolean(2));
+                ch.setCauHoi(rs.getString(3));
+                ch.setDoKho(rs.getInt(4));
+                ch.setTenBai(rs.getString(5));
+                ch.setDapAn1(rs.getString(6));
+                ch.setDapAn2(rs.getString(7));
+                ch.setDapAn3(rs.getString(8));
+                ch.setDapAn4(rs.getString(9));
+                ch.setDapAnDung(rs.getString(10));
+                ch.setNgayTao(rs.getDate(11));
+                listch.add(ch);
+                
+            }
+            rs.getStatement().close();
+        } catch (Exception e) {
+        }
+        return listch;
+    }
 }
