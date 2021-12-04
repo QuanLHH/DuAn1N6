@@ -91,6 +91,11 @@ public class FormChinh extends javax.swing.JFrame {
         cbt.setVisible(true);
 
     }
+    void XemTop() {
+        Form_XemTop xt = new Form_XemTop();
+        xt.setVisible(true);
+
+    }
 
     void FQuanLyDeThi() {
         FromQL_DeThi f = new FromQL_DeThi();
@@ -361,6 +366,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnXemTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTopActionPerformed
         // TODO add your handling code here:
+        XemTop();
     }//GEN-LAST:event_btnXemTopActionPerformed
 
     private void btnTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiLieuActionPerformed
