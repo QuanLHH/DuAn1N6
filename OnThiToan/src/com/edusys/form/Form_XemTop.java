@@ -40,7 +40,9 @@ public class Form_XemTop extends javax.swing.JFrame {
             Logger.getLogger(Form_XemTop.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public void loadTable(){
+    void quaylai(){
+        FormChinh fc = new FormChinh();
+        fc.setVisible(true);
         
     }
     /**
@@ -124,7 +126,7 @@ public class Form_XemTop extends javax.swing.JFrame {
 
     private void btnQuayLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuayLaiActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+       quaylai();
     }//GEN-LAST:event_btnQuayLaiActionPerformed
 
     /**
