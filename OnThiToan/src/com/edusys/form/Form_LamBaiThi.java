@@ -45,6 +45,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     public static int tongSoCau = 0;
     public static int soCauDung = 0;
     public static int soCauSai = 0;
+    public static int minutes = 0;
+    public static int seconds = 0;
     public static float diem = 0;
 
     public Form_LamBaiThi() {
@@ -243,7 +245,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }
 
     public void checkBai() {
-
+        minutes = 44 - Integer.valueOf(lb_Minutes.getText());
+        seconds = 60 - Integer.valueOf(lb_Seconds.getText());
         float tong = tongSoCau;
         for (int i = 0; i < listDT.size(); i++) {
             if (listDT.get(i).getDapAnDung().equalsIgnoreCase(tb_LamBaiThi.getValueAt(i, 1).toString())) {
@@ -316,21 +319,21 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             public void run() {
                 while (true) {
 
-                    int m = Integer.valueOf((lb_Minutes.getText()));
-                    int s = Integer.valueOf((lb_Seconds.getText()));
-                    s--;
+                    minutes= Integer.valueOf((lb_Minutes.getText()));
+                    seconds = Integer.valueOf((lb_Seconds.getText()));
+                    seconds--;
 
-                    if (s <= 0 && m > 0) {
-                        s = 59;
-                        m--;
+                    if (seconds <= 0 && minutes > 0) {
+                        seconds = 59;
+                        minutes--;
                     }
-                    if (m == 0 && s <= 0) {
+                    if (minutes == 0 && seconds <= 0) {
                         JOptionPane.showMessageDialog(rootPane, "Hết giờ!");
                         SP_BaiThi.setVisible(false);
                         stop();
                     }
-                    lb_Minutes.setText(m + "");
-                    lb_Seconds.setText(s + "");
+                    lb_Minutes.setText(minutes + "");
+                    lb_Seconds.setText(seconds + "");
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
