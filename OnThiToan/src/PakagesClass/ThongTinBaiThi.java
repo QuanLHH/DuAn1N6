@@ -10,19 +10,29 @@ public class ThongTinBaiThi {
     private String MaDe;
     private int DoKho;
     private String DapAnChon;
-
+    private int ID_MaND;
     public ThongTinBaiThi() {
     }
 
-    public ThongTinBaiThi(int ID_TTBaiThi, int ID_CauHoi, int ID_BaiThiCT, String MaDe, int DoKho, String DapAnChon) {
+    public ThongTinBaiThi(int ID_TTBaiThi, int ID_CauHoi, int ID_BaiThiCT, String MaDe, int DoKho, String DapAnChon, int ID_MaND) {
         this.ID_TTBaiThi = ID_TTBaiThi;
         this.ID_CauHoi = ID_CauHoi;
         this.ID_BaiThiCT = ID_BaiThiCT;
         this.MaDe = MaDe;
         this.DoKho = DoKho;
         this.DapAnChon = DapAnChon;
+        this.ID_MaND = ID_MaND;
     }
 
+    public int getID_MaND() {
+        return ID_MaND;
+    }
+
+    public void setID_MaND(int ID_MaND) {
+        this.ID_MaND = ID_MaND;
+    }
+
+    
     public int getID_TTBaiThi() {
         return ID_TTBaiThi;
     }
