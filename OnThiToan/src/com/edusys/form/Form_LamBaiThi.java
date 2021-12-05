@@ -1664,7 +1664,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_restartActionPerformed
 
     private void bt_NopBaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBaiActionPerformed
-        player.stop();
+        if(bt_Start.isEnabled()==false&&bt_pause.isEnabled()==true&&bt_resume.isEnabled()==false){
+            player.stop();
+        }
         int dem = JOptionPane.showConfirmDialog(rootPane, "Nộp bài thi?", "Nộp bài", JOptionPane.YES_NO_OPTION);
         if (dem == 0) {
             checkBai();
