@@ -254,9 +254,14 @@ SELECT*FROM ChiTiet_BaiThi
 SELECT*FROM ThongTin_BaiThi
 
 SELECT TOP 1 * FROM ChiTiet_BaiThi ORDER BY ID_BaiThiCT DESC
-SELECT ID_TTBaiThi,ID_CauHoi,ThongTin_BaiThi. ID_BaiThiCT,MaDe,DoKho,DapAnChon,ID_MaND FROM ThongTin_BaiThi join ChiTiet_BaiThi 
-on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT
-rollback
+
+SELECT * FROM ThongTin_BaiThi 
+join ChiTiet_BaiThi 
+	on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT 
+join Cau_Hoi
+	on ThongTin_BaiThi.ID_CauHoi = Cau_Hoi.ID_CauHoi
+WHERE MaDe=? AND ThongTin_BaiThi.DoKho=? AND ID_MaND=?
+
 -- Truy vấn theo thông tin
 SELECT ID_CauHoi,dokho FROM Cau_Hoi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai

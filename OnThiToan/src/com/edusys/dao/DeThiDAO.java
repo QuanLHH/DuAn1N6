@@ -205,4 +205,9 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
         Helper.JdbcHelper.update(InsertTTBaiThi, bt.getID_CauHoi(), bt.getID_BaiThiCT(),
                 bt.getMaDe(), bt.getDoKho(),bt.getDapAnChon());
     }
+    public ArrayList<BaiThiChiTiet> selectALLBaiThiCT() {
+        String sql = "SELECT*FROM ChiTiet_BaiThi";
+        ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(sql);
+        return list;
+    }
 }

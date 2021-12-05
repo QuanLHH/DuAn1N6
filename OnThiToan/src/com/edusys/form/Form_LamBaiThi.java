@@ -1669,7 +1669,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
             checkBai();
             new JFrom_BaiThiChiTiet(this, true).setVisible(true);
-            player.stop();
+            
             insertThongTinBaiThi();
             dispose();
         }
