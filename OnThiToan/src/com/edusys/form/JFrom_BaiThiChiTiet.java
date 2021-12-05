@@ -73,11 +73,14 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         BaiThiChiTiet bt = new BaiThiChiTiet();
         bt.setID_BaiThi(formLBT.id_baiThi);
         bt.setID_MaND(user.getID_MaND());
+        bt.setSoCauDung(cauDung);
+        bt.setSoCauSai(cauSai);
         bt.setDiem(diem);
+        deThiDAO.inserts(bt);
         formLBT.soCauSai = 0;
         formLBT.soCauDung = 0;
         formLBT.diem = 0;
-        deThiDAO.inserts(bt);
+        
 
     }
     
