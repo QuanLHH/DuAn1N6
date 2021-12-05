@@ -319,7 +319,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             public void run() {
                 while (true) {
 
-                    minutes= Integer.valueOf((lb_Minutes.getText()));
+                    minutes = Integer.valueOf((lb_Minutes.getText()));
                     seconds = Integer.valueOf((lb_Seconds.getText()));
                     seconds--;
 
@@ -1566,6 +1566,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         int i = JOptionPane.showConfirmDialog(rootPane, "Ấn yes để tiếp tục", "Tiếp tục", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             time.resume();
+        } else if (i == 1) {
+            int x = JOptionPane.showConfirmDialog(rootPane, "Bạn muốn dừng làm bài?", "Xác nhận!", JOptionPane.YES_NO_OPTION);
+            if (x == 0) {
+                dispose();
+            } else if (x == 1) {
+                time.resume();
+            }
         }
     }//GEN-LAST:event_bt_StopActionPerformed
 
@@ -1659,8 +1666,10 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private void bt_NopBaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBaiActionPerformed
         int dem = JOptionPane.showConfirmDialog(rootPane, "Nộp bài thi?", "Nộp bài", JOptionPane.YES_NO_OPTION);
         if (dem == 0) {
+
             checkBai();
             new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+            player.stop();
             insertThongTinBaiThi();
             dispose();
         }
