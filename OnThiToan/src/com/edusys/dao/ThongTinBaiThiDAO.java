@@ -92,8 +92,17 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
                 }else if(rs.getString("DapAnDung").equalsIgnoreCase("D")){
                     dapAnDung=rs.getString("DapAn4");
                 }
-                Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"),
-                    rs.getString("DapAnChon"), dapAnDung};
+                String dapAnChon =null;
+                if(rs.getString("DapAnChon").equalsIgnoreCase("A")){
+                    dapAnChon=rs.getString("DapAn1");
+                }else if(rs.getString("DapAnChon").equalsIgnoreCase("B")){
+                    dapAnChon=rs.getString("DapAn2");
+                }else if(rs.getString("DapAnChon").equalsIgnoreCase("C")){
+                    dapAnChon=rs.getString("DapAn3");
+                }else if(rs.getString("DapAnChon").equalsIgnoreCase("D")){
+                    dapAnChon=rs.getString("DapAn4");
+                }
+                Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"),dapAnChon, dapAnDung};
                 list.add(dt);
             }
             rs.getStatement().getConnection().close();

@@ -76,7 +76,6 @@ create table ThongTin_BaiThi(
 	MaDe int not null,
 	DoKho int not null,
 	DapAnChon varchar(2) not null,
-	DapAn nvarchar(250) not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi),
 	foreign key (ID_BaiThiCT) references ChiTiet_BaiThi (ID_BaiThiCT)
 )
