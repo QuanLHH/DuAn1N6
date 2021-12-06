@@ -240,7 +240,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         for (int i = 0; i < listDT.size(); i++) {
             tt.setID_CauHoi(listDT.get(i).getID_CauHoi());
             tt.setDapAnChon(listModel.get(i));
+            
             deThiDao.insertTTBaiThi(tt);
+            
         }
     }
 
@@ -1393,11 +1395,11 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Đáp án"
+                "STT", "Đáp án", "Câu trả lời"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1414,7 +1416,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SP_BaiThi, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
