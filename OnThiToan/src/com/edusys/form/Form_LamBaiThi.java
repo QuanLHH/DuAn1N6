@@ -227,16 +227,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         tt.setID_BaiThiCT(ID_BaiThiCT);
         tt.setMaDe(getMaDe);
         tt.setDoKho(getDoKho);
-        tt.setDapAnChon(getMaDe);
         return tt;
     }
 
     public void insertThongTinBaiThi() {
         ThongTinBaiThi tt = getFormTTBaiThi();
-        
         for (int i = 0; i < listDT.size(); i++) {
             tt.setID_CauHoi(listDT.get(i).getID_CauHoi());
-            tt.setDapAnChon(model.getValueAt(i, 2).toString());
+            tt.setDapAnChon(model.getValueAt(i, 1).toString());
             deThiDao.insertTTBaiThi(tt);
         }
     }
@@ -358,34 +356,29 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         player.start();
     }
 
-    public void fillDapAnCau1(String chuoi,String dapan) {
+    public void fillDapAnCau1(String chuoi) {
         int cau1 = Integer.valueOf(lb_Cau1.getText());
         model.setValueAt(chuoi, cau1 - 1, 1);
-        model.setValueAt(dapan, cau1 - 1, 2);
     }
 
-    public void fillDapAnCau2(String chuoi,String dapan) {
+    public void fillDapAnCau2(String chuoi) {
         int cau2 = Integer.valueOf(lb_Cau2.getText());
         model.setValueAt(chuoi, cau2 - 1, 1);
-        model.setValueAt(dapan, cau2 - 1, 2);
     }
 
-    public void fillDapAnCau3(String chuoi,String dapan) {
+    public void fillDapAnCau3(String chuoi) {
         int cau3 = Integer.valueOf(lb_Cau3.getText());
         model.setValueAt(chuoi, cau3 - 1, 1);
-        model.setValueAt(dapan, cau3 - 1, 2);
     }
 
-    public void fillDapAnCau4(String chuoi,String dapan) {
+    public void fillDapAnCau4(String chuoi) {
         int cau4 = Integer.valueOf(lb_Cau4.getText());
         model.setValueAt(chuoi, cau4 - 1, 1);
-        model.setValueAt(dapan, cau4 - 1, 2);
     }
 
-    public void fillDapAnCau5(String chuoi,String dapan) {
+    public void fillDapAnCau5(String chuoi) {
         int cau5 = Integer.valueOf(lb_Cau5.getText());
         model.setValueAt(chuoi, cau5 - 1, 1);
-        model.setValueAt(dapan, cau5 - 1, 2);
     }
 
     void setImage() {
@@ -1395,11 +1388,11 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
             },
             new String [] {
-                "STT", "Đáp án", "Câu trả lời"
+                "STT", "Đáp án"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -1416,7 +1409,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(SP_BaiThi, javax.swing.GroupLayout.PREFERRED_SIZE, 737, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
@@ -1579,83 +1572,83 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_StopActionPerformed
 
     private void cb_C5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_C5ActionPerformed
-        fillDapAnCau5("C",tf_C5.getText());
+        fillDapAnCau5("C");
     }//GEN-LAST:event_cb_C5ActionPerformed
 
     private void cb_A1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_A1ActionPerformed
-        fillDapAnCau1("A",tf_A1.getText());
+        fillDapAnCau1("A");
     }//GEN-LAST:event_cb_A1ActionPerformed
 
     private void cb_B1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_B1ActionPerformed
-        fillDapAnCau1("B",tf_B1.getText());
+        fillDapAnCau1("B");
     }//GEN-LAST:event_cb_B1ActionPerformed
 
     private void cb_C1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_C1ActionPerformed
-        fillDapAnCau1("C",tf_C1.getText());
+        fillDapAnCau1("C");
     }//GEN-LAST:event_cb_C1ActionPerformed
 
     private void cb_D1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_D1ActionPerformed
-        fillDapAnCau1("D",tf_D1.getText());
+        fillDapAnCau1("D");
     }//GEN-LAST:event_cb_D1ActionPerformed
 
     private void cb_A2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_A2ActionPerformed
-        fillDapAnCau2("A",tf_A2.getText());
+        fillDapAnCau2("A");
     }//GEN-LAST:event_cb_A2ActionPerformed
 
     private void cb_B2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_B2ActionPerformed
-        fillDapAnCau2("B",tf_B2.getText());
+        fillDapAnCau2("B");
     }//GEN-LAST:event_cb_B2ActionPerformed
 
     private void cb_C2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_C2ActionPerformed
-        fillDapAnCau2("C",tf_C2.getText());
+        fillDapAnCau2("C");
     }//GEN-LAST:event_cb_C2ActionPerformed
 
     private void cb_D2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_D2ActionPerformed
-        fillDapAnCau2("D",tf_D2.getText());
+        fillDapAnCau2("D");
     }//GEN-LAST:event_cb_D2ActionPerformed
 
     private void cb_A3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_A3ActionPerformed
-        fillDapAnCau3("A",tf_A3.getText());
+        fillDapAnCau3("A");
     }//GEN-LAST:event_cb_A3ActionPerformed
 
     private void cb_B3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_B3ActionPerformed
-        fillDapAnCau3("B",tf_B3.getText());
+        fillDapAnCau3("B");
     }//GEN-LAST:event_cb_B3ActionPerformed
 
     private void cb_C3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_C3ActionPerformed
-        fillDapAnCau3("C",tf_C3.getText());
+        fillDapAnCau3("C");
     }//GEN-LAST:event_cb_C3ActionPerformed
 
     private void cb_D3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_D3ActionPerformed
-        fillDapAnCau3("D",tf_D3.getText());
+        fillDapAnCau3("D");
     }//GEN-LAST:event_cb_D3ActionPerformed
 
     private void cb_A4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_A4ActionPerformed
-        fillDapAnCau4("A",tf_A4.getText());
+        fillDapAnCau4("A");
     }//GEN-LAST:event_cb_A4ActionPerformed
 
     private void cb_B4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_B4ActionPerformed
-        fillDapAnCau4("B",tf_B4.getText());
+        fillDapAnCau4("B");
     }//GEN-LAST:event_cb_B4ActionPerformed
 
     private void cb_C4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_C4ActionPerformed
-        fillDapAnCau4("C",tf_C4.getText());
+        fillDapAnCau4("C");
     }//GEN-LAST:event_cb_C4ActionPerformed
 
     private void cb_D4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_D4ActionPerformed
-        fillDapAnCau4("D",tf_D4.getText());
+        fillDapAnCau4("D");
     }//GEN-LAST:event_cb_D4ActionPerformed
 
     private void cb_A5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_A5ActionPerformed
-        fillDapAnCau5("A",tf_A5.getText());
+        fillDapAnCau5("A");
     }//GEN-LAST:event_cb_A5ActionPerformed
 
     private void cb_B5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_B5ActionPerformed
-        fillDapAnCau5("B",tf_B5.getText());
+        fillDapAnCau5("B");
     }//GEN-LAST:event_cb_B5ActionPerformed
 
     private void cb_D5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_D5ActionPerformed
-        fillDapAnCau5("D",tf_D5.getText());
+        fillDapAnCau5("D");
     }//GEN-LAST:event_cb_D5ActionPerformed
 
     private void bt_restartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_restartActionPerformed
