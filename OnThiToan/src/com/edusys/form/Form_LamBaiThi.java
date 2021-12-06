@@ -34,7 +34,6 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     Form_ChonBaiThi formChonDT;
     com.edusys.dao.DeThiDAO deThiDao = new DeThiDAO();
     DefaultTableModel model;
-    ArrayList<String> listModel = new ArrayList<>();
     Thread time;
     Thread player;
     String getMaDe = null;
@@ -234,12 +233,11 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
     public void insertThongTinBaiThi() {
         ThongTinBaiThi tt = getFormTTBaiThi();
-        for (int i = 0; i < listDT.size(); i++) {
-            listModel.add(model.getValueAt(i, 1).toString());
-        }
+        
         for (int i = 0; i < listDT.size(); i++) {
             tt.setID_CauHoi(listDT.get(i).getID_CauHoi());
-            tt.setDapAnChon(listModel.get(i));
+            tt.setDapAnChon(model.getValueAt(i, 1).toString());
+            tt.setDapAn(model.getValueAt(i, 2).toString());
             
             deThiDao.insertTTBaiThi(tt);
             
