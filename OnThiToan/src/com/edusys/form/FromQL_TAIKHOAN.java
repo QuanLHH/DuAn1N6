@@ -37,7 +37,7 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
         txtma.setText(tk.getID_MaND() + "");
         txthoten.setText(tk.getTenTaiKhoan());
         txtmk.setText(tk.getMatKhau());
-        txtmk2.setText(tk.getMKCap2());
+        txtmk2.setText(tk.getMatKhau());
         if (tk.getVaiTro() == true) {
             rdadd.setSelected(true);
         } else {
