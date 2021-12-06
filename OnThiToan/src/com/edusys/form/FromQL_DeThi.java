@@ -10,10 +10,13 @@ import PakagesClass.CauHoi;
 import com.edusys.dao.BaiThiDAO;
 import com.edusys.dao.CauHoiDAO;
 import java.awt.Button;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -38,7 +41,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
         // add 5 element in ArrayList
         filltable(listCH);
         tongcau();
-
+        setExit();
     }
 
     public void random() {
@@ -105,7 +108,14 @@ public class FromQL_DeThi extends javax.swing.JFrame {
 
         return bt;
     }
-
+void setExit() {
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            }
+        });
+    }
     public void them() {
         try {
             if (txtmade.getText().equals("")) {
