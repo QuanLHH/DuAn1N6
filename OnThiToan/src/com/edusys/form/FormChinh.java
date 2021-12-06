@@ -106,11 +106,15 @@ public class FormChinh extends javax.swing.JFrame {
         xt.setVisible(true);
 
     }
+    void TaiLieu() {
+        FormTaiLieu tl = new FormTaiLieu();
+        tl.setVisible(true);
 
+    }
     void FQuanLyDeThi() {
         FromQL_DeThi f = new FromQL_DeThi();
         f.setVisible(true);
-        dispose();
+        
     }
 
     void setExit() {
@@ -393,6 +397,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiLieuActionPerformed
         // TODO add your handling code here:
+        TaiLieu();
     }//GEN-LAST:event_btnTaiLieuActionPerformed
 
     private void bt_LichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_LichSuActionPerformed
