@@ -76,10 +76,19 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
     }
 
     public void setCbbDoKho() {
+        ArrayList<BaiThi> list = baiThiDao.selectDoKhoByMaDe((String) cbb_MaDe.getSelectedItem());
         cbb_DoKho.removeAllItems();
-        cbb_DoKho.addItem("Dễ");
-        cbb_DoKho.addItem("Trung bình");
-        cbb_DoKho.addItem("Khó");
+        for (BaiThi x : list) {
+            String item = null;
+            if (x.getDoKho() == 1) {
+                item = "Dễ";
+            } else if (x.getDoKho() == 2) {
+                item = "Trung bình";
+            } else if (x.getDoKho() == 3) {
+                item = "Khó";
+            }
+            cbb_DoKho.addItem(item);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -184,7 +193,16 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         getMaDe = (String) cbb_MaDe.getSelectedItem();
-        getDoKho = cbb_DoKho.getSelectedIndex() + 1;
+        String item =(String) cbb_DoKho.getSelectedItem();
+        int dokho = 0;
+            if (item.equalsIgnoreCase("Dễ")) {
+                dokho = 1;
+            } else if (item.equalsIgnoreCase("Trung bình")) {
+                dokho = 2;
+            } else if (item.equalsIgnoreCase("Khó")) {
+                dokho = 3;
+            }
+        getDoKho = dokho;
         setTongCau();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 

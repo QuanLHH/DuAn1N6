@@ -82,8 +82,18 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
         try {
             ResultSet rs = Helper.JdbcHelper.query(SelectByTT,idBT, made,dokho,id);
             while (rs.next()) {
+                String dapAnDung =null;
+                if(rs.getString("DapAnDung").equalsIgnoreCase("A")){
+                    dapAnDung=rs.getString("DapAn1");
+                }else if(rs.getString("DapAnDung").equalsIgnoreCase("B")){
+                    dapAnDung=rs.getString("DapAn2");
+                }else if(rs.getString("DapAnDung").equalsIgnoreCase("C")){
+                    dapAnDung=rs.getString("DapAn3");
+                }else if(rs.getString("DapAnDung").equalsIgnoreCase("D")){
+                    dapAnDung=rs.getString("DapAn4");
+                }
                 Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"),
-                    rs.getString("DapAnChon"), rs.getString("DapAnDung")};
+                    rs.getString("DapAnChon"), dapAnDung};
                 list.add(dt);
             }
             rs.getStatement().getConnection().close();

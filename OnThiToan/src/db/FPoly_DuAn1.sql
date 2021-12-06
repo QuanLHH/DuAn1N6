@@ -76,6 +76,7 @@ create table ThongTin_BaiThi(
 	MaDe int not null,
 	DoKho int not null,
 	DapAnChon varchar(2) not null,
+	DapAn nvarchar(250) not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi),
 	foreign key (ID_BaiThiCT) references ChiTiet_BaiThi (ID_BaiThiCT)
 )
@@ -263,14 +264,8 @@ join ChiTiet_BaiThi
 join Cau_Hoi
 	on ThongTin_BaiThi.ID_CauHoi = Cau_Hoi.ID_CauHoi
 JOIN Bai_Thi ON ChiTiet_BaiThi.ID_BaiThi = Bai_Thi.ID_BaiThi
-WHERE ChiTiet_BaiThi. ID_BaiThiCT=50 AND Bai_Thi. MaDe=113 AND Bai_Thi.DoKho=1 AND ID_MaND=1
+WHERE ChiTiet_BaiThi. ID_BaiThiCT=67 AND Bai_Thi. MaDe=121 AND Bai_Thi.DoKho=1 AND ID_MaND=1
 
-SELECT * FROM ThongTin_BaiThi 
-join ChiTiet_BaiThi 
-	on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT 
-join Cau_Hoi
-	on ThongTin_BaiThi.ID_CauHoi = Cau_Hoi.ID_CauHoi
-WHERE ChiTiet_BaiThi. ID_BaiThiCT=50 AND MaDe=113 AND ThongTin_BaiThi. DoKho=1 AND ID_MaND=1
 -- Truy vấn theo thông tin
 SELECT ID_CauHoi,dokho FROM Cau_Hoi
 SELECT TenBai FROM Cau_Hoi GROUP BY TenBai
