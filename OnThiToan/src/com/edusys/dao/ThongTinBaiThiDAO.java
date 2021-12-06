@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
 
     String SelectALL = "SELECT ID_TTBaiThi,ID_CauHoi,ThongTin_BaiThi. ID_BaiThiCT,MaDe,DoKho,"
-            + "DapAnChon,ID_MaND FROM ThongTin_BaiThi join ChiTiet_BaiThi \n"
+            + "DapAnChon,DapAn,ID_MaND FROM ThongTin_BaiThi join ChiTiet_BaiThi \n"
             + "on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT WHERE ID_MaND=?";
     String SelectByTT = "SELECT * FROM ThongTin_BaiThi \n"
             + "join ChiTiet_BaiThi \n"
@@ -67,6 +67,7 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
                 dt.setDoKho(rs.getInt("DoKho"));
                 dt.setDapAnChon(rs.getString("DapAnChon"));
                 dt.setID_MaND(rs.getInt("ID_MaND"));
+                dt.setDapAn(rs.getString("DapAn"));
                 list.add(dt);
             }
             rs.getStatement().getConnection().close();
@@ -83,7 +84,7 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
             ResultSet rs = Helper.JdbcHelper.query(SelectByTT,idBT, made,dokho,id);
             while (rs.next()) {
                 Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"),
-                    rs.getString("DapAnChon"), rs.getString("DapAnDung")};
+                    rs.getString("DapAn"), rs.getString("DapAnDung")};
                 list.add(dt);
             }
             rs.getStatement().getConnection().close();
