@@ -35,11 +35,14 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     String getMaDe = null;
     int getDoKho = 0;
     int getID_NguoiDung = 0;
-
+    public static String getCauHoi=null;
+    public static String getDapAnChon=null;
+    public static String getDapAnDung=null;
     public Form_LichSuThi() {
         initComponents();
         setInit();
         setExit();
+        runs();
     }
 
     void setInit() {
@@ -53,7 +56,6 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         this.getID_NguoiDung = auth.use.getID_MaND();
         this.listTTBT = thongTinBTDao.selectAllTTBaiThi(getID_NguoiDung);
         this.listBTCT = deThiDao.selectALLBaiThiCT();
-        this.tp_CauHoi.setEditable(false);
         setCbbMaDe();
         setCbbDoKho();
         fillTableBTChiTiet();
@@ -138,8 +140,6 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_thongTinBaiThi = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        tp_CauHoi = new javax.swing.JTextPane();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         lb_text = new javax.swing.JLabel();
@@ -238,9 +238,12 @@ public class Form_LichSuThi extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tb_thongTinBaiThi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_thongTinBaiThiMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(tb_thongTinBaiThi);
-
-        jScrollPane3.setViewportView(tp_CauHoi);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -248,18 +251,14 @@ public class Form_LichSuThi extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -338,6 +337,17 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tb_DanhSachBaiThiMouseClicked
 
+    private void tb_thongTinBaiThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_thongTinBaiThiMouseClicked
+        int dem =tb_thongTinBaiThi.getSelectedRow();
+        if(evt.getClickCount()==2&&!evt.isConsumed()){
+            getCauHoi = modelCT.getValueAt(dem, 1).toString();
+            getDapAnChon = modelCT.getValueAt(dem, 2).toString();
+            getDapAnDung = modelCT.getValueAt(dem, 3).toString();
+            new JForm_ChiTietLichSu(this, true).show();
+            
+        }
+    }//GEN-LAST:event_tb_thongTinBaiThiMouseClicked
+
     public void setExit() {
         addWindowListener(new WindowAdapter() {
             @Override
@@ -390,12 +400,10 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lb_text;
     private javax.swing.JPanel pn_DanhSach;
     private javax.swing.JTable tb_DanhSachBaiThi;
     private javax.swing.JTable tb_thongTinBaiThi;
-    private javax.swing.JTextPane tp_CauHoi;
     private javax.swing.JTabbedPane tp_pane;
     // End of variables declaration//GEN-END:variables
 }

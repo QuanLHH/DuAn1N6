@@ -11,19 +11,10 @@ public class ThongTinBaiThi {
     private int DoKho;
     private String DapAnChon;
     private int ID_MaND;
-    private String DapAn;
     public ThongTinBaiThi() {
     }
 
-    public String getDapAn() {
-        return DapAn;
-    }
-
-    public void setDapAn(String DapAn) {
-        this.DapAn = DapAn;
-    }
-
-    public ThongTinBaiThi(int ID_TTBaiThi, int ID_CauHoi, int ID_BaiThiCT, String MaDe, int DoKho, String DapAnChon, int ID_MaND, String DapAn) {
+    public ThongTinBaiThi(int ID_TTBaiThi, int ID_CauHoi, int ID_BaiThiCT, String MaDe, int DoKho, String DapAnChon, int ID_MaND) {
         this.ID_TTBaiThi = ID_TTBaiThi;
         this.ID_CauHoi = ID_CauHoi;
         this.ID_BaiThiCT = ID_BaiThiCT;
@@ -31,9 +22,7 @@ public class ThongTinBaiThi {
         this.DoKho = DoKho;
         this.DapAnChon = DapAnChon;
         this.ID_MaND = ID_MaND;
-        this.DapAn = DapAn;
     }
-
 
     public int getID_MaND() {
         return ID_MaND;
