@@ -70,21 +70,14 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     }
 
     public void setCbbDoKho() {
-        ArrayList<BaiThi> list = baiThiDao.selectDoKhoByMaDe((String) cbb_MaDe.getSelectedItem());
         cbb_DoKho.removeAllItems();
-        for (BaiThi x : list) {
-            String item = null;
-            if (x.getDoKho() == 1) {
-                item = "Dễ";
-            } else if (x.getDoKho() == 2) {
-                item = "Trung bình";
-            } else if (x.getDoKho() == 3) {
-                item = "Khó";
-            }
-            cbb_DoKho.addItem(item);
-        }
+        cbb_DoKho.addItem("Dễ");
+        cbb_DoKho.addItem("Trung bình");
+        cbb_DoKho.addItem("Khó");
         
     }
+
+
     public void fillTableBTChiTietByID(){
         getMaDe = (String) cbb_MaDe.getSelectedItem();
         getDoKho = cbb_DoKho.getSelectedIndex()+1;
