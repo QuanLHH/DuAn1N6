@@ -110,7 +110,7 @@ public class FormChinh extends javax.swing.JFrame {
     void FQuanLyDeThi() {
         FromQL_DeThi f = new FromQL_DeThi();
         f.setVisible(true);
-        dispose();
+        
     }
 
     void setExit() {

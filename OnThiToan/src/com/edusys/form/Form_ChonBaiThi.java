@@ -76,6 +76,7 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
     }
 
     public void setCbbDoKho() {
+        cbb_DoKho.removeAllItems();
         cbb_DoKho.addItem("Dễ");
         cbb_DoKho.addItem("Trung bình");
         cbb_DoKho.addItem("Khó");
