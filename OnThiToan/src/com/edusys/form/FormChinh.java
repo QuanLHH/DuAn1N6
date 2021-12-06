@@ -1,28 +1,39 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.edusys.form;
 
+import PakagesClass.TaiKhoan;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JMenuItem;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import utils.Auth2;
 import utils.MsgBox;
 
-/**
- *
- * @author taola
- */
 public class FormChinh extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FormChinh
-     */
+    Auth2 auth = new Auth2();
+
     public FormChinh() {
         initComponents();
+        role_Admin(mnuQuanLy);
         setInit();
+
+    }
+
+    void role_Admin(JMenuItem j) {
+        TaiKhoan tk = this.auth.use;
+        if (tk.getVaiTro() == false) {
+            j.setEnabled(false);
+        } else if (tk.getVaiTro() == true) {
+            j.setEnabled(true);
+        }
+    }
+
+    public void setInit() {
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setTitle("Ôn thi đại học môn toán");
         ImageIcon icon = new ImageIcon("Hinh/Exit.png");
         this.btnDangXuat.setIcon(icon);
         ImageIcon icon1 = new ImageIcon("Hinh/Stop.png");
@@ -39,54 +50,69 @@ public class FormChinh extends javax.swing.JFrame {
         this.lblAnh.setIcon(icon6);
         ImageIcon icon7 = new ImageIcon("Hinh/Best.png");
         this.btnXemTop.setIcon(icon7);
-        
+        ImageIcon icon8 = new ImageIcon("Hinh/Task list.png");
+        this.bt_LichSu.setIcon(icon8);
     }
 
-    public void setInit() {
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setTitle("Ôn thi đại học môn toán");
-
-    }
-    void openLogin(){
+    void openLogin() {
         FormLogin_Start login = new FormLogin_Start();
         login.setVisible(true);
-        
-    }
-    void openDMK(){ 
-        new JFormDMK(this,true).setVisible(true);
-    }
-    void dangxuat(){
-        
-    }
-    void ketThuc(){
-        if(MsgBox.confirm(this, "Bạn muốn kết thúc?"));
-        System.exit(0);
-    }
-    void QLCH(){
-        new JForm_QLCauHoi(this, true).setVisible(true);
-    }
-    void QLTK(){
-        FromQL_TAIKHOAN tk=new FromQL_TAIKHOAN();
-        tk.setVisible(true);
-      
-    }
-    void LamBaiTap(){
-        formlambaitap lbt = new formlambaitap();
-        lbt.setVisible(true);
-        
-    }
-    void ChonBaiThi(){
-        Form_ChonBaiThi cbt = new Form_ChonBaiThi();
-        cbt.setVisible(true);
-        
+
     }
 
-    void FQuanLyDeThi(){
+    void openDMK() {
+        new JFormDMK(this, true).setVisible(true);
+    }
+
+    void dangxuat() {
+
+    }
+
+    void ketThuc() {
+        if (MsgBox.confirm(this, "Bạn muốn kết thúc?"));
+        System.exit(0);
+    }
+
+    void QLCH() {
+        new JForm_QLCauHoi(this, true).setVisible(true);
+    }
+
+    void QLTK() {
+        FromQL_TAIKHOAN tk = new FromQL_TAIKHOAN();
+        tk.setVisible(true);
+
+    }
+
+    void LamBaiTap() {
+        formlambaitap lbt = new formlambaitap();
+        lbt.setVisible(true);
+
+    }
+
+    void ChonBaiThi() {
+        Form_ChonBaiThi cbt = new Form_ChonBaiThi();
+        cbt.setVisible(true);
+
+    }
+
+    void XemTop() {
+        Form_XemTop xt = new Form_XemTop();
+        xt.setVisible(true);
+
+    }
+
+    void XemLichSu() {
+        Form_LichSuThi xt = new Form_LichSuThi();
+        xt.setVisible(true);
+
+    }
+
+    void FQuanLyDeThi() {
         FromQL_DeThi f = new FromQL_DeThi();
         f.setVisible(true);
         dispose();
     }
+
     void setExit() {
         addWindowListener(new WindowAdapter() {
             @Override
@@ -95,6 +121,7 @@ public class FormChinh extends javax.swing.JFrame {
             }
         });
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -108,6 +135,7 @@ public class FormChinh extends javax.swing.JFrame {
         btnLBT = new javax.swing.JButton();
         btnLBTap = new javax.swing.JButton();
         btnXemTop = new javax.swing.JButton();
+        bt_LichSu = new javax.swing.JButton();
         btnTaiLieu = new javax.swing.JButton();
         btnPhanHoi = new javax.swing.JButton();
         lblAnh = new javax.swing.JLabel();
@@ -187,6 +215,17 @@ public class FormChinh extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(btnXemTop);
+
+        bt_LichSu.setText("Lịch sử thi");
+        bt_LichSu.setFocusable(false);
+        bt_LichSu.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        bt_LichSu.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        bt_LichSu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_LichSuActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(bt_LichSu);
 
         btnTaiLieu.setText("Tài Liệu");
         btnTaiLieu.setFocusable(false);
@@ -349,11 +388,16 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnXemTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTopActionPerformed
         // TODO add your handling code here:
+        XemTop();
     }//GEN-LAST:event_btnXemTopActionPerformed
 
     private void btnTaiLieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaiLieuActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnTaiLieuActionPerformed
+
+    private void bt_LichSuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_LichSuActionPerformed
+        XemLichSu();
+    }//GEN-LAST:event_bt_LichSuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,6 +450,7 @@ public class FormChinh extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_LichSu;
     private javax.swing.JButton btnDangXuat;
     private javax.swing.JButton btnKetThuc;
     private javax.swing.JButton btnLBT;

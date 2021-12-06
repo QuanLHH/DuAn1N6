@@ -31,8 +31,7 @@ public class FromQL_TAIKHOAN extends javax.swing.JFrame {
          setLocationRelativeTo(null);
         setExit();
         filltable();
-        setExit();
-        
+
     }
     public void setform(TaiKhoan tk) {
         txtma.setText(tk.getID_MaND() + "");

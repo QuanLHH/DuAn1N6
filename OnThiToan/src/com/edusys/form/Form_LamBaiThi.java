@@ -5,8 +5,10 @@
  */
 package com.edusys.form;
 
-import PakagesClass.CauHoi; 
+import PakagesClass.BaiThiChiTiet;
+import PakagesClass.CauHoi;
 import PakagesClass.DeThi;
+import PakagesClass.ThongTinBaiThi;
 import com.edusys.dao.DeThiDAO;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,10 +29,12 @@ import javax.swing.table.DefaultTableModel;
 import javazoom.jl.player.Player;
 
 public class Form_LamBaiThi extends javax.swing.JFrame {
+
     ArrayList<DeThi> listDT = new ArrayList<>();
     Form_ChonBaiThi formChonDT;
     com.edusys.dao.DeThiDAO deThiDao = new DeThiDAO();
     DefaultTableModel model;
+    ArrayList<String> listModel = new ArrayList<>();
     Thread time;
     Thread player;
     String getMaDe = null;
@@ -41,6 +45,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     public static int tongSoCau = 0;
     public static int soCauDung = 0;
     public static int soCauSai = 0;
+    public static int minutes = 0;
+    public static int seconds = 0;
     public static float diem = 0;
 
     public Form_LamBaiThi() {
@@ -52,6 +58,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         setImage();
         setExit();
         setInit();
+        SelectID_CauHoi();
     }
 
     void setInit() {
@@ -64,13 +71,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         this.getDoKho = formChonDT.getDoKho;
         this.formChonDT = new Form_ChonBaiThi();
         this.listDT = deThiDao.selectDeThi(getMaDe, getDoKho);
-        this.tongSoCau = deThiDao.selectSoCau(getMaDe, getDoKho);        
+        this.tongSoCau = deThiDao.selectSoCau(getMaDe, getDoKho);
+
         setCauHoi(i);
         fillCauHoi();
         fillTable();
-        id_CauHoi= listDT.get(0).getID_CauHoi();
+        id_CauHoi = listDT.get(0).getID_CauHoi();
         id_baiThi = deThiDao.selectByIds(id_CauHoi, getMaDe, getDoKho);
-        System.out.println("ID_CauHoi:"+id_CauHoi+"ID_BaiThi:"+id_baiThi);
+        System.out.println("ID_CauHoi:" + id_CauHoi + "ID_BaiThi:" + id_baiThi);
         prev.setEnabled(false);
         page1.setText("1");
         page2.setText((tongSoCau / 5) + "");
@@ -174,6 +182,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         }
     }
 
+    public void SelectID_CauHoi() {
+        for (DeThi x : listDT) {
+
+            System.out.println("ID_CauHoi: " + x.getID_CauHoi());
+        }
+    }
+
     void setCauHoi(int so) {
         lb_CauHoi1.setText(listDT.get(so).getCauHoi());
         tf_A1.setText(listDT.get(so).getDapAn1());
@@ -206,7 +221,32 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         tf_D5.setText(listDT.get(so + 4).getDapAn4());
     }
 
+    public ThongTinBaiThi getFormTTBaiThi() {
+        ThongTinBaiThi tt = new ThongTinBaiThi();
+        BaiThiChiTiet dt = deThiDao.selectNewID_BaiThiCT();
+        int ID_BaiThiCT = dt.getID_BaiThiCT();
+        tt.setID_BaiThiCT(ID_BaiThiCT);
+        tt.setMaDe(getMaDe);
+        tt.setDoKho(getDoKho);
+        tt.setDapAnChon(getMaDe);
+        return tt;
+    }
+
+    public void insertThongTinBaiThi() {
+        ThongTinBaiThi tt = getFormTTBaiThi();
+        for (int i = 0; i < listDT.size(); i++) {
+            listModel.add(model.getValueAt(i, 1).toString());
+        }
+        for (int i = 0; i < listDT.size(); i++) {
+            tt.setID_CauHoi(listDT.get(i).getID_CauHoi());
+            tt.setDapAnChon(listModel.get(i));
+            deThiDao.insertTTBaiThi(tt);
+        }
+    }
+
     public void checkBai() {
+        minutes = 44 - Integer.valueOf(lb_Minutes.getText());
+        seconds = 60 - Integer.valueOf(lb_Seconds.getText());
         float tong = tongSoCau;
         for (int i = 0; i < listDT.size(); i++) {
             if (listDT.get(i).getDapAnDung().equalsIgnoreCase(tb_LamBaiThi.getValueAt(i, 1).toString())) {
@@ -278,26 +318,22 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
             @Override
             public void run() {
                 while (true) {
-                    SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-                    int m = Integer.valueOf((lb_Minutes.getText()));
-                    int s = Integer.valueOf((lb_Seconds.getText()));
-                    s--;
 
-                    if (s <= 0 && m > 0) {
-                        s = 59;
-                        m--;
+                    minutes = Integer.valueOf((lb_Minutes.getText()));
+                    seconds = Integer.valueOf((lb_Seconds.getText()));
+                    seconds--;
+
+                    if (seconds <= 0 && minutes > 0) {
+                        seconds = 59;
+                        minutes--;
                     }
-                    if (m == 0 && s == 0) {
-                        time.stop();
-                        lb_Time.setText("");
-                        lb_Minutes.setText("Hết");
-                        lb_Seconds.setText("giờ");
+                    if (minutes == 0 && seconds <= 0) {
                         JOptionPane.showMessageDialog(rootPane, "Hết giờ!");
-                        bt_Stop.setEnabled(false);
-                        bt_NopBai.setEnabled(false);
+                        SP_BaiThi.setVisible(false);
+                        stop();
                     }
-                    lb_Minutes.setText(m + "");
-                    lb_Seconds.setText(s + "");
+                    lb_Minutes.setText(minutes + "");
+                    lb_Seconds.setText(seconds + "");
                     try {
                         Thread.sleep(1000);
                     } catch (Exception e) {
@@ -420,7 +456,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         lb_Seconds = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         SP_BaiThi = new javax.swing.JScrollPane();
-        jPanel6 = new javax.swing.JPanel();
+        jpanel_tong = new javax.swing.JPanel();
         JP_1 = new javax.swing.JPanel();
         tf_D1 = new javax.swing.JLabel();
         tf_C1 = new javax.swing.JLabel();
@@ -731,7 +767,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         SP_BaiThi.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         SP_BaiThi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        jPanel6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jpanel_tong.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         JP_1.setBackground(new java.awt.Color(255, 255, 255));
         JP_1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1274,13 +1310,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpanel_tongLayout = new javax.swing.GroupLayout(jpanel_tong);
+        jpanel_tong.setLayout(jpanel_tongLayout);
+        jpanel_tongLayout.setHorizontalGroup(
+            jpanel_tongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanel_tongLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jpanel_tongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(JP_4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JP_3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(JP_2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1288,9 +1324,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                     .addComponent(JP_5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(179, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        jpanel_tongLayout.setVerticalGroup(
+            jpanel_tongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanel_tongLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(JP_1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1304,7 +1340,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addContainerGap(178, Short.MAX_VALUE))
         );
 
-        SP_BaiThi.setViewportView(jPanel6);
+        SP_BaiThi.setViewportView(jpanel_tong);
 
         last.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1530,6 +1566,13 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         int i = JOptionPane.showConfirmDialog(rootPane, "Ấn yes để tiếp tục", "Tiếp tục", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             time.resume();
+        } else if (i == 1) {
+            int x = JOptionPane.showConfirmDialog(rootPane, "Bạn muốn dừng làm bài?", "Xác nhận!", JOptionPane.YES_NO_OPTION);
+            if (x == 0) {
+                dispose();
+            } else if (x == 1) {
+                time.resume();
+            }
         }
     }//GEN-LAST:event_bt_StopActionPerformed
 
@@ -1621,10 +1664,14 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_restartActionPerformed
 
     private void bt_NopBaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_NopBaiActionPerformed
+        if(bt_Start.isEnabled()==false&&bt_pause.isEnabled()==true&&bt_resume.isEnabled()==false){
+            player.stop();
+        }
         int dem = JOptionPane.showConfirmDialog(rootPane, "Nộp bài thi?", "Nộp bài", JOptionPane.YES_NO_OPTION);
         if (dem == 0) {
             checkBai();
             new JFrom_BaiThiChiTiet(this, true).setVisible(true);
+            insertThongTinBaiThi();
             dispose();
         }
 
@@ -1699,11 +1746,11 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlb;
     private javax.swing.JLabel jlb_cau1;
     private javax.swing.JLabel jlb_cau2;
+    private javax.swing.JPanel jpanel_tong;
     private javax.swing.JButton khoiDongLai;
     private javax.swing.JButton last;
     private javax.swing.JLabel lb_Cau1;

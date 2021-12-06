@@ -62,6 +62,7 @@ public class JFormNguoiDung extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Không để trống email!");
                 return;
             }
+            
             String checkSo1 = "[0-9]{1,}";
             String checkSo2 = "[0]+[0-9]{1,}";
             if (tf_name.getText().matches(checkSo1)) {
@@ -78,6 +79,14 @@ public class JFormNguoiDung extends javax.swing.JDialog {
                 return;
             } else if (tf_sdt.getText().length() < 10 || tf_sdt.getText().length() > 15) {
                 JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng độ dài số điện thoại!");
+                return;
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            String ngaySinh =((JTextField) jc_date.getDateEditor()).getText();
+            try{
+                sdf.parse(ngaySinh);
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(rootPane, "Vui lòng điền đúng định dạng ngày sinh!");
                 return;
             }
             String checkEmail = "[A-Za-z0-9+-._]{1,}+@+[A-Za-z]{2,}+\\.+[A-Za-z]{2,}";

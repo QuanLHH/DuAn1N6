@@ -6,10 +6,13 @@
 package com.edusys.form;
 
 import PakagesClass.BaiThiChiTiet;
+import PakagesClass.DeThi;
 import PakagesClass.NguoiDung;
 import PakagesClass.TaiKhoan;
+import PakagesClass.ThongTinBaiThi;
 import com.edusys.dao.DeThiDAO;
 import com.edusys.dao.NguoiDungDAO;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import utils.Auth2;
 
@@ -19,30 +22,38 @@ import utils.Auth2;
  */
 public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
 
+    ArrayList<DeThi> listDT = new ArrayList<>();
     Auth2 auth = new Auth2();
     TaiKhoan user = new TaiKhoan();
     Form_LamBaiThi formLBT = new Form_LamBaiThi();
     com.edusys.dao.NguoiDungDAO nguoiDungDAO = new NguoiDungDAO();
     com.edusys.dao.DeThiDAO deThiDAO = new DeThiDAO();
+    Form_ChonBaiThi formChonDT;
     int cauDung = 0;
     int cauSai = 0;
     float diem = 0;
-
+    String getMaDe = null;
+    int getDoKho = 0;
     public JFrom_BaiThiChiTiet(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setInit();
-        user = auth.use;
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setInit();
         showTK();
-        ImageIcon restartImg = new ImageIcon("hinh/Accept.png");
-        this.bt_img.setIcon(restartImg);
+        
     }
 
     void setInit() {
         setLocationRelativeTo(null);
         setResizable(false);
         setTitle("Bài thi chi tiết!");
+        ImageIcon restartImg = new ImageIcon("hinh/Accept.png");
+        this.formLBT = new Form_LamBaiThi();
+        this.bt_img.setIcon(restartImg);
+        this.user = auth.use;
+        this.getMaDe = formChonDT.getMaDe;
+        this.getDoKho = formChonDT.getDoKho;
+        this.listDT = deThiDAO.selectDeThi(getMaDe, getDoKho);
     }
 
     void showTK() {
@@ -55,7 +66,9 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         lb_SoCauSai.setText(Integer.toString(formLBT.soCauSai));
         cauDung = formLBT.soCauDung;
         cauSai = formLBT.soCauSai;
-        diem = formLBT.diem;
+        diem = Math.round(formLBT.diem);
+        System.out.println("Đúng: "+cauDung);
+        System.out.println("Sai: "+cauSai);
         lb_Diem.setText(formLBT.diem + "");
         BaiThiChiTiet bt = new BaiThiChiTiet();
         bt.setID_BaiThi(formLBT.id_baiThi);
@@ -63,11 +76,14 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         bt.setSoCauDung(cauDung);
         bt.setSoCauSai(cauSai);
         bt.setDiem(diem);
+        deThiDAO.inserts(bt);
         formLBT.soCauSai = 0;
         formLBT.soCauDung = 0;
         formLBT.diem = 0;
-        deThiDAO.inserts(bt);
+        
+
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

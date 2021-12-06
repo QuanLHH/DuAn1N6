@@ -5,9 +5,9 @@
  */
 package com.edusys.dao;
 
-
 import PakagesClass.BaiThiChiTiet;
 import PakagesClass.DeThi;
+import PakagesClass.ThongTinBaiThi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
 
     String INSERT = "INSERT INTO ChiTiet_BaiThi(ID_MaND,ID_BaiThi,SoCauDung,SoCauSai,Diem)VALUES(?,?,?,?,?)";
-    String DELETE="DELETE FROM ChiTiet_BaiThi WHERE ID_BaiThi=?";
+    String DELETE = "DELETE FROM ChiTiet_BaiThi WHERE ID_BaiThi=?";
     String SelectByID = "SELECT TOP 1 ID_BaiThi FROM Bai_Thi WHERE ID_CauHoi=? AND MaDe=? AND DoKho=?";
-
+    
     public int selectByIds(Integer id, String made, int dokho) {
         int id_bt = 0;
         try {
@@ -162,8 +162,60 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
     }
 
     public void inserts(BaiThiChiTiet bt) {
-        Helper.JdbcHelper.update(INSERT, bt.getID_MaND(), bt.getID_BaiThi(), bt.getSoCauDung()
-                , bt.getSoCauSai(), bt.getDiem());
+        Helper.JdbcHelper.update(INSERT, bt.getID_MaND(), bt.getID_BaiThi(), bt.getSoCauDung(),
+                bt.getSoCauSai(), bt.getDiem());
     }
 
+    // select baithichitiet
+    public ArrayList<BaiThiChiTiet> sqlBaiThiChiTiet(String sql, Object... args) {
+        ArrayList<BaiThiChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(sql, args);
+            while (rs.next()) {
+                BaiThiChiTiet dt = new BaiThiChiTiet();
+                dt.setID_BaiThiCT(rs.getInt("ID_BaiThiCT"));
+                dt.setID_MaND(rs.getInt("ID_MaND"));
+                dt.setID_BaiThi(rs.getInt("ID_BaiThi"));
+                dt.setSoCauDung(rs.getInt("SoCauDung"));
+                dt.setSoCauSai(rs.getInt("SoCauSai"));
+                dt.setDiem(rs.getFloat("Diem"));
+                dt.setNgayThi(rs.getDate("NgayThi"));
+                list.add(dt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return list;
+    }
+
+    public BaiThiChiTiet selectNewID_BaiThiCT() {
+        String sql = "SELECT TOP 1 * FROM ChiTiet_BaiThi ORDER BY ID_BaiThiCT DESC";
+        ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(sql);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public void insertTTBaiThi(ThongTinBaiThi bt) {
+        String InsertTTBaiThi = "INSERT INTO ThongTin_BaiThi(ID_CauHoi,ID_BaiThiCT,MaDe,DoKho,DapAnChon) "
+                + "VALUES(?,?,?,?,?)";
+        Helper.JdbcHelper.update(InsertTTBaiThi, bt.getID_CauHoi(), bt.getID_BaiThiCT(),
+                bt.getMaDe(), bt.getDoKho(), bt.getDapAnChon());
+    }
+
+    public ArrayList<BaiThiChiTiet> selectALLBaiThiCT() {
+        String sql = "SELECT*FROM ChiTiet_BaiThi";
+        ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(sql);
+        return list;
+    }
+    public ArrayList<BaiThiChiTiet> selectBaiThiCTByID(String made,int dokho,int id) {
+        String SelectByTT = "SELECT ID_BaiThiCT,ID_MaND,ChiTiet_BaiThi.ID_BaiThi,SoCauDung,SoCauSai,Diem,NgayThi \n"
+            + "FROM ChiTiet_BaiThi JOIN Bai_Thi ON ChiTiet_BaiThi.ID_BaiThi = Bai_Thi.ID_BaiThi\n"
+            + "WHERE MaDe=? AND DoKho=? AND ID_MaND=?";
+        ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(SelectByTT,made,dokho,id);
+        return list;
+    }
 }
