@@ -76,7 +76,11 @@ public class FormChinh extends javax.swing.JFrame {
     void QLBT(){
         new JForm_QLBaiThi(this, true).setVisible(true);
     }
-    
+    void TaiLieu(){
+        FormTaiLieu tl = new FormTaiLieu();
+        tl.setVisible(true);
+        
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
