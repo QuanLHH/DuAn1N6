@@ -111,10 +111,15 @@ public class FormChinh extends javax.swing.JFrame {
         tl.setVisible(true);
 
     }
+    void PhanHoi() {
+        FormPhanHoi pl = new FormPhanHoi();
+        pl.setVisible(true);
+
+    }
     void FQuanLyDeThi() {
         FromQL_DeThi f = new FromQL_DeThi();
         f.setVisible(true);
-        dispose();
+        
     }
 
     void setExit() {
@@ -355,6 +360,7 @@ public class FormChinh extends javax.swing.JFrame {
         // TODO add your handling code here:
         openLogin();
     }//GEN-LAST:event_btnDangXuatActionPerformed
+    
 
     private void btnKetThucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKetThucActionPerformed
         // TODO add your handling code here:
@@ -388,6 +394,7 @@ public class FormChinh extends javax.swing.JFrame {
 
     private void btnPhanHoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhanHoiActionPerformed
         // TODO add your handling code here:
+        PhanHoi();
     }//GEN-LAST:event_btnPhanHoiActionPerformed
 
     private void btnXemTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXemTopActionPerformed
