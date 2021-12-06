@@ -393,14 +393,19 @@ public class FromQL_DeThi extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTabbedPane1)
-                .addGap(19, 19, 19)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
-                .addGap(7, 7, 7))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     private void cbbtbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbtbActionPerformed
         // TODO add your handling code here:
@@ -409,7 +414,6 @@ public class FromQL_DeThi extends javax.swing.JFrame {
 
     private void cbbtbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbtbMouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_cbbtbMouseClicked
 
     private void cbbdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbdeActionPerformed
@@ -423,7 +427,6 @@ public class FromQL_DeThi extends javax.swing.JFrame {
 
     private void cbbdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbdeMouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_cbbdeMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -443,13 +446,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
 
     private void cbbkhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbkhoMouseClicked
         // TODO add your handling code here:
-
     }//GEN-LAST:event_cbbkhoMouseClicked
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
