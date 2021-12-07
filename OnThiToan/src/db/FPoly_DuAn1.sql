@@ -104,7 +104,7 @@ create table Phan_Hoi(
 	ID_PhanHoi int not null identity(1,1) primary key,
 	ID_MaND int not null,
 	DanhGia varchar(10) not null,
-	NhanXet nvarchar(200) not null,
+	NhanXet nvarchar(500) not null,
 	foreign key (ID_MaND) references Nguoi_Dung (ID_MaND)
 )
 
@@ -235,6 +235,7 @@ SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT*FROM ChiTiet_BaiThi
 SELECT*FROM ThongTin_BaiThi
+SELECT*FROM Phan_Hoi join Nguoi_Dung on Phan_Hoi.ID_MaND = Nguoi_Dung.ID_MaND
 
 SELECT TOP 1 * FROM ChiTiet_BaiThi ORDER BY ID_BaiThiCT DESC
 SELECT ID_TTBaiThi,ID_CauHoi,ThongTin_BaiThi. ID_BaiThiCT,MaDe,DoKho,DapAnChon,ID_MaND FROM ThongTin_BaiThi join ChiTiet_BaiThi 
