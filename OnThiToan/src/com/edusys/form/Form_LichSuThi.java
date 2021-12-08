@@ -97,6 +97,7 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     }
 
     public void fillTableBTChiTiet() {
+        this.listBTCT = deThiDao.selectALLBaiThiCT();
         this.modelDS.setRowCount(0);
         for (BaiThiChiTiet x : listBTCT) {
             modelDS.addRow(new Object[]{x.getID_BaiThiCT(), x.getSoCauDung(), x.getSoCauSai(), x.getDiem(), x.getNgayThi()});
