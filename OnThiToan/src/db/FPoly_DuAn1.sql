@@ -257,3 +257,10 @@ SELECT COUNT(DOKHO),DoKho FROM Cau_Hoi GROUP BY DoKho
 SELECT Bai_Thi.ID_CauHoi, Role_ID,CauHoi,DapAn1,DapAn2,DapAn3,DapAn4,DapAnDung FROM Cau_Hoi 
 join Bai_Thi on Cau_Hoi.ID_CauHoi=Bai_Thi.ID_CauHoi WHERE MaDe=113 AND Bai_Thi.DoKho=1
 SELECT TOP 1 ID_BaiThi FROM Bai_Thi WHERE ID_CauHoi=69 AND MaDe=113 AND DoKho=1
+
+SELECT NgayThi FROM ChiTiet_BaiThi WHERE ID_MaND=1 GROUP BY NgayThi
+SELECT * FROM ChiTiet_BaiThi WHERE ID_MaND=1 AND NgayThi='2021-12-07'
+SELECT * FROM ThongTin_BaiThi 
+join ChiTiet_BaiThi on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT 
+join Cau_Hoi on ThongTin_BaiThi.ID_CauHoi = Cau_Hoi.ID_CauHoi
+WHERE NgayThi = '2021-12-07'

@@ -7,6 +7,7 @@ package com.edusys.form;
 
 import PakagesClass.TaiKhoan;
 import com.edusys.dao.TaiKhoanDAO;
+import java.awt.event.KeyEvent;
 
 import utils.Auth2;
 import javax.swing.JOptionPane;
@@ -118,7 +119,19 @@ public class FormLogin_Start extends javax.swing.JFrame {
 
         jLabel3.setText("Username");
 
+        txtname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtnameKeyPressed(evt);
+            }
+        });
+
         jLabel4.setText("PassWord");
+
+        txtpas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtpasKeyPressed(evt);
+            }
+        });
 
         lbl.setForeground(new java.awt.Color(51, 51, 255));
         lbl.setText(" Forgot password ?");
@@ -220,6 +233,18 @@ public class FormLogin_Start extends javax.swing.JFrame {
         new JFormNguoiDung(this, true).setVisible(true);
         new JFormSignUp(this, true).setVisible(true);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void txtnameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnameKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            vao();
+        }
+    }//GEN-LAST:event_txtnameKeyPressed
+
+    private void txtpasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpasKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            vao();
+        }
+    }//GEN-LAST:event_txtpasKeyPressed
 
     /**
      * @param args the command line arguments

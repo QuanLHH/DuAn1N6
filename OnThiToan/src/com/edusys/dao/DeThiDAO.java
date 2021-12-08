@@ -10,6 +10,7 @@ import PakagesClass.DeThi;
 import PakagesClass.ThongTinBaiThi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -216,6 +217,14 @@ public class DeThiDAO extends EduSysDAO<DeThi, Integer> {
             + "FROM ChiTiet_BaiThi JOIN Bai_Thi ON ChiTiet_BaiThi.ID_BaiThi = Bai_Thi.ID_BaiThi\n"
             + "WHERE MaDe=? AND DoKho=? AND ID_MaND=?";
         ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(SelectByTT,made,dokho,id);
+        return list;
+    }
+    public ArrayList<BaiThiChiTiet> selectBaiThiCTByNgayThi(String date,int id) {
+        
+        String SelectByTT = "SELECT ID_BaiThiCT,ID_MaND,ChiTiet_BaiThi.ID_BaiThi,SoCauDung,SoCauSai,Diem,NgayThi \n"
+            + "FROM ChiTiet_BaiThi JOIN Bai_Thi ON ChiTiet_BaiThi.ID_BaiThi = Bai_Thi.ID_BaiThi\n"
+            + "WHERE NgayThi = ? AND ID_MaND=?";
+        ArrayList<BaiThiChiTiet> list = sqlBaiThiChiTiet(SelectByTT,date,id);
         return list;
     }
 }

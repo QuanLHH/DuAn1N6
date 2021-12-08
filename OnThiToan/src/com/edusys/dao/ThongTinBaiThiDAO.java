@@ -4,6 +4,7 @@ import PakagesClass.BaiThiChiTiet;
 import PakagesClass.ThongTinBaiThi;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
 
@@ -16,7 +17,11 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
             + "join Cau_Hoi\n"
             + "	on ThongTin_BaiThi.ID_CauHoi = Cau_Hoi.ID_CauHoi\n"
             + "WHERE ChiTiet_BaiThi. ID_BaiThiCT=? AND MaDe=? AND ThongTin_BaiThi. DoKho=? AND ID_MaND=?";
-
+    String SelectByNgayThi = "SELECT * FROM ThongTin_BaiThi \n"
+            + "join ChiTiet_BaiThi on ThongTin_BaiThi.ID_BaiThiCT=ChiTiet_BaiThi.ID_BaiThiCT \n"
+            + "join Cau_Hoi on ThongTin_BaiThi.ID_CauHoi = Cau_Hoi.ID_CauHoi\n"
+            + "WHERE ChiTiet_BaiThi. ID_BaiThiCT=? AND NgayThi = ? AND ID_MaND=?";
+    String SelectNgayThi = "SELECT NgayThi FROM ChiTiet_BaiThi WHERE ID_MaND=? GROUP BY NgayThi";
     @Override
     public void insert(ThongTinBaiThi entity) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -34,8 +39,7 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
 
     @Override
     public ArrayList<ThongTinBaiThi> selectALL() {
-        ArrayList<ThongTinBaiThi> list = selectBySql(SelectALL);
-        return list;
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public ArrayList<ThongTinBaiThi> selectAllTTBaiThi(int id) {
@@ -77,32 +81,32 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
         return list;
     }
 
-    public ArrayList<Object[]> selectSQLThongTinThi(int idBT,String made, int dokho, int id) {
+    public ArrayList<Object[]> selectSQLThongTinThi(int idBT, String made, int dokho, int id) {
         ArrayList<Object[]> list = new ArrayList<>();
         try {
-            ResultSet rs = Helper.JdbcHelper.query(SelectByTT,idBT, made,dokho,id);
+            ResultSet rs = Helper.JdbcHelper.query(SelectByTT, idBT, made, dokho, id);
             while (rs.next()) {
-                String dapAnDung =null;
-                if(rs.getString("DapAnDung").equalsIgnoreCase("A")){
-                    dapAnDung=rs.getString("DapAn1");
-                }else if(rs.getString("DapAnDung").equalsIgnoreCase("B")){
-                    dapAnDung=rs.getString("DapAn2");
-                }else if(rs.getString("DapAnDung").equalsIgnoreCase("C")){
-                    dapAnDung=rs.getString("DapAn3");
-                }else if(rs.getString("DapAnDung").equalsIgnoreCase("D")){
-                    dapAnDung=rs.getString("DapAn4");
+                String dapAnDung = null;
+                if (rs.getString("DapAnDung").equalsIgnoreCase("A")) {
+                    dapAnDung = rs.getString("DapAn1");
+                } else if (rs.getString("DapAnDung").equalsIgnoreCase("B")) {
+                    dapAnDung = rs.getString("DapAn2");
+                } else if (rs.getString("DapAnDung").equalsIgnoreCase("C")) {
+                    dapAnDung = rs.getString("DapAn3");
+                } else if (rs.getString("DapAnDung").equalsIgnoreCase("D")) {
+                    dapAnDung = rs.getString("DapAn4");
                 }
-                String dapAnChon =null;
-                if(rs.getString("DapAnChon").equalsIgnoreCase("A")){
-                    dapAnChon=rs.getString("DapAn1");
-                }else if(rs.getString("DapAnChon").equalsIgnoreCase("B")){
-                    dapAnChon=rs.getString("DapAn2");
-                }else if(rs.getString("DapAnChon").equalsIgnoreCase("C")){
-                    dapAnChon=rs.getString("DapAn3");
-                }else if(rs.getString("DapAnChon").equalsIgnoreCase("D")){
-                    dapAnChon=rs.getString("DapAn4");
+                String dapAnChon = null;
+                if (rs.getString("DapAnChon").equalsIgnoreCase("A")) {
+                    dapAnChon = rs.getString("DapAn1");
+                } else if (rs.getString("DapAnChon").equalsIgnoreCase("B")) {
+                    dapAnChon = rs.getString("DapAn2");
+                } else if (rs.getString("DapAnChon").equalsIgnoreCase("C")) {
+                    dapAnChon = rs.getString("DapAn3");
+                } else if (rs.getString("DapAnChon").equalsIgnoreCase("D")) {
+                    dapAnChon = rs.getString("DapAn4");
                 }
-                Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"),dapAnChon, dapAnDung};
+                Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"), dapAnChon, dapAnDung};
                 list.add(dt);
             }
             rs.getStatement().getConnection().close();
@@ -112,5 +116,58 @@ public class ThongTinBaiThiDAO extends EduSysDAO<ThongTinBaiThi, Integer> {
         }
         return list;
     }
-   
+
+    public ArrayList<Object[]> selectByNgayThi(int idBT,String date, int id) {
+        ArrayList<Object[]> list = new ArrayList<>();
+        try {
+            
+            ResultSet rs = Helper.JdbcHelper.query(SelectByNgayThi,idBT, date,id);
+            while (rs.next()) {
+                String dapAnDung = null;
+                if (rs.getString("DapAnDung").equalsIgnoreCase("A")) {
+                    dapAnDung = rs.getString("DapAn1");
+                } else if (rs.getString("DapAnDung").equalsIgnoreCase("B")) {
+                    dapAnDung = rs.getString("DapAn2");
+                } else if (rs.getString("DapAnDung").equalsIgnoreCase("C")) {
+                    dapAnDung = rs.getString("DapAn3");
+                } else if (rs.getString("DapAnDung").equalsIgnoreCase("D")) {
+                    dapAnDung = rs.getString("DapAn4");
+                }
+                String dapAnChon = null;
+                if (rs.getString("DapAnChon").equalsIgnoreCase("A")) {
+                    dapAnChon = rs.getString("DapAn1");
+                } else if (rs.getString("DapAnChon").equalsIgnoreCase("B")) {
+                    dapAnChon = rs.getString("DapAn2");
+                } else if (rs.getString("DapAnChon").equalsIgnoreCase("C")) {
+                    dapAnChon = rs.getString("DapAn3");
+                } else if (rs.getString("DapAnChon").equalsIgnoreCase("D")) {
+                    dapAnChon = rs.getString("DapAn4");
+                }
+                Object[] dt = {rs.getInt("ID_TTBaiThi"), rs.getString("CauHoi"), dapAnChon, dapAnDung};
+                list.add(dt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return list;
+    }
+    public ArrayList<BaiThiChiTiet> selectCbbNgayThi(int id) {
+        ArrayList<BaiThiChiTiet> list = new ArrayList<>();
+        try {
+            ResultSet rs = Helper.JdbcHelper.query(SelectNgayThi,id);
+            while (rs.next()) {
+                BaiThiChiTiet bt = new BaiThiChiTiet();
+                bt.setNgayThi(rs.getDate(1));
+                list.add(bt);
+            }
+            rs.getStatement().getConnection().close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return list;
+    }  
+    
 }

@@ -71,6 +71,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         setCbbTheLoai();
         setCbbTenBai();
         fillTable();
+        bt_InsertExcel.setEnabled(false);
     }
 
     public void setCbbMucDo() {
@@ -737,7 +738,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tb_excel = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        bt_InsertExcel = new javax.swing.JButton();
 
         lb_DapAn2.setText("jLabel13");
 
@@ -1235,10 +1236,10 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(tb_excel);
 
-        jButton2.setText("Insert");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bt_InsertExcel.setText("Insert");
+        bt_InsertExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bt_InsertExcelActionPerformed(evt);
             }
         });
 
@@ -1248,7 +1249,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(465, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bt_InsertExcel)
                 .addGap(29, 29, 29))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1260,7 +1261,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(444, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(bt_InsertExcel)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -1436,6 +1437,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         jtp_Show.setSelectedIndex(2);
+        bt_InsertExcel.setEnabled(true);
         readExcel();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
@@ -1443,12 +1445,14 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_tb_excelMouseClicked
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void bt_InsertExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_InsertExcelActionPerformed
         int i = JOptionPane.showConfirmDialog(rootPane, "Thêm hàng loạt?", "", JOptionPane.YES_NO_OPTION);
         if (i == 0) {
             insertExcel();
+            modelExcel.setRowCount(0);
+            bt_InsertExcel.setEnabled(false);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_bt_InsertExcelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1506,6 +1510,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JButton Next;
     private javax.swing.JButton Prev;
     private javax.swing.JButton bt_Delete;
+    private javax.swing.JButton bt_InsertExcel;
     private javax.swing.JButton bt_Refresh;
     private javax.swing.JButton bt_Them;
     private javax.swing.JButton bt_Update;
@@ -1516,7 +1521,6 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cbb_mucDo;
     private javax.swing.JComboBox<String> cbb_viewTenBai;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

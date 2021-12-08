@@ -193,15 +193,15 @@ public class Form_ChonBaiThi extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         getMaDe = (String) cbb_MaDe.getSelectedItem();
-        String item =(String) cbb_DoKho.getSelectedItem();
+        String item = (String) cbb_DoKho.getSelectedItem();
         int dokho = 0;
-            if (item.equalsIgnoreCase("Dễ")) {
-                dokho = 1;
-            } else if (item.equalsIgnoreCase("Trung bình")) {
-                dokho = 2;
-            } else if (item.equalsIgnoreCase("Khó")) {
-                dokho = 3;
-            }
+        if (item.equalsIgnoreCase("Dễ")) {
+            dokho = 1;
+        } else if (item.equalsIgnoreCase("Trung bình")) {
+            dokho = 2;
+        } else if (item.equalsIgnoreCase("Khó")) {
+            dokho = 3;
+        }
         getDoKho = dokho;
         setTongCau();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
