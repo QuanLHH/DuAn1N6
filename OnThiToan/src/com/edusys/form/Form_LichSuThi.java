@@ -14,7 +14,11 @@ import com.edusys.dao.ThongTinBaiThiDAO;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import static java.lang.Thread.sleep;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import utils.Auth2;
 
@@ -35,9 +39,11 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     String getMaDe = null;
     int getDoKho = 0;
     int getID_NguoiDung = 0;
-    public static String getCauHoi=null;
-    public static String getDapAnChon=null;
-    public static String getDapAnDung=null;
+    int index = 0;
+    public static String getCauHoi = null;
+    public static String getDapAnChon = null;
+    public static String getDapAnDung = null;
+
     public Form_LichSuThi() {
         initComponents();
         setInit();
@@ -58,6 +64,7 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         this.listBTCT = deThiDao.selectALLBaiThiCT();
         setCbbMaDe();
         setCbbDoKho();
+        setCbbNgayThi();
         fillTableBTChiTiet();
     }
 
@@ -68,7 +75,7 @@ public class Form_LichSuThi extends javax.swing.JFrame {
             String item = Integer.toString(x.getMaDe());
             cbb_MaDe.addItem(item);
         }
-        fillTableBTChiTietByID();
+        fillTableDanhSach();
     }
 
     public void setCbbDoKho() {
@@ -76,19 +83,19 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         cbb_DoKho.addItem("Dễ");
         cbb_DoKho.addItem("Trung bình");
         cbb_DoKho.addItem("Khó");
-        
+
     }
 
-
-    public void fillTableBTChiTietByID(){
+    public void fillTableDanhSach() {
         getMaDe = (String) cbb_MaDe.getSelectedItem();
-        getDoKho = cbb_DoKho.getSelectedIndex()+1;
+        getDoKho = cbb_DoKho.getSelectedIndex() + 1;
         this.listBTCT = deThiDao.selectBaiThiCTByID(getMaDe, getDoKho, getID_NguoiDung);
         this.modelDS.setRowCount(0);
         for (BaiThiChiTiet x : listBTCT) {
             modelDS.addRow(new Object[]{x.getID_BaiThiCT(), x.getSoCauDung(), x.getSoCauSai(), x.getDiem(), x.getNgayThi()});
         }
     }
+
     public void fillTableBTChiTiet() {
         this.modelDS.setRowCount(0);
         for (BaiThiChiTiet x : listBTCT) {
@@ -96,13 +103,13 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         }
     }
 
-    public void fillTableTTBaiThi() {
-
+    public void fillTableChiTiet() {
+        this.listBTCT = deThiDao.selectALLBaiThiCT();
         int dem = tb_DanhSachBaiThi.getSelectedRow();
         int id_BTCT = Integer.valueOf(modelDS.getValueAt(dem, 0).toString());
-        ArrayList<Object[]> list = thongTinBTDao.selectSQLThongTinThi(id_BTCT,getMaDe, getDoKho, getID_NguoiDung);
+        ArrayList<Object[]> list = thongTinBTDao.selectSQLThongTinThi(id_BTCT, getMaDe, getDoKho, getID_NguoiDung);
         modelCT.setRowCount(0);
-        for(Object[] x:list){
+        for (Object[] x : list) {
             modelCT.addRow(x);
         }
     }
@@ -124,6 +131,37 @@ public class Form_LichSuThi extends javax.swing.JFrame {
             }
         }.start();
     }
+
+    public void setCbbNgayThi() {
+        cbb_NgayThi.removeAllItems();
+        ArrayList<BaiThiChiTiet> list = thongTinBTDao.selectCbbNgayThi(getID_NguoiDung);
+        for (BaiThiChiTiet x : list) {
+            cbb_NgayThi.addItem(x.toString());
+        }
+
+    }
+
+    public void fillTableNgayThi() {
+        String item = (String) cbb_NgayThi.getSelectedItem();
+        listBTCT = deThiDao.selectBaiThiCTByNgayThi(item, getID_NguoiDung);
+        this.modelDS.setRowCount(0);
+        for (BaiThiChiTiet x : listBTCT) {
+            modelDS.addRow(new Object[]{x.getID_BaiThiCT(), x.getSoCauDung(), x.getSoCauSai(), x.getDiem(), x.getNgayThi()});
+        }
+
+    }
+
+    public void fillTableByDate() {
+        String item = (String) cbb_NgayThi.getSelectedItem();
+        int dem = tb_DanhSachBaiThi.getSelectedRow();
+        int idChiTiet = Integer.valueOf(modelDS.getValueAt(dem, 0).toString());
+        this.modelCT.setRowCount(0);
+        ArrayList<Object[]> list = thongTinBTDao.selectByNgayThi(idChiTiet, item, getID_NguoiDung);
+        for (Object[] x : list) {
+            modelCT.addRow(x);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -137,6 +175,9 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cbb_MaDe = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        cbb_NgayThi = new javax.swing.JComboBox<>();
+        bt_FillTable = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_thongTinBaiThi = new javax.swing.JTable();
@@ -187,24 +228,45 @@ public class Form_LichSuThi extends javax.swing.JFrame {
 
         jLabel3.setText("Mã đề:");
 
+        jLabel4.setText("Ngày thi:");
+
+        cbb_NgayThi.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbb_NgayThi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_NgayThiActionPerformed(evt);
+            }
+        });
+
+        bt_FillTable.setText("Fill");
+        bt_FillTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_FillTableActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pn_DanhSachLayout = new javax.swing.GroupLayout(pn_DanhSach);
         pn_DanhSach.setLayout(pn_DanhSachLayout);
         pn_DanhSachLayout.setHorizontalGroup(
             pn_DanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pn_DanhSachLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addGroup(pn_DanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(pn_DanhSachLayout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbb_MaDe, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbb_NgayThi, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bt_FillTable)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pn_DanhSachLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbb_MaDe, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(132, 132, 132))
         );
         pn_DanhSachLayout.setVerticalGroup(
             pn_DanhSachLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,7 +276,10 @@ public class Form_LichSuThi extends javax.swing.JFrame {
                     .addComponent(cbb_MaDe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbb_DoKho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbb_NgayThi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_FillTable))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -251,14 +316,14 @@ public class Form_LichSuThi extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 547, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -322,31 +387,64 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cbb_DoKhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_DoKhoActionPerformed
-        fillTableBTChiTietByID();
+        index = 0;
+        cbb_NgayThi.setEnabled(false);
+        fillTableDanhSach();
+        
     }//GEN-LAST:event_cbb_DoKhoActionPerformed
 
     private void cbb_MaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_MaDeActionPerformed
+        index = 0;
+        cbb_NgayThi.setEnabled(false);
         setCbbDoKho();
-        fillTableBTChiTietByID();
+        fillTableDanhSach();
     }//GEN-LAST:event_cbb_MaDeActionPerformed
 
     private void tb_DanhSachBaiThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_DanhSachBaiThiMouseClicked
-        if(evt.getClickCount()==2&&!evt.isConsumed()){
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
+            cbb_DoKho.setEnabled(true);
+            cbb_MaDe.setEnabled(true);
+            cbb_NgayThi.setEnabled(true);
             tp_pane.setSelectedIndex(1);
-            fillTableTTBaiThi();
+            if (index == 0) {
+                fillTableChiTiet();
+            } else if (index == 1) {
+                fillTableByDate();
+            } else if (index == 2) {
+                fillTableDanhSach();
+            }
+            cbb_DoKho.setEnabled(true);
+            cbb_MaDe.setEnabled(true);
+            cbb_NgayThi.setEnabled(true);
         }
     }//GEN-LAST:event_tb_DanhSachBaiThiMouseClicked
 
     private void tb_thongTinBaiThiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_thongTinBaiThiMouseClicked
-        int dem =tb_thongTinBaiThi.getSelectedRow();
-        if(evt.getClickCount()==2&&!evt.isConsumed()){
+        int dem = tb_thongTinBaiThi.getSelectedRow();
+        if (evt.getClickCount() == 2 && !evt.isConsumed()) {
             getCauHoi = modelCT.getValueAt(dem, 1).toString();
             getDapAnChon = modelCT.getValueAt(dem, 2).toString();
             getDapAnDung = modelCT.getValueAt(dem, 3).toString();
             new JForm_ChiTietLichSu(this, true).show();
-            
+
         }
     }//GEN-LAST:event_tb_thongTinBaiThiMouseClicked
+
+    private void cbb_NgayThiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_NgayThiActionPerformed
+        index = 1;
+        cbb_DoKho.setEnabled(false);
+        cbb_MaDe.setEnabled(false);
+        fillTableNgayThi();
+
+    }//GEN-LAST:event_cbb_NgayThiActionPerformed
+
+    private void bt_FillTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_FillTableActionPerformed
+        index = 2;
+        fillTableBTChiTiet();
+        cbb_DoKho.setEnabled(true);
+        cbb_MaDe.setEnabled(true);
+        cbb_NgayThi.setEnabled(true);
+    }//GEN-LAST:event_bt_FillTableActionPerformed
 
     public void setExit() {
         addWindowListener(new WindowAdapter() {
@@ -390,10 +488,13 @@ public class Form_LichSuThi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_FillTable;
     private javax.swing.JComboBox<String> cbb_DoKho;
     private javax.swing.JComboBox<String> cbb_MaDe;
+    private javax.swing.JComboBox<String> cbb_NgayThi;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
