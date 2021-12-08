@@ -94,7 +94,6 @@ public class FromQL_DeThi extends javax.swing.JFrame {
             cbbmucdo.setSelectedIndex(0);
         } else if (socautb == socaude && socautb == socaukho) {
             cbbmucdo.setSelectedIndex(1);
-
         } else if (socautb > socaukho && socautb > socaude) {
             cbbmucdo.setSelectedIndex(1);
         } else if (socaukho >= socautb) {
