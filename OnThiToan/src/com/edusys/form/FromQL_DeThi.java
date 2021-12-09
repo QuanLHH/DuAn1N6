@@ -42,7 +42,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
     }
 
     public void random() {
-           
+
         List<CauHoi> list = new ArrayList<>();
         List<CauHoi> listde = daocauhoi.dokho(1);
         List<CauHoi> listTB = daocauhoi.dokho(2);
@@ -130,22 +130,22 @@ public class FromQL_DeThi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bạn chọn câu hỏi bé hơn 30 rồi!");
             return;
         }
-        ArrayList<BaiThi> listbaithi= dao.selectALL();
+        ArrayList<BaiThi> listbaithi = dao.selectALL();
         for (BaiThi bt : listbaithi) {
-            String made=Integer.toString(bt.getDoKho());
-             System.out.println(made);
+            String made = Integer.toString(bt.getDoKho());
+            System.out.println(made);
             if (txtmade.getText().equalsIgnoreCase(made)) {
-                JOptionPane.showMessageDialog(this, "Trùng mã đề rồi!");              
+                JOptionPane.showMessageDialog(this, "Trùng mã đề rồi!");
                 return;
             }
         }
         try {
-            model=(DefaultTableModel)table.getModel();
+            model = (DefaultTableModel) table.getModel();
             BaiThi bt = getfrom();
             try {
                 listbt = dao.selectALL();
                 for (int i = 0; i < listbt.size(); i++) {
-                    bt.setID_CauHoi(Integer.parseInt(model.getValueAt(i,0).toString()));
+                    bt.setID_CauHoi(Integer.parseInt(model.getValueAt(i, 0).toString()));
                     dao.insert(bt);
                     System.out.println(bt);
                 }
