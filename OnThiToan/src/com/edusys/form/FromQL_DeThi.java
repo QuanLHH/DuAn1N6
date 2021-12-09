@@ -99,9 +99,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
         } else if (socaukho >= socautb) {
             cbbmucdo.setSelectedIndex(2);
         }
-
     }
-
     public String getdokho(int dokho) {
         switch (dokho) {
             case 1:
@@ -118,7 +116,6 @@ public class FromQL_DeThi extends javax.swing.JFrame {
     }
 
     BaiThi getfrom() {
-
         BaiThi bt = new BaiThi();
         bt.setMaDe(Integer.parseInt(String.valueOf(txtmade.getText())));
         bt.setDoKho(cbbmucdo.getSelectedIndex() + 1);
