@@ -57,15 +57,15 @@ public class JForm_ChiTietLichSu extends javax.swing.JDialog {
 
         jLabel3.setText("Đáp án đúng:");
 
-        lb_CauHoi.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_CauHoi.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lb_CauHoi.setText("cauhoi");
         lb_CauHoi.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_DapAn.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_DapAn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lb_DapAn.setText("dapan");
         lb_DapAn.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_DapAnDung.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lb_DapAnDung.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lb_DapAnDung.setText("dapandung");
         lb_DapAnDung.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -93,9 +93,11 @@ public class JForm_ChiTietLichSu extends javax.swing.JDialog {
                                 .addGap(9, 9, 9))
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lb_DapAnDung, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                            .addComponent(lb_DapAnDung, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lb_DapAn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lb_CauHoi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(lb_CauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, 565, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(

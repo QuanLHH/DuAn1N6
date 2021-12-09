@@ -76,7 +76,6 @@ create table ThongTin_BaiThi(
 	MaDe int not null,
 	DoKho int not null,
 	DapAnChon varchar(2) not null,
-	DapAn nvarchar(250) not null,
 	foreign key (ID_CauHoi) references Cau_Hoi (ID_CauHoi),
 	foreign key (ID_BaiThiCT) references ChiTiet_BaiThi (ID_BaiThiCT)
 )
@@ -105,7 +104,7 @@ create table Phan_Hoi(
 	ID_PhanHoi int not null identity(1,1) primary key,
 	ID_MaND int not null,
 	DanhGia varchar(10) not null,
-	NhanXet nvarchar(200) not null,
+	NhanXet nvarchar(500) not null,
 	foreign key (ID_MaND) references Nguoi_Dung (ID_MaND)
 )
 
@@ -195,24 +194,7 @@ go
 
 INSERT INTO Bai_Thi(MaDe,DoKho,ID_CauHoi)
 VALUES
-	(113,1,1),
-	(113,1,2),
-	(113,1,3),
-	(113,1,4),
-	(113,1,5),
-	(113,1,6),
-	(113,1,7),
-	(113,1,8),
-	(113,1,9),
-	(113,2,1),
-	(113,2,2),
-	(113,2,3),
-	(113,2,4),
-	(113,2,5),
-	(113,2,6),
-	(113,2,7),
-	(113,2,8),
-	(113,2,9),
+	
 	(113,1,69),
 	(113,1,70),
 	(113,1,71),
@@ -253,6 +235,7 @@ SELECT*FROM Cau_Hoi
 SElECT*FROM Bai_Thi
 SELECT*FROM ChiTiet_BaiThi
 SELECT*FROM ThongTin_BaiThi
+SELECT*FROM Phan_Hoi join Nguoi_Dung on Phan_Hoi.ID_MaND = Nguoi_Dung.ID_MaND
 
 SELECT TOP 1 * FROM ChiTiet_BaiThi ORDER BY ID_BaiThiCT DESC
 SELECT ID_TTBaiThi,ID_CauHoi,ThongTin_BaiThi. ID_BaiThiCT,MaDe,DoKho,DapAnChon,ID_MaND FROM ThongTin_BaiThi join ChiTiet_BaiThi 
