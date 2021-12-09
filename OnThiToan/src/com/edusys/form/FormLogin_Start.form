@@ -146,6 +146,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtname">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtnameKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -153,6 +156,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JPasswordField" name="txtpas">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtpasKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lbl">
       <Properties>

@@ -77,5 +77,10 @@ public class BaiThiChiTiet {
     public void setDiem(float Diem) {
         this.Diem = Diem;
     }
+
+    @Override
+    public String toString() {
+        return ngayThi+"";
+    }
     
 }

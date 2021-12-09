@@ -9,11 +9,27 @@ import PakagesClass.CauHoi;
 import com.edusys.dao.CauHoiDAO;
 import com.edusys.utils.XImage;
 import java.awt.Color;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import javax.swing.JFileChooser;
+import org.apache.poi.ss.usermodel.Cell;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
@@ -24,11 +40,17 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     com.edusys.dao.CauHoiDAO CauHoiDao = new CauHoiDAO();
     com.edusys.utils.XImage xImage = new XImage();
     ArrayList<CauHoi> listCH = new ArrayList<>();
-    DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model;
+    DefaultTableModel modelExcel;
+
     public int id_cauhoi = 0;
     public boolean check = false;
     public static String doKho = null;
     public static String theLoai = null;
+    String getDoKho = null;
+    int getTheLoai = 0;
+    String getCauHoi = null;
+    String path = null;
 
     public JForm_QLCauHoi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -44,10 +66,12 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         runs();
         this.listCH = CauHoiDao.selectALL();
         this.model = (DefaultTableModel) tb_cauHoi.getModel();
+        this.modelExcel = (DefaultTableModel) tb_excel.getModel();
         setCbbMucDo();
         setCbbTheLoai();
         setCbbTenBai();
         fillTable();
+        bt_InsertExcel.setEnabled(false);
     }
 
     public void setCbbMucDo() {
@@ -147,9 +171,9 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             rd_D.setText("");
         }
         String itemTL = model.getValueAt(dem, 3).toString();
-        if(itemTL.equalsIgnoreCase("Bài tập")){
+        if (itemTL.equalsIgnoreCase("Bài tập")) {
             cbb_TheLoai.setSelectedIndex(0);
-        }else if(itemTL.equalsIgnoreCase("Đề thi")){
+        } else if (itemTL.equalsIgnoreCase("Đề thi")) {
             cbb_TheLoai.setSelectedIndex(1);
         }
     }
@@ -449,7 +473,17 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         }
         return doKho;
     }
-
+    public int setDoKhos(String dkho) {
+        int k=0;
+        if (dkho.equalsIgnoreCase("Dễ")) {
+            k = 1;
+        } else if (dkho.equalsIgnoreCase("Trung bình")) {
+            k = 2;
+        } else if (dkho.equalsIgnoreCase("Khó")) {
+            k = 3;
+        }
+        return k;
+    }
     public boolean checkDapAn() {
         try {
             if (rd_A.isSelected() == false && rd_B.isSelected() == false && rd_C.isSelected() == false && rd_D.isSelected() == false) {
@@ -471,6 +505,173 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             theLoai = "Đề thi";
         }
         return theLoai;
+    }
+
+    public void readExcel() {
+        modelExcel.setRowCount(0);
+        String listDoKho = null;
+        String listTheLoai = null;
+        String listCauHoi = null;
+        String listTenBai = null;
+        String listDapAn1 = null;
+        String listDapAn2 = null;
+        String listDapAn3 = null;
+        String listDapAn4 = null;
+        String listDapAnDung = null;
+
+        try {
+            JFileChooser jfc = new JFileChooser();
+            FileNameExtensionFilter f = new FileNameExtensionFilter("File Excel", "xlsx");
+            jfc.setMultiSelectionEnabled(false);
+            jfc.setFileFilter(f);
+
+            int x = jfc.showOpenDialog(this);
+            if (x == JFileChooser.APPROVE_OPTION) {
+                path = jfc.getSelectedFile().getAbsolutePath();
+            }
+            FileInputStream excelFile = new FileInputStream(new File(path));
+            Workbook workbook = new XSSFWorkbook(excelFile);
+            Sheet datatypeSheet = workbook.getSheetAt(0);
+            Iterator<Row> iterator = datatypeSheet.iterator();
+
+            while (iterator.hasNext()) {
+
+                Row currentRow = iterator.next();
+                Iterator<Cell> cellIterator = currentRow.iterator();
+                while (cellIterator.hasNext()) {
+                    Cell cc = cellIterator.next();
+
+                    if (cc.getColumnIndex() == 0) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listTheLoai = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listTheLoai = Integer.toString((int) cc.getNumericCellValue());
+                        }
+                    }
+                    if (cc.getColumnIndex() == 1) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listCauHoi = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listCauHoi = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 2) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listDoKho = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listDoKho = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 3) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listTenBai = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listTenBai = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 4) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listDapAn1 = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listDapAn1 = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 5) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listDapAn2 = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listDapAn2 = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 6) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listDapAn3 = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listDapAn3 = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 7) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listDapAn4 = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listDapAn4 = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                    if (cc.getColumnIndex() == 8) {
+                        if (cc.getCellType() == CellType.STRING) {
+                            System.out.print(cc.getStringCellValue() + ", ");
+                            listDapAnDung = cc.getStringCellValue();
+                        } else if (cc.getCellType() == CellType.NUMERIC) {
+                            System.out.print(cc.getNumericCellValue() + ", ");
+                            listDapAnDung = Integer.toString((int) cc.getNumericCellValue());
+                        }
+
+                    }
+                }
+                if(listTenBai.equalsIgnoreCase("Không")){
+                    listTenBai="";
+                }
+                modelExcel.addRow(new Object[]{listTheLoai, listCauHoi, listDoKho,listTenBai, listDapAn1, listDapAn2, listDapAn3, listDapAn4, listDapAnDung});
+            }
+            modelExcel.removeRow(0);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void insertExcel() {
+        
+        try {
+            for (int i = 0; i < tb_excel.getRowCount(); i++) {
+                CauHoi ch = new CauHoi();
+                boolean role_id=false;
+                if(modelExcel.getValueAt(i, 0).toString().equalsIgnoreCase("Bài tập")){
+                    role_id=false;
+                }else if(modelExcel.getValueAt(i, 0).toString().equalsIgnoreCase("Đề thi")){
+                    role_id=true;
+                }
+                int doKho=setDoKhos(modelExcel.getValueAt(i, 2).toString());
+                ch.setRole_ID(role_id);
+                ch.setCauHoi(modelExcel.getValueAt(i, 1).toString());
+                ch.setDoKho(doKho);
+                ch.setTenBai(modelExcel.getValueAt(i, 3).toString());
+                ch.setDapAn1(modelExcel.getValueAt(i, 4).toString());
+                ch.setDapAn2(modelExcel.getValueAt(i, 5).toString());
+                ch.setDapAn3(modelExcel.getValueAt(i, 6).toString());
+                ch.setDapAn4(modelExcel.getValueAt(i, 7).toString());
+                ch.setDapAnDung(modelExcel.getValueAt(i, 8).toString());
+                CauHoiDao.insert(ch);
+            }
+            JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -520,6 +721,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         cbb_TenBai = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tb_cauHoi = new javax.swing.JTable();
@@ -533,6 +735,10 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         jButton1 = new javax.swing.JButton();
         cbb_ViewTheLoai = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tb_excel = new javax.swing.JTable();
+        bt_InsertExcel = new javax.swing.JButton();
 
         lb_DapAn2.setText("jLabel13");
 
@@ -679,6 +885,13 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(0, 102, 102));
         jLabel4.setText("Đáp án đúng");
 
+        jToggleButton1.setText("Read File Excel");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -716,7 +929,9 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                                .addGap(151, 151, 151)
+                                                .addGap(26, 26, 26)
+                                                .addComponent(jToggleButton1)
+                                                .addGap(28, 28, 28)
                                                 .addComponent(bt_Them)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(bt_Update)
@@ -848,7 +1063,8 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bt_Them)
                             .addComponent(bt_Update)
-                            .addComponent(bt_Refresh))))
+                            .addComponent(bt_Refresh)
+                            .addComponent(jToggleButton1))))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
@@ -876,12 +1092,6 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             }
         });
         jScrollPane2.setViewportView(tb_cauHoi);
-        if (tb_cauHoi.getColumnModel().getColumnCount() > 0) {
-            tb_cauHoi.getColumnModel().getColumn(0).setHeaderValue("ID_ Câu hỏi");
-            tb_cauHoi.getColumnModel().getColumn(1).setHeaderValue("Độ khó");
-            tb_cauHoi.getColumnModel().getColumn(2).setHeaderValue("Tên bài");
-            tb_cauHoi.getColumnModel().getColumn(3).setHeaderValue("Thể loại");
-        }
 
         Last1.setText(">|");
         Last1.addActionListener(new java.awt.event.ActionListener() {
@@ -950,7 +1160,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(202, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bt_Delete)
                         .addGap(75, 75, 75)
                         .addComponent(First)
@@ -963,10 +1173,11 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
                                 .addComponent(jLabel12)
-                                .addGap(41, 41, 41)
+                                .addGap(18, 18, 18)
                                 .addComponent(cbb_viewTenBai, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel10)
@@ -981,14 +1192,13 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(cbb_ViewTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbb_viewTenBai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(cbb_ViewTheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbb_viewTenBai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1)
+                        .addComponent(jLabel12)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -1002,6 +1212,65 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         );
 
         jtp_Show.addTab("Danh sách", jPanel3);
+
+        tb_excel.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Thể loại", "Câu hỏi", "Độ khó", "Tên bài", "A", "B", "C", "D", "Đáp án đúng"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tb_excel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tb_excelMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tb_excel);
+
+        bt_InsertExcel.setText("Insert");
+        bt_InsertExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_InsertExcelActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(465, Short.MAX_VALUE)
+                .addComponent(bt_InsertExcel)
+                .addGap(29, 29, 29))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(18, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(444, Short.MAX_VALUE)
+                .addComponent(bt_InsertExcel)
+                .addContainerGap())
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(40, Short.MAX_VALUE)))
+        );
+
+        jtp_Show.addTab("Read Excel", jPanel1);
 
         javax.swing.GroupLayout pn_totalLayout = new javax.swing.GroupLayout(pn_total);
         pn_total.setLayout(pn_totalLayout);
@@ -1166,6 +1435,25 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         fillTableTheLoai();
     }//GEN-LAST:event_cbb_ViewTheLoaiActionPerformed
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        jtp_Show.setSelectedIndex(2);
+        bt_InsertExcel.setEnabled(true);
+        readExcel();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
+    private void tb_excelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tb_excelMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tb_excelMouseClicked
+
+    private void bt_InsertExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_InsertExcelActionPerformed
+        int i = JOptionPane.showConfirmDialog(rootPane, "Thêm hàng loạt?", "", JOptionPane.YES_NO_OPTION);
+        if (i == 0) {
+            insertExcel();
+            modelExcel.setRowCount(0);
+            bt_InsertExcel.setEnabled(false);
+        }
+    }//GEN-LAST:event_bt_InsertExcelActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1180,16 +1468,24 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JForm_QLCauHoi.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -1214,6 +1510,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JButton Next;
     private javax.swing.JButton Prev;
     private javax.swing.JButton bt_Delete;
+    private javax.swing.JButton bt_InsertExcel;
     private javax.swing.JButton bt_Refresh;
     private javax.swing.JButton bt_Them;
     private javax.swing.JButton bt_Update;
@@ -1237,14 +1534,17 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTabbedPane jtp_Show;
     private javax.swing.JLabel lb_CheckDapAn1;
     private javax.swing.JLabel lb_CheckDapAn2;
@@ -1260,6 +1560,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     private javax.swing.JCheckBox rd_C;
     private javax.swing.JCheckBox rd_D;
     private javax.swing.JTable tb_cauHoi;
+    private javax.swing.JTable tb_excel;
     private javax.swing.JTextPane tf_DapAn1;
     private javax.swing.JTextPane tf_DapAn2;
     private javax.swing.JTextPane tf_DapAn3;
