@@ -42,7 +42,8 @@ public class FromQL_DeThi extends javax.swing.JFrame {
         // add 5 element in ArrayList
         filltable(listCH);
         tongcau();
-        
+        tudong();
+
     }
 
     public void random() {
@@ -71,9 +72,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
             listKho.remove(X);
         }
         filltable(list);
-
     }
-
     public void filltable(List<CauHoi> list) {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         model.setRowCount(0);
@@ -86,6 +85,21 @@ public class FromQL_DeThi extends javax.swing.JFrame {
 
     }
 
+    public void tudong() {
+        int socaude = Integer.parseInt(String.valueOf(cbbde.getSelectedItem()));
+        int socautb = Integer.parseInt(String.valueOf(cbbtb.getSelectedItem()));
+        int socaukho = Integer.parseInt(String.valueOf(cbbkho.getSelectedItem()));
+
+        if ((socaude + socautb) > socaukho && socaude > socautb) {
+            cbbmucdo.setSelectedIndex(0);
+        } else if (socautb == socaude && socautb == socaukho) {
+            cbbmucdo.setSelectedIndex(1);
+        } else if (socautb > socaukho && socautb > socaude) {
+            cbbmucdo.setSelectedIndex(1);
+        } else if (socaukho >= socautb) {
+            cbbmucdo.setSelectedIndex(2);
+        }
+    }
     public String getdokho(int dokho) {
         switch (dokho) {
             case 1:
@@ -102,7 +116,6 @@ public class FromQL_DeThi extends javax.swing.JFrame {
     }
 
     BaiThi getfrom() {
-
         BaiThi bt = new BaiThi();
         bt.setMaDe(Integer.parseInt(String.valueOf(txtmade.getText())));
         bt.setDoKho(cbbmucdo.getSelectedIndex() + 1);
@@ -424,6 +437,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
     private void cbbtbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbtbActionPerformed
         // TODO add your handling code here:
         tongcau();
+        tudong();
     }//GEN-LAST:event_cbbtbActionPerformed
 
     private void cbbtbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbtbMouseClicked
@@ -433,6 +447,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
     private void cbbdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbdeActionPerformed
         // TODO add your handling code here:
         tongcau();
+        tudong();
     }//GEN-LAST:event_cbbdeActionPerformed
 
     private void cbbdeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbdeMousePressed
@@ -456,6 +471,7 @@ public class FromQL_DeThi extends javax.swing.JFrame {
     private void cbbkhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbkhoActionPerformed
         // TODO add your handling code here:
         tongcau();
+        tudong();
     }//GEN-LAST:event_cbbkhoActionPerformed
 
     private void cbbkhoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cbbkhoMouseClicked
