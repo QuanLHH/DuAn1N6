@@ -157,7 +157,7 @@
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jlb" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlb_TongCau" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lb_tongCau" min="-2" pref="40" max="-2" attributes="0"/>
                               </Group>
@@ -172,7 +172,7 @@
                           <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jlb" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jlb_TongCau" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -274,7 +274,7 @@
                     <Property name="text" type="java.lang.String" value="N&#x1ed9;p b&#xe0;i"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jlb">
+                <Component class="javax.swing.JLabel" name="jlb_TongCau">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="33" red="33" type="rgb"/>

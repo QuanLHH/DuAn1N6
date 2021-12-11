@@ -82,6 +82,9 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         page1.setText("1");
         page2.setText((tongSoCau / 5) + "");
         System.out.println("Mã đề:" + getMaDe + ", độ khó:" + getDoKho + ", tổng câu:" + tongSoCau);
+        if(tongSoCau<40){
+            lb_Minutes.setText("29");
+        }
     }
 
     void setExit() {
@@ -425,7 +428,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jlb = new javax.swing.JLabel();
+        jlb_TongCau = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         soCauTB = new javax.swing.JLabel();
@@ -546,8 +549,8 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
 
         jLabel4.setText("Nộp bài");
 
-        jlb.setBackground(new java.awt.Color(51, 51, 255));
-        jlb.setText("Tổng câu:");
+        jlb_TongCau.setBackground(new java.awt.Color(51, 51, 255));
+        jlb_TongCau.setText("Tổng câu:");
 
         jLabel6.setText("Số câu TB:");
 
@@ -643,7 +646,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                                 .addComponent(soCauKho, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(soCauDe, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jlb)
+                        .addComponent(jlb_TongCau)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lb_tongCau, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39))
@@ -654,7 +657,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
                 .addGap(5, 5, 5)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jlb)
+                        .addComponent(jlb_TongCau)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(lb_tongCau, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1739,7 +1742,7 @@ public class Form_LamBaiThi extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel jlb;
+    private javax.swing.JLabel jlb_TongCau;
     private javax.swing.JLabel jlb_cau1;
     private javax.swing.JLabel jlb_cau2;
     private javax.swing.JPanel jpanel_tong;
