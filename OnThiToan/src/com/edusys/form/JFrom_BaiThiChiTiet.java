@@ -69,7 +69,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         diem = Math.round(formLBT.diem);
         System.out.println("Đúng: "+cauDung);
         System.out.println("Sai: "+cauSai);
-        lb_Diem.setText(formLBT.diem + "");
+        lb_Diem.setText(diem + "");
         BaiThiChiTiet bt = new BaiThiChiTiet();
         bt.setID_BaiThi(formLBT.id_baiThi);
         bt.setID_MaND(user.getID_MaND());
