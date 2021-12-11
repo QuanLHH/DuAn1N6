@@ -48,7 +48,7 @@ public class Form_LichSuThi extends javax.swing.JFrame {
         initComponents();
         setInit();
         setExit();
-        runs();
+
     }
 
     void setInit() {
