@@ -334,15 +334,16 @@ public class Form_LichSuThi extends javax.swing.JFrame {
 
         lb_text.setFont(new java.awt.Font("Sitka Small", 0, 27)); // NOI18N
         lb_text.setForeground(new java.awt.Color(51, 51, 255));
-        lb_text.setText("Xem lịch sử thi                                                  ");
+        lb_text.setText("Xem lịch sử thi");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addComponent(lb_text, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(183, 183, 183)
+                .addComponent(lb_text)
+                .addGap(113, 113, 113)
                 .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
