@@ -75,12 +75,10 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     public void setCbbMucDo() {
-        ArrayList<CauHoi> list = CauHoiDao.selectDoKho();
         cbb_mucDo.removeAllItems();
-        for (CauHoi x : list) {
-            setDoKho(x.getDoKho());
-            cbb_mucDo.addItem(doKho);
-        }
+        cbb_mucDo.addItem("Dễ");
+        cbb_mucDo.addItem("Trung bình");
+        cbb_mucDo.addItem("Khó");
     }
 
     public void setCbbTheLoai() {
@@ -101,8 +99,18 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         cbb_TenBai.removeAllItems();
         for (CauHoi x : list) {
             cbb_viewTenBai.addItem(x.getTenBai());
-            cbb_TenBai.addItem(x.getTenBai());
         }
+        cbb_TenBai.addItem("Hàm số");
+        cbb_TenBai.addItem("Tiệm cận");
+        cbb_TenBai.addItem("Mũ và Logarit");
+        cbb_TenBai.addItem("Nguyên hàm");
+        cbb_TenBai.addItem("Đạo hàm");
+        cbb_TenBai.addItem("Tích phân");
+        cbb_TenBai.addItem("Số phức");
+        cbb_TenBai.addItem("Đồng biến");
+        cbb_TenBai.addItem("Nghịch biến");
+        cbb_TenBai.addItem("Cực trị");
+        cbb_TenBai.addItem("Tiếp tuyến");
     }
 
     public void fillTableTenBai() {
@@ -138,43 +146,49 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     public void shows() {
-        int dem = tb_cauHoi.getSelectedRow();
-        int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
-        CauHoi ch = CauHoiDao.selectById(id);
-        tp_CauHoi.setText(ch.getCauHoi());
-        tf_DapAn1.setText(ch.getDapAn1());
-        tf_DapAn2.setText(ch.getDapAn2());
-        tf_DapAn3.setText(ch.getDapAn3());
-        tf_DapAn4.setText(ch.getDapAn4());
-        String doKho = model.getValueAt(dem, 1).toString();
-        cbb_mucDo.setSelectedItem(doKho);
-        tf_DapAn1.setText(ch.getDapAn1());
-        if (ch.getDapAnDung().equalsIgnoreCase("A")) {
-            rd_A.setSelected(true);
-            rd_B.setText("");
-            rd_C.setText("");
-            rd_D.setText("");
-        } else if (ch.getDapAnDung().equalsIgnoreCase("B")) {
-            rd_B.setSelected(true);
-            rd_A.setText("");
-            rd_C.setText("");
-            rd_D.setText("");
-        } else if (ch.getDapAnDung().equalsIgnoreCase("C")) {
-            rd_C.setSelected(true);
-            rd_A.setText("");
-            rd_B.setText("");
-            rd_D.setText("");
-        } else if (ch.getDapAnDung().equalsIgnoreCase("D")) {
-            rd_D.setSelected(true);
-            rd_A.setText("");
-            rd_B.setText("");
-            rd_D.setText("");
-        }
-        String itemTL = model.getValueAt(dem, 3).toString();
-        if (itemTL.equalsIgnoreCase("Bài tập")) {
-            cbb_TheLoai.setSelectedIndex(0);
-        } else if (itemTL.equalsIgnoreCase("Đề thi")) {
-            cbb_TheLoai.setSelectedIndex(1);
+        try {
+            int dem = tb_cauHoi.getSelectedRow();
+            int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
+            CauHoi ch = CauHoiDao.selectById(id);
+            tp_CauHoi.setText(ch.getCauHoi());
+            tf_DapAn1.setText(ch.getDapAn1());
+            tf_DapAn2.setText(ch.getDapAn2());
+            tf_DapAn3.setText(ch.getDapAn3());
+            tf_DapAn4.setText(ch.getDapAn4());
+            String doKho = model.getValueAt(dem, 1).toString();
+            cbb_mucDo.setSelectedItem(doKho);
+            tf_DapAn1.setText(ch.getDapAn1());
+            if (ch.getDapAnDung().equalsIgnoreCase("A")) {
+                rd_A.setSelected(true);
+                rd_B.setText("");
+                rd_C.setText("");
+                rd_D.setText("");
+            } else if (ch.getDapAnDung().equalsIgnoreCase("B")) {
+                rd_B.setSelected(true);
+                rd_A.setText("");
+                rd_C.setText("");
+                rd_D.setText("");
+            } else if (ch.getDapAnDung().equalsIgnoreCase("C")) {
+                rd_C.setSelected(true);
+                rd_A.setText("");
+                rd_B.setText("");
+                rd_D.setText("");
+            } else if (ch.getDapAnDung().equalsIgnoreCase("D")) {
+                rd_D.setSelected(true);
+                rd_A.setText("");
+                rd_B.setText("");
+                rd_D.setText("");
+            }
+            String itemTenBai = model.getValueAt(dem, 2).toString();
+            cbb_TenBai.setSelectedItem(itemTenBai);
+            String itemTL = model.getValueAt(dem, 3).toString();
+            if (itemTL.equalsIgnoreCase("Bài tập")) {
+                cbb_TheLoai.setSelectedIndex(0);
+            } else if (itemTL.equalsIgnoreCase("Đề thi")) {
+                cbb_TheLoai.setSelectedIndex(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -473,8 +487,9 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         }
         return doKho;
     }
+
     public int setDoKhos(String dkho) {
-        int k=0;
+        int k = 0;
         if (dkho.equalsIgnoreCase("Dễ")) {
             k = 1;
         } else if (dkho.equalsIgnoreCase("Trung bình")) {
@@ -484,6 +499,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         }
         return k;
     }
+
     public boolean checkDapAn() {
         try {
             if (rd_A.isSelected() == false && rd_B.isSelected() == false && rd_C.isSelected() == false && rd_D.isSelected() == false) {
@@ -631,10 +647,10 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
                     }
                 }
-                if(listTenBai.equalsIgnoreCase("Không")){
-                    listTenBai="";
+                if (listTenBai.equalsIgnoreCase("Không")) {
+                    listTenBai = "";
                 }
-                modelExcel.addRow(new Object[]{listTheLoai, listCauHoi, listDoKho,listTenBai, listDapAn1, listDapAn2, listDapAn3, listDapAn4, listDapAnDung});
+                modelExcel.addRow(new Object[]{listTheLoai, listCauHoi, listDoKho, listTenBai, listDapAn1, listDapAn2, listDapAn3, listDapAn4, listDapAnDung});
             }
             modelExcel.removeRow(0);
         } catch (FileNotFoundException e) {
@@ -646,17 +662,17 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
     }
 
     public void insertExcel() {
-        
+
         try {
             for (int i = 0; i < tb_excel.getRowCount(); i++) {
                 CauHoi ch = new CauHoi();
-                boolean role_id=false;
-                if(modelExcel.getValueAt(i, 0).toString().equalsIgnoreCase("Bài tập")){
-                    role_id=false;
-                }else if(modelExcel.getValueAt(i, 0).toString().equalsIgnoreCase("Đề thi")){
-                    role_id=true;
+                boolean role_id = false;
+                if (modelExcel.getValueAt(i, 0).toString().equalsIgnoreCase("Bài tập")) {
+                    role_id = false;
+                } else if (modelExcel.getValueAt(i, 0).toString().equalsIgnoreCase("Đề thi")) {
+                    role_id = true;
                 }
-                int doKho=setDoKhos(modelExcel.getValueAt(i, 2).toString());
+                int doKho = setDoKhos(modelExcel.getValueAt(i, 2).toString());
                 ch.setRole_ID(role_id);
                 ch.setCauHoi(modelExcel.getValueAt(i, 1).toString());
                 ch.setDoKho(doKho);
