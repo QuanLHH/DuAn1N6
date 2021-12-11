@@ -104,7 +104,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         lb_TongCau = new javax.swing.JLabel();
         lb_SOCauDUng = new javax.swing.JLabel();
         lb_SoCauSai = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lb_diem = new javax.swing.JLabel();
         lb_Diem = new javax.swing.JLabel();
         bt_img = new javax.swing.JToggleButton();
 
@@ -185,8 +185,8 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
 
         lb_SoCauSai.setText("sai");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel7.setText("Điểm:");
+        lb_diem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lb_diem.setText("Điểm:");
 
         lb_Diem.setFont(new java.awt.Font("Tahoma", 0, 16)); // NOI18N
 
@@ -204,7 +204,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
+                        .addComponent(lb_diem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lb_Diem, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -244,7 +244,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lb_Diem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_diem, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(bt_img, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -332,7 +332,6 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -342,5 +341,6 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
     private javax.swing.JLabel lb_SoCauSai;
     private javax.swing.JLabel lb_TaiKhoan;
     private javax.swing.JLabel lb_TongCau;
+    private javax.swing.JLabel lb_diem;
     // End of variables declaration//GEN-END:variables
 }
