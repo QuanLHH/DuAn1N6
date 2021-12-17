@@ -66,7 +66,7 @@ public class JFrom_BaiThiChiTiet extends javax.swing.JDialog {
         lb_SoCauSai.setText(Integer.toString(formLBT.soCauSai));
         cauDung = formLBT.soCauDung;
         cauSai = formLBT.soCauSai;
-        diem = Math.round(formLBT.diem);
+        diem = (float) Math.ceil(formLBT.diem);
         System.out.println("Đúng: "+cauDung);
         System.out.println("Sai: "+cauSai);
         lb_Diem.setText(diem + "");
