@@ -5,7 +5,9 @@
  */
 package com.edusys.form;
 
+import PakagesClass.BaiThi;
 import PakagesClass.CauHoi;
+import com.edusys.dao.BaiThiDAO;
 import com.edusys.dao.CauHoiDAO;
 import com.edusys.utils.XImage;
 import java.awt.Color;
@@ -38,8 +40,10 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class JForm_QLCauHoi extends javax.swing.JDialog {
 
     com.edusys.dao.CauHoiDAO CauHoiDao = new CauHoiDAO();
+    com.edusys.dao.BaiThiDAO baiThiDao = new BaiThiDAO();
     com.edusys.utils.XImage xImage = new XImage();
     ArrayList<CauHoi> listCH = new ArrayList<>();
+    ArrayList<BaiThi> listBT = new ArrayList<>();
     DefaultTableModel model;
     DefaultTableModel modelExcel;
 
@@ -65,6 +69,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
         setTitle("Quản lý câu hỏi");
         runs();
         this.listCH = CauHoiDao.selectALL();
+        this.listBT = baiThiDao.selectALL();
         this.model = (DefaultTableModel) tb_cauHoi.getModel();
         this.modelExcel = (DefaultTableModel) tb_excel.getModel();
         setCbbMucDo();
@@ -290,15 +295,34 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
             int i = JOptionPane.showConfirmDialog(rootPane, "Xóa câu hỏi ID: " + model.getValueAt(dem, 0).toString() + "?", "", JOptionPane.YES_NO_OPTION);
             if (i == 0) {
                 int id = Integer.valueOf(model.getValueAt(dem, 0).toString());
+                for (BaiThi x : listBT) {
+                    if (id == x.getID_CauHoi()) {
+                        JOptionPane.showMessageDialog(rootPane, "Không thể xóa câu hỏi đã có trong đề thi!");
+                        return;
+                    }
+                }
                 CauHoiDao.delete(id);
                 JOptionPane.showMessageDialog(rootPane, "Xóa thành công!");
-
+                fillTableTheLoai();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+//
+//    public void fillNotDeThi() {
+//        model.setRowCount(0);
+//        this.listBT = baiThiDao.selectALL();
+//        this.listCH = CauHoiDao.selectALL();
+//        for (int i = 0; i < listBT.size(); i++) {
+//            if (!(listCH.get(i).getID_CauHoi() == listBT.get(i).getID_CauHoi())) {
+//                setTheLoai(listCH.get(i).getRole_ID());
+//                setDoKho(listCH.get(i).getDoKho());
+//                model.addRow(new Object[]{listCH.get(i).getID_CauHoi(), doKho,listCH.get(i).getTenBai(), theLoai});
+//            }
+//        }
+//    }
 
     public void runs() {
         new Thread() {
@@ -1189,7 +1213,7 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel12)
@@ -1356,7 +1380,6 @@ public class JForm_QLCauHoi extends javax.swing.JDialog {
 
     private void bt_DeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_DeleteActionPerformed
         delete();
-        fillTableTenBai();
 
     }//GEN-LAST:event_bt_DeleteActionPerformed
 
